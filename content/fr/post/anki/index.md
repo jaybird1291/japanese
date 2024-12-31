@@ -12,7 +12,7 @@ weight: 1       # You can add weight to some posts to override the default sorti
 ---
 
 ## Introduction
-Vous retrouverez ici les stats de mon Anki avec mon nombre cartes révisées par jour etc.
+Vous retrouverez ici les stats de mon Anki avec mon nombre cartes révisées par jour et autres.
 
 ## Stats
 {{< grid >}}
