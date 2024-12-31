@@ -9,26 +9,29 @@
             color: white;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            padding: 1px;
+            align-items: center;
+            padding: 10px;
             margin: 0;
+            background-color: #222;
         }
 
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(41, 12px);
+            grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
             grid-gap: 5px;
             margin-top: 20px;
-            overflow-x: auto;
             padding: 10px;
-            position: relative;
+            overflow-x: auto;
+            width: 100%;
         }
 
         .stats {
             margin-top: 20px;
             text-align: center;
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
         }
 
         .day {
@@ -72,6 +75,39 @@
         .q8 { background-color: #fa9fb5; }
         .q9 { background-color: #fcc5c0; }
         .q10 { background-color: #fde0dd; }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+
+            .grid-container {
+                grid-gap: 4px; /* Reduced gap for medium screens */
+            }
+
+            .day {
+                width: 10px;
+                height: 10px;
+            }
+
+            .stats {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .grid-container {
+                grid-gap: 2px; /* Minimal gap for small screens */
+            }
+            .day {
+                width: 8px;
+                height: 8px;
+            }
+
+            .stats {
+                font-size: 12px;
+                gap: 5px;
+            }
+        }
     </style>
 </head>
 <body>
