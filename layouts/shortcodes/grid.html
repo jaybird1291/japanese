@@ -1,389 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <!--
-      Pour un meilleur rendu sur mobile, on garde bien la meta viewport.
-      width=device-width : fixe la largeur de la zone d'affichage
-      initial-scale=1.0 : définit le zoom initial
-    -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heatmap</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <!-- Meta viewport pour un bon rendu mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heatmap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+      margin: 0;
+    }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
-            grid-gap: 5px;
-            margin-top: 20px;
-            padding: 10px;
-            overflow-x: auto;
-            width: 100%;
-            /* Permet un défilement horizontal uniquement (pas obligatoire) */
-            touch-action: pan-x;
-        }
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
+      grid-gap: 5px;
+      margin-top: 20px;
+      padding: 10px;
+      overflow-x: auto;    /* permet le défilement horizontal */
+      width: 100%;
+      touch-action: pan-x; /* sur mobile, évite les conflits de scroll */
+    }
 
-        .stats {
-            margin-top: 20px;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
+    .stats {
+      margin-top: 20px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
-        .day {
-            width: 15px;
-            height: 15px;
-            background-color: #3b3b3b;
-            border-radius: 2px;
-            position: relative;
-        }
+    .day {
+      width: 15px;
+      height: 15px;
+      background-color: #3b3b3b;
+      border-radius: 2px;
+      position: relative;
+    }
 
-        /* Indication visuelle quand il y a des cartes */
-        .day[data-cards] {
-            cursor: pointer;
-        }
+    .day[data-cards] {
+      cursor: pointer;
+    }
 
-        /* Tooltip */
-        .tooltip {
-            position: fixed;
-            background-color: #333;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 1000;
-        }
+    /* Tooltip */
+    .tooltip {
+      position: fixed;
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+      z-index: 1000;
+    }
 
-        .tooltip[style*="visibility: visible"] {
-            display: block;
-        }
+    .tooltip[style*="visibility: visible"] {
+      display: block;
+    }
 
-        /* Couleurs (thème magenta) */
-        .q1 { background-color: #49006a; }
-        .q2 { background-color: #610070; }
-        .q3 { background-color: #7a0177; }
-        .q4 { background-color: #ae017e; }
-        .q5 { background-color: #dd3497; }
-        .q6 { background-color: #ea4e9c; }
-        .q7 { background-color: #f768a1; }
-        .q8 { background-color: #fa9fb5; }
-        .q9 { background-color: #fcc5c0; }
-        .q10 { background-color: #fde0dd; }
+    /* Couleurs (thème magenta) */
+    .q1  { background-color: #49006a; }
+    .q2  { background-color: #610070; }
+    .q3  { background-color: #7a0177; }
+    .q4  { background-color: #ae017e; }
+    .q5  { background-color: #dd3497; }
+    .q6  { background-color: #ea4e9c; }
+    .q7  { background-color: #f768a1; }
+    .q8  { background-color: #fa9fb5; }
+    .q9  { background-color: #fcc5c0; }
+    .q10 { background-color: #fde0dd; }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .grid-container {
-                grid-gap: 4px; /* Reduced gap for medium screens */
-            }
-            .day {
-                width: 10px;
-                height: 10px;
-            }
-            .stats {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
-                grid-gap: 2px; /* Minimal gap for small screens */
-            }
-            .day {
-                width: 9px;
-                height: 9px;
-            }
-            .stats {
-                font-size: 12px;
-                gap: 5px;
-            }
-        }
-    </style>
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-gap: 4px; /* Reduced gap for medium screens */
+      }
+      .day {
+        width: 10px;
+        height: 10px;
+      }
+      .stats {
+        font-size: 14px;
+      }
+    }
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
+        grid-gap: 2px; /* Minimal gap for small screens */
+      }
+      .day {
+        width: 9px;
+        height: 9px;
+      }
+      .stats {
+        font-size: 12px;
+        gap: 5px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="grid-container" id="grid"></div>
-    <div class="stats">
-        <span id="daily-average">Daily average: xx cards</span>
-        <span id="longest-streak">Longest streak: xx days</span>
-        <span id="current-streak">Current streak: xx days</span>
-    </div>
+  <div class="grid-container" id="grid"></div>
+  <div class="stats">
+    <span id="daily-average">Daily average: xx cards</span>
+    <span id="longest-streak">Longest streak: xx days</span>
+    <span id="current-streak">Current streak: xx days</span>
+  </div>
 
-    <script>
-        // Données d'exemple
-        const data = [
-            { date: "08/09/2024", cards: 43 },
-            { date: "09/09/2024", cards: 42 },
-            { date: "10/09/2024", cards: 30 },
-            { date: "11/09/2024", cards: 38 },
-            { date: "12/09/2024", cards: 0 },
-            { date: "13/09/2024", cards: 36 },
-            { date: "14/09/2024", cards: 36 },
-            { date: "15/09/2024", cards: 31 },
-            { date: "16/09/2024", cards: 35 },
-            { date: "17/09/2024", cards: 36 },
-            { date: "18/09/2024", cards: 32 },
-            { date: "19/09/2024", cards: 29 },
-            { date: "20/09/2024", cards: 35 },
-            { date: "21/09/2024", cards: 73 },
-            { date: "22/09/2024", cards: 73 },
-            { date: "23/09/2024", cards: 93 },
-            { date: "24/09/2024", cards: 72 },
-            { date: "25/09/2024", cards: 34 },
-            { date: "26/09/2024", cards: 90 },
-            { date: "27/09/2024", cards: 136 },
-            { date: "28/09/2024", cards: 123 },
-            { date: "29/09/2024", cards: 116 },
-            { date: "30/09/2024", cards: 114 },
-            { date: "01/10/2024", cards: 102 },
-            { date: "02/10/2024", cards: 114 },
-            { date: "03/10/2024", cards: 117 },
-            { date: "04/10/2024", cards: 109 },
-            { date: "05/10/2024", cards: 136 },
-            { date: "06/10/2024", cards: 158 },
-            { date: "07/10/2024", cards: 120 },
-            { date: "08/10/2024", cards: 118 },
-            { date: "09/10/2024", cards: 109 },
-            { date: "10/10/2024", cards: 121 },
-            { date: "11/10/2024", cards: 116 },
-            { date: "12/10/2024", cards: 107 },
-            { date: "13/10/2024", cards: 104 },
-            { date: "14/10/2024", cards: 103 },
-            { date: "15/10/2024", cards: 73 },
-            { date: "16/10/2024", cards: 91 },
-            { date: "17/10/2024", cards: 83 },
-            { date: "18/10/2024", cards: 72 },
-            { date: "19/10/2024", cards: 62 },
-            { date: "20/10/2024", cards: 58 },
-            { date: "21/10/2024", cards: 63 },
-            { date: "22/10/2024", cards: 60 },
-            { date: "23/10/2024", cards: 71 },
-            { date: "24/10/2024", cards: 65 },
-            { date: "25/10/2024", cards: 16 },
-            { date: "26/10/2024", cards: 100 },
-            { date: "27/10/2024", cards: 87 },
-            { date: "28/10/2024", cards: 96 },
-            { date: "29/10/2024", cards: 81 },
-            { date: "30/10/2024", cards: 80 },
-            { date: "31/10/2024", cards: 75 },
-            { date: "01/11/2024", cards: 77 },
-            { date: "02/11/2024", cards: 81 },
-            { date: "03/11/2024", cards: 75 },
-            { date: "04/11/2024", cards: 70 },
-            { date: "05/11/2024", cards: 135 },
-            { date: "06/11/2024", cards: 89 },
-            { date: "07/11/2024", cards: 75 },
-            { date: "08/11/2024", cards: 107 },
-            { date: "09/11/2024", cards: 128 },
-            { date: "10/11/2024", cards: 138 },
-            { date: "11/11/2024", cards: 112 },
-            { date: "12/11/2024", cards: 82 },
-            { date: "13/11/2024", cards: 105 },
-            { date: "14/11/2024", cards: 66 },
-            { date: "15/11/2024", cards: 99 },
-            { date: "16/11/2024", cards: 102 },
-            { date: "17/11/2024", cards: 95 },
-            { date: "18/11/2024", cards: 105 },
-            { date: "19/11/2024", cards: 94 },
-            { date: "20/11/2024", cards: 107 },
-            { date: "21/11/2024", cards: 108 },
-            { date: "22/11/2024", cards: 95 },
-            { date: "23/11/2024", cards: 103 },
-            { date: "24/11/2024", cards: 101 },
-            { date: "25/11/2024", cards: 117 },
-            { date: "26/11/2024", cards: 114 },
-            { date: "27/11/2024", cards: 98 },
-            { date: "28/11/2024", cards: 87 },
-            { date: "29/11/2024", cards: 87 },
-            { date: "30/11/2024", cards: 81 },
-            { date: "01/12/2024", cards: 90 },
-            { date: "02/12/2024", cards: 84 },
-            { date: "03/12/2024", cards: 75 },
-            { date: "04/12/2024", cards: 84 },
-            { date: "05/12/2024", cards: 69 },
-            { date: "06/12/2024", cards: 81 },
-            { date: "07/12/2024", cards: 97 },
-            { date: "08/12/2024", cards: 80 },
-            { date: "09/12/2024", cards: 86 },
-            { date: "10/12/2024", cards: 89 },
-            { date: "11/12/2024", cards: 96 },
-            { date: "12/12/2024", cards: 79 },
-            { date: "13/12/2024", cards: 78 },
-            { date: "14/12/2024", cards: 79 },
-            { date: "15/12/2024", cards: 80 },
-            { date: "16/12/2024", cards: 81 },
-            { date: "17/12/2024", cards: 72 },
-            { date: "18/12/2024", cards: 88 },
-            { date: "19/12/2024", cards: 85 },
-            { date: "20/12/2024", cards: 88 },
-            { date: "21/12/2024", cards: 90 },
-            { date: "22/12/2024", cards: 82 },
-            { date: "23/12/2024", cards: 84 },
-            { date: "24/12/2024", cards: 58 },
-            { date: "25/12/2024", cards: 78 },
-            { date: "26/12/2024", cards: 82 },
-            { date: "27/12/2024", cards: 88 },
-            { date: "28/12/2024", cards: 87 },
-            { date: "29/12/2024", cards: 85 },
-            { date: "30/12/2024", cards: 90 },
-            { date: "31/12/2024", cards: 90 }
-        ];
+  <script>
+    // Données d'exemple
+    const data = [
+      { date: "08/09/2024", cards: 43 },
+      { date: "09/09/2024", cards: 42 },
+      { date: "10/09/2024", cards: 30 },
+      { date: "11/09/2024", cards: 38 },
+      { date: "12/09/2024", cards: 0 },
+      { date: "13/09/2024", cards: 36 },
+      { date: "14/09/2024", cards: 36 },
+      { date: "15/09/2024", cards: 31 },
+      { date: "16/09/2024", cards: 35 },
+      { date: "17/09/2024", cards: 36 },
+      { date: "18/09/2024", cards: 32 },
+      { date: "19/09/2024", cards: 29 },
+      { date: "20/09/2024", cards: 35 },
+      { date: "21/09/2024", cards: 73 },
+      { date: "22/09/2024", cards: 73 },
+      { date: "23/09/2024", cards: 93 },
+      { date: "24/09/2024", cards: 72 },
+      { date: "25/09/2024", cards: 34 },
+      { date: "26/09/2024", cards: 90 },
+      { date: "27/09/2024", cards: 136 },
+      { date: "28/09/2024", cards: 123 },
+      { date: "29/09/2024", cards: 116 },
+      { date: "30/09/2024", cards: 114 },
+      { date: "01/10/2024", cards: 102 },
+      { date: "02/10/2024", cards: 114 },
+      { date: "03/10/2024", cards: 117 },
+      { date: "04/10/2024", cards: 109 },
+      { date: "05/10/2024", cards: 136 },
+      { date: "06/10/2024", cards: 158 },
+      { date: "07/10/2024", cards: 120 },
+      { date: "08/10/2024", cards: 118 },
+      { date: "09/10/2024", cards: 109 },
+      { date: "10/10/2024", cards: 121 },
+      { date: "11/10/2024", cards: 116 },
+      { date: "12/10/2024", cards: 107 },
+      { date: "13/10/2024", cards: 104 },
+      { date: "14/10/2024", cards: 103 },
+      { date: "15/10/2024", cards: 73 },
+      { date: "16/10/2024", cards: 91 },
+      { date: "17/10/2024", cards: 83 },
+      { date: "18/10/2024", cards: 72 },
+      { date: "19/10/2024", cards: 62 },
+      { date: "20/10/2024", cards: 58 },
+      { date: "21/10/2024", cards: 63 },
+      { date: "22/10/2024", cards: 60 },
+      { date: "23/10/2024", cards: 71 },
+      { date: "24/10/2024", cards: 65 },
+      { date: "25/10/2024", cards: 16 },
+      { date: "26/10/2024", cards: 100 },
+      { date: "27/10/2024", cards: 87 },
+      { date: "28/10/2024", cards: 96 },
+      { date: "29/10/2024", cards: 81 },
+      { date: "30/10/2024", cards: 80 },
+      { date: "31/10/2024", cards: 75 },
+      { date: "01/11/2024", cards: 77 },
+      { date: "02/11/2024", cards: 81 },
+      { date: "03/11/2024", cards: 75 },
+      { date: "04/11/2024", cards: 70 },
+      { date: "05/11/2024", cards: 135 },
+      { date: "06/11/2024", cards: 89 },
+      { date: "07/11/2024", cards: 75 },
+      { date: "08/11/2024", cards: 107 },
+      { date: "09/11/2024", cards: 128 },
+      { date: "10/11/2024", cards: 138 },
+      { date: "11/11/2024", cards: 112 },
+      { date: "12/11/2024", cards: 82 },
+      { date: "13/11/2024", cards: 105 },
+      { date: "14/11/2024", cards: 66 },
+      { date: "15/11/2024", cards: 99 },
+      { date: "16/11/2024", cards: 102 },
+      { date: "17/11/2024", cards: 95 },
+      { date: "18/11/2024", cards: 105 },
+      { date: "19/11/2024", cards: 94 },
+      { date: "20/11/2024", cards: 107 },
+      { date: "21/11/2024", cards: 108 },
+      { date: "22/11/2024", cards: 95 },
+      { date: "23/11/2024", cards: 103 },
+      { date: "24/11/2024", cards: 101 },
+      { date: "25/11/2024", cards: 117 },
+      { date: "26/11/2024", cards: 114 },
+      { date: "27/11/2024", cards: 98 },
+      { date: "28/11/2024", cards: 87 },
+      { date: "29/11/2024", cards: 87 },
+      { date: "30/11/2024", cards: 81 },
+      { date: "01/12/2024", cards: 90 },
+      { date: "02/12/2024", cards: 84 },
+      { date: "03/12/2024", cards: 75 },
+      { date: "04/12/2024", cards: 84 },
+      { date: "05/12/2024", cards: 69 },
+      { date: "06/12/2024", cards: 81 },
+      { date: "07/12/2024", cards: 97 },
+      { date: "08/12/2024", cards: 80 },
+      { date: "09/12/2024", cards: 86 },
+      { date: "10/12/2024", cards: 89 },
+      { date: "11/12/2024", cards: 96 },
+      { date: "12/12/2024", cards: 79 },
+      { date: "13/12/2024", cards: 78 },
+      { date: "14/12/2024", cards: 79 },
+      { date: "15/12/2024", cards: 80 },
+      { date: "16/12/2024", cards: 81 },
+      { date: "17/12/2024", cards: 72 },
+      { date: "18/12/2024", cards: 88 },
+      { date: "19/12/2024", cards: 85 },
+      { date: "20/12/2024", cards: 88 },
+      { date: "21/12/2024", cards: 90 },
+      { date: "22/12/2024", cards: 82 },
+      { date: "23/12/2024", cards: 84 },
+      { date: "24/12/2024", cards: 58 },
+      { date: "25/12/2024", cards: 78 },
+      { date: "26/12/2024", cards: 82 },
+      { date: "27/12/2024", cards: 88 },
+      { date: "28/12/2024", cards: 87 },
+      { date: "29/12/2024", cards: 85 },
+      { date: "30/12/2024", cards: 90 },
+      { date: "31/12/2024", cards: 90 }
+    ];
 
-        const grid = document.getElementById("grid");
+    const grid = document.getElementById("grid");
 
-        // Retourne la classe correspondant au nombre de cartes (pour la couleur)
-        function getClassByCards(cards) {
-            if (cards >= 168) return "q10";
-            if (cards >= 147) return "q9";
-            if (cards >= 126) return "q8";
-            if (cards >= 105) return "q7";
-            if (cards >= 84) return "q6";
-            if (cards >= 63) return "q5";
-            if (cards >= 42) return "q4";
-            if (cards >= 21) return "q3";
-            if (cards >= 1)  return "q2";
-            // 0 => q1
-            return "q1";
+    // Retourne la classe correspondant au nombre de cartes
+    function getClassByCards(cards) {
+      if (cards >= 168) return "q10";
+      if (cards >= 147) return "q9";
+      if (cards >= 126) return "q8";
+      if (cards >= 105) return "q7";
+      if (cards >= 84)  return "q6";
+      if (cards >= 63)  return "q5";
+      if (cards >= 42)  return "q4";
+      if (cards >= 21)  return "q3";
+      if (cards >= 1)   return "q2";
+      // 0 => q1
+      return "q1";
+    }
+
+    function renderGrid() {
+      grid.innerHTML = "";
+      const today = new Date();
+      const totalDays = 369;  // ~ 1 an
+      const endDay = new Date(today);
+
+      let totalCards = 0;
+      let longestStreak = 0;
+      let currentStreak = 0;
+      let tempStreak = 0;
+
+      // Tooltip unique
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
+      document.body.appendChild(tooltip);
+
+      // Détecte si on est sur un écran tactile
+      const isTouchDevice = ('ontouchstart' in window);
+
+      // Fonctions d'affichage / masquage du tooltip
+      const showTooltip = (e, message) => {
+        // Sur mobile, on récupère e.touches[0]
+        const x = e.touches?.[0]?.clientX ?? e.clientX;
+        const y = e.touches?.[0]?.clientY ?? e.clientY;
+
+        tooltip.innerText = message;
+        tooltip.style.visibility = "visible";
+        tooltip.style.opacity = "1";
+
+        // Positionnement
+        const tooltipWidth = tooltip.offsetWidth;
+        const adjustedX = Math.min(x + 10, window.innerWidth - tooltipWidth - 10);
+        const adjustedY = Math.max(y - 40, 10);
+
+        tooltip.style.left = `${adjustedX}px`;
+        tooltip.style.top = `${adjustedY}px`;
+      };
+
+      const hideTooltip = () => {
+        tooltip.style.visibility = "hidden";
+        tooltip.style.opacity = "0";
+      };
+
+      for (let i = totalDays - 1; i >= 1; i--) {
+        const d = new Date(endDay);
+        d.setDate(endDay.getDate() - i);
+
+        const day = document.createElement("div");
+        day.className = "day";
+
+        // Formatage de la date
+        const dayString = d.toLocaleDateString("en-GB");
+        const todayData = data.find(entry => entry.date === dayString) || null;
+
+        if (todayData && todayData.cards > 0) {
+          const cards = todayData.cards;
+          totalCards += cards;
+
+          // Streak
+          tempStreak++;
+          if (tempStreak > longestStreak) {
+            longestStreak = tempStreak;
+          }
+
+          // Couleur en fonction du nombre de cartes
+          day.classList.add(getClassByCards(cards));
+
+          if (isTouchDevice) {
+            // Sur mobile : un tap => affiche, reste affiché
+            day.addEventListener("touchstart", (e) => {
+              e.stopPropagation();  // Empêche la fermeture immédiate par l’event global
+              showTooltip(e, `${cards} reviews on ${dayString}`);
+            });
+          } else {
+            // Desktop : mouseover/mouseout
+            day.addEventListener("mouseover", (e) => {
+              showTooltip(e, `${cards} reviews on ${dayString}`);
+            });
+            day.addEventListener("mouseout", hideTooltip);
+          }
+        } else {
+          // Pas de cartes => #333
+          day.style.backgroundColor = "#333333";
+          // On brise le streak
+          tempStreak = 0;
+
+          if (isTouchDevice) {
+            day.addEventListener("touchstart", (e) => {
+              e.stopPropagation();
+              showTooltip(e, `No reviews on ${dayString}`);
+            });
+          } else {
+            day.addEventListener("mouseover", (e) => {
+              showTooltip(e, `No reviews on ${dayString}`);
+            });
+            day.addEventListener("mouseout", hideTooltip);
+          }
         }
 
-        function renderGrid() {
-            grid.innerHTML = "";
-            const today = new Date();
-            // Nombre de jours à afficher (par exemple 369 pour ~1 an)
-            const totalDays = 369;
-            const endDay = new Date(today);
+        grid.appendChild(day);
+      }
 
-            let totalCards = 0;
-            let longestStreak = 0;
-            let currentStreak = 0;
-            let tempStreak = 0;
+      // Streak en cours
+      currentStreak = tempStreak;
 
-            // Crée un tooltip unique pour toute la page
-            const tooltip = document.createElement("div");
-            tooltip.className = "tooltip";
-            document.body.appendChild(tooltip);
+      // Moyenne journalière sur les jours > 0
+      const daysWithCards = data.filter(d => d.cards > 0).length;
+      const dailyAverage = daysWithCards > 0
+        ? (totalCards / daysWithCards).toFixed(2)
+        : 0;
 
-            // Détecte si on est sur un écran tactile
-            const isTouchDevice = ('ontouchstart' in window);
+      document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
+      document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
+      document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
 
-            for (let i = totalDays - 1; i >= 1; i--) {
-                const d = new Date(endDay);
-                d.setDate(endDay.getDate() - i);
+      // ----------------------
+      // FERMETURE DU TOOLTIP
+      // ----------------------
+      // 1) Sur mobile, si on tape ailleurs que sur le tooltip => fermer
+      if (isTouchDevice) {
+        document.addEventListener("touchstart", (ev) => {
+          if (!tooltip.contains(ev.target)) {
+            hideTooltip();
+          }
+        });
+      }
+      // 2) Dès qu'on scroll la page (desktop ou mobile), on cache le tooltip
+      window.addEventListener("scroll", hideTooltip, { passive: true });
+      // 3) Si on veut aussi cacher lors du scroll horizontal dans la grille
+      grid.addEventListener("scroll", hideTooltip, { passive: true });
+    }
 
-                const day = document.createElement("div");
-                day.className = "day";
-
-                // Format jj/mm/aaaa en anglais GB => "dd/MM/yyyy"
-                const dayString = d.toLocaleDateString("en-GB");
-                const todayData = data.find(entry => entry.date === dayString) || null;
-
-                // -- GESTION DU TOOLTIP --
-                // On définit des fonctions showTooltip / hideTooltip
-                // qui gèrent l'affichage/masquage du tooltip
-                const showTooltip = (e) => {
-                    // Sur mobile, e.touches[0] -> coordonnées
-                    const x = e.touches?.[0]?.clientX ?? e.clientX;
-                    const y = e.touches?.[0]?.clientY ?? e.clientY;
-
-                    tooltip.style.visibility = "visible";
-                    tooltip.style.opacity = "1";
-                    
-                    // Positionnement
-                    const tooltipWidth = tooltip.offsetWidth;
-                    const adjustedX = Math.min(x + 10, window.innerWidth - tooltipWidth - 10);
-                    const adjustedY = Math.max(y - 40, 10);
-
-                    tooltip.style.left = `${adjustedX}px`;
-                    tooltip.style.top = `${adjustedY}px`;
-                };
-                const hideTooltip = () => {
-                    tooltip.style.visibility = "hidden";
-                    tooltip.style.opacity = "0";
-                };
-
-                // Cas où il y a des cartes (>0)
-                if (todayData && todayData.cards > 0) {
-                    const cards = todayData.cards;
-                    totalCards += cards;
-
-                    // Ajoute une classe "qX"
-                    day.classList.add(getClassByCards(cards));
-                    // Pour le streak
-                    tempStreak++;
-                    if (tempStreak > longestStreak) {
-                        longestStreak = tempStreak;
-                    }
-
-                    // IMPORTANT : on met du texte dans le tooltip
-                    // pour ne pas l'avoir vide !
-                    // Ex. : "30 reviews on 10/09/2024"
-                    if (isTouchDevice) {
-                        day.addEventListener("touchstart", (e) => {
-                            tooltip.innerText = `${cards} reviews on ${dayString}`;
-                            showTooltip(e);
-                        });
-                        day.addEventListener("touchend", hideTooltip);
-                    } else {
-                        day.addEventListener("mouseover", (e) => {
-                            tooltip.innerText = `${cards} reviews on ${dayString}`;
-                            showTooltip(e);
-                        });
-                        day.addEventListener("mouseout", hideTooltip);
-                    }
-
-                } else {
-                    // S'il n'y a pas de cartes ce jour-là
-                    day.style.backgroundColor = "#333333";
-                    // On brise le streak (tempStreak = 0)
-                    tempStreak = 0;
-
-                    // Idem : on gère le tooltip
-                    if (isTouchDevice) {
-                        day.addEventListener("touchstart", (e) => {
-                            tooltip.innerText = `No reviews on ${dayString}`;
-                            showTooltip(e);
-                        });
-                        day.addEventListener("touchend", hideTooltip);
-                    } else {
-                        day.addEventListener("mouseover", (e) => {
-                            tooltip.innerText = `No reviews on ${dayString}`;
-                            showTooltip(e);
-                        });
-                        day.addEventListener("mouseout", hideTooltip);
-                    }
-                }
-
-                grid.appendChild(day);
-            }
-
-            // Le streak en cours est la dernière valeur de tempStreak
-            currentStreak = tempStreak;
-
-            // Calcule la moyenne journalière sur les jours > 0
-            const daysWithCards = data.filter(d => d.cards > 0).length;
-            const dailyAverage = daysWithCards > 0
-                ? (totalCards / daysWithCards).toFixed(2)
-                : 0;
-
-            document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
-            document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
-            document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
-        }
-
-        renderGrid();
-    </script>
+    renderGrid();
+  </script>
 </body>
 </html>
