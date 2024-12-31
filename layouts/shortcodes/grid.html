@@ -95,6 +95,7 @@
         @media (max-width: 480px) {
 
             .grid-container {
+                grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
                 grid-gap: 2px; /* Minimal gap for small screens */
             }
             .day {
@@ -252,83 +253,113 @@
         }
 
         function renderGrid() {
-            grid.innerHTML = "";
-            const today = new Date();
-            const totalDays = 370; // Number of days to display in the grid
-            const endDay = new Date(today); // Today is the last day in the grid
+        grid.innerHTML = "";
+        const today = new Date();
+        const totalDays = 370; // Number of days to display in the grid
+        const endDay = new Date(today); // Today is the last day in the grid
 
-            let totalCards = 0;
-            let longestStreak = 0;
-            let currentStreak = 0;
-            let tempStreak = 0;
-            const tooltip = document.createElement("div");
-            tooltip.className = "tooltip";
-            document.body.appendChild(tooltip);
+        let totalCards = 0;
+        let longestStreak = 0;
+        let currentStreak = 0;
+        let tempStreak = 0;
+        const tooltip = document.createElement("div");
+        tooltip.className = "tooltip";
+        document.body.appendChild(tooltip);
 
-            for (let i = totalDays - 1; i >= 1; i--) { // Exclude today's date from streak calculation
-                const d = new Date(endDay);
-                d.setDate(endDay.getDate() - i); // Calculate the date for each square
+        for (let i = totalDays - 1; i >= 1; i--) {
+            const d = new Date(endDay);
+            d.setDate(endDay.getDate() - i); // Calculate the date for each square
 
-                const day = document.createElement("div");
-                day.className = "day";
+            const day = document.createElement("div");
+            day.className = "day";
 
-                const dayString = d.toLocaleDateString("en-GB"); // Format to day/month/year
-                const todayData = data.find(entry => entry.date === dayString) || null;
+            const dayString = d.toLocaleDateString("en-GB"); // Format to day/month/year
+            const todayData = data.find(entry => entry.date === dayString) || null;
 
-                if (todayData && todayData.cards > 0) {
-                    const cards = todayData.cards;
-                    totalCards += cards;
+            if (todayData && todayData.cards > 0) {
+                const cards = todayData.cards;
+                totalCards += cards;
 
-                    day.classList.add(getClassByCards(cards)); // Apply magenta theme class
+                day.classList.add(getClassByCards(cards)); // Apply magenta theme class
 
-                    tempStreak++;
-                    if (tempStreak > longestStreak) {
-                        longestStreak = tempStreak;
-                    }
-
-                    day.addEventListener("mouseover", (e) => {
-                        tooltip.innerText = `${cards} cards reviewed on ${dayString}`;
-                        tooltip.style.left = `${e.pageX + 10}px`;
-                        tooltip.style.top = `${e.pageY - 40}px`;
-                        tooltip.style.visibility = "visible";
-                        tooltip.style.opacity = "1";
-                    });
-
-                    day.addEventListener("mouseout", () => {
-                        tooltip.style.visibility = "hidden";
-                        tooltip.style.opacity = "0";
-                    });
-                } else {
-                    // Handle days with 0 cards
-                    day.style.backgroundColor = "#333333"; // Default background color
-                    day.addEventListener("mouseover", (e) => {
-                        tooltip.innerText = `No reviews on ${dayString}`;
-                        tooltip.style.left = `${e.pageX + 10}px`;
-                        tooltip.style.top = `${e.pageY - 40}px`;
-                        tooltip.style.visibility = "visible";
-                        tooltip.style.opacity = "1";
-                    });
-
-                    day.addEventListener("mouseout", () => {
-                        tooltip.style.visibility = "hidden";
-                        tooltip.style.opacity = "0";
-                    });
-
-                    tempStreak = 0;
+                tempStreak++;
+                if (tempStreak > longestStreak) {
+                    longestStreak = tempStreak;
                 }
 
-                grid.appendChild(day);
+                const showTooltip = (e) => {
+                    tooltip.innerText = `${cards} cards reviewed on ${dayString}`;
+                    tooltip.style.left = `${e.pageX + 10}px`;
+                    tooltip.style.top = `${e.pageY - 40}px`;
+                    tooltip.style.visibility = "visible";
+                    tooltip.style.opacity = "1";
+                };
+
+                const hideTooltip = () => {
+                    tooltip.style.visibility = "hidden";
+                    tooltip.style.opacity = "0";
+                };
+
+                day.addEventListener("mouseover", showTooltip);
+                day.addEventListener("mouseout", hideTooltip);
+
+                // Add touch and click event for mobile
+                day.addEventListener("click", (e) => {
+                    showTooltip(e);
+                    setTimeout(hideTooltip, 3000); // Hide tooltip after 3 seconds
+                });
+
+                day.addEventListener("touchstart", (e) => {
+                    showTooltip(e.touches[0]); // Use first touch for position
+                    setTimeout(hideTooltip, 3000); // Hide tooltip after 3 seconds
+                });
+            } else {
+                // Handle days with 0 cards
+                day.style.backgroundColor = "#333333"; // Default background color
+
+                const showTooltip = (e) => {
+                    tooltip.innerText = `No reviews on ${dayString}`;
+                    tooltip.style.left = `${e.pageX + 10}px`;
+                    tooltip.style.top = `${e.pageY - 40}px`;
+                    tooltip.style.visibility = "visible";
+                    tooltip.style.opacity = "1";
+                };
+
+                const hideTooltip = () => {
+                    tooltip.style.visibility = "hidden";
+                    tooltip.style.opacity = "0";
+                };
+
+                day.addEventListener("mouseover", showTooltip);
+                day.addEventListener("mouseout", hideTooltip);
+
+                // Add touch and click event for mobile
+                day.addEventListener("click", (e) => {
+                    showTooltip(e);
+                    setTimeout(hideTooltip, 3000); // Hide tooltip after 3 seconds
+                });
+
+                day.addEventListener("touchstart", (e) => {
+                    showTooltip(e.touches[0]); // Use first touch for position
+                    setTimeout(hideTooltip, 3000); // Hide tooltip after 3 seconds
+                });
+
+                tempStreak = 0;
             }
 
-            currentStreak = tempStreak;
-
-            const dailyAverage = (totalCards / data.filter(d => d.cards > 0).length).toFixed(2);
-            document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
-            document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
-            document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
+            grid.appendChild(day);
         }
 
-        renderGrid();
+        currentStreak = tempStreak;
+
+        const dailyAverage = (totalCards / data.filter(d => d.cards > 0).length).toFixed(2);
+        document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
+        document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
+        document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
+    }
+
+    renderGrid();
+
     </script>
 </body>
 </html>
