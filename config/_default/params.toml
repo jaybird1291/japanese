@@ -2,19 +2,19 @@
 mainSections = ["post"]
 # Output page's full content in RSS.
 rssFullContent = true
-favicon = "/favicon.png"
+favicon = "favicon.ico"
 
 [footer]
-since = 2020
+since = 2024
 customText = ""
 
 [dateFormat]
-published = "Jan 02, 2006"
-lastUpdated = "Jan 02, 2006 15:04 MST"
+published = "02/01/2006"
+lastUpdated = "02/01/2006 15:04 MST"
 
 [sidebar]
-emoji = "🍥"
-subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+emoji = "🌸"
+subtitle = "Apprend le japonais en autodicate. Objectifs JLPT N5 avril 2025 et N3 fin 2027 !"
 
 [sidebar.avatar]
 enabled = true
@@ -27,7 +27,7 @@ math = false
 readingTime = true
 
 [article.license]
-enabled = true
+enabled = false
 default = "Licensed under CC BY-NC-SA 4.0"
 
 ## Widgets
@@ -65,8 +65,8 @@ local = false
 src = ""
 
 [colorScheme]
-toggle = true
-default = "auto"
+toggle = false
+default = "dark"
 
 [imageProcessing.cover]
 enabled = true
@@ -76,7 +76,7 @@ enabled = true
 
 ## Comments
 [comments]
-enabled = true
+enabled = false
 provider = "disqus"
 
 [comments.disqusjs]

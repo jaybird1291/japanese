@@ -1,3 +1,39 @@
 /*
     You can add your own custom styles here.
 */
+
+.image-container {
+    display: flex;
+    justify-content: start;
+    column-gap: 75px;
+    flex-wrap: wrap;
+}
+
+.image2-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+
+body, .sidebar {
+    background-color: #313131;
+}
+
+strong, b {
+    color: #f37471; 
+    font-weight: 600; // Utilisez un poids légèrement plus élevé pour plus de visibilité sans exagérer
+}
+
+strong.alternate {
+    color: #4A90E2 ; // Couleur alternative pour strong avec la classe "alternate"
+    font-weight: 600; // Vous pouvez modifier d'autres propriétés si nécessaire
+}
+
+body {
+    background-color: #313131;
+}
+
+:root[data-scheme=dark] {
+    --card-background: #3f3f3f; 
+}
