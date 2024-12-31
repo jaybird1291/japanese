@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <!-- Meta viewport pour un bon rendu mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Heatmap avec animation</title>
+  <title>Heatmap avec navigation temporelle</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,6 +14,32 @@
       align-items: center;
       padding: 10px;
       margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .controls button {
+      padding: 6px 12px;
+      background-color: #3b3b3b;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .controls button:hover {
+      background-color: #555;
+    }
+
+    #date-range {
+      margin-top: 10px;
+      font-size: 14px;
+      text-align: center;
     }
 
     .grid-container {
@@ -43,22 +69,14 @@
       border-radius: 2px;
       position: relative;
       transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-      /* On met une transition pour que l’agrandissement soit animé */
     }
 
-    /* Quand un carré est "sélectionné" ou "survolé", on l'agrandit un peu + ombre */
     .day.hovered {
       transform: scale(1.25);
       z-index: 10;
       box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
     }
 
-    /* Indication visuelle quand il y a des cartes (mainly for cursor) */
-    .day[data-cards] {
-      cursor: pointer;
-    }
-
-    /* Tooltip */
     .tooltip {
       position: fixed;
       background-color: #333;
@@ -71,10 +89,8 @@
       transition: opacity 0.2s;
       z-index: 1000;
       max-width: 200px;
-      /* On peut limiter la largeur pour éviter un tooltip trop large sur mobile */
       line-height: 1.4;
     }
-
     .tooltip[style*="visibility: visible"] {
       display: block;
     }
@@ -91,10 +107,9 @@
     .q9  { background-color: #fcc5c0; }
     .q10 { background-color: #fde0dd; }
 
-    /* Responsive Adjustments */
     @media (max-width: 768px) {
       .grid-container {
-        grid-gap: 7px; /* Reduced gap for medium screens */
+        grid-gap: 7px;
       }
       .day {
         width: 18px;
@@ -105,11 +120,12 @@
         gap: 10px;
       }
     }
-    /* @media (max-width: 480px) {
+
+    /*
+    @media (max-width: 480px) {
       .grid-container {
-        grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
-        grid-gap: 2px; /* Minimal gap for small screens */
-      /* }
+        grid-gap: 2px;
+      }
       .day {
         width: 12px;
         height: 12px;
@@ -118,11 +134,25 @@
         font-size: 12px;
         gap: 5px;
       }
-    } */ 
+    }
+    */ 
   </style>
 </head>
 <body>
+  <!-- Contrôles de navigation dans le temps -->
+  <div class="controls">
+    <button id="btn-left">←</button>
+    <button id="btn-center">Vue par défaut</button>
+    <button id="btn-right">→</button>
+  </div>
+
+  <!-- Plage de dates affichée -->
+  <div id="date-range"></div>
+
+  <!-- Grille -->
   <div class="grid-container" id="grid"></div>
+
+  <!-- Statistiques globales (basées sur tout le dataset, pas sur la plage affichée) -->
   <div class="stats">
     <span id="daily-average">Daily average: xx cards</span>
     <span id="longest-streak">Longest streak: xx days</span>
@@ -130,8 +160,9 @@
   </div>
 
   <script>
-
-    // Données d'exemple
+    // --------------------------
+    //      Données d'exemple
+    // --------------------------
     const data = [
       { date: "08/09/2024", cards: 43 },
       { date: "09/09/2024", cards: 42 },
@@ -250,7 +281,73 @@
       { date: "31/12/2024", cards: 90 }
     ];
 
+    // ----------------------------------------
+    // 1) Calculer les stats sur TOUT le dataset
+    // ----------------------------------------
+    function computeStats(fullData) {
+      // Pour calculer la plus longue série, il faut avancer date par date
+      // On va d'abord trier les données par ordre chronologique
+      // (Le format "dd/mm/yyyy" n’est pas triable directement, donc on convertit en Date)
+      const sortedData = [...fullData].sort((a, b) => {
+        const [dayA, monthA, yearA] = a.date.split("/").map(Number);
+        const [dayB, monthB, yearB] = b.date.split("/").map(Number);
+        return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+      });
+
+      let totalCards = 0;
+      let daysWithCards = 0;
+      let longestStreak = 0;
+      let currentStreak = 0;
+      let tempStreak = 0;
+
+      // Itération sur l’ordre chronologique
+      for (const dayData of sortedData) {
+        const cards = dayData.cards;
+        if (cards > 0) {
+          tempStreak++;
+          if (tempStreak > longestStreak) {
+            longestStreak = tempStreak;
+          }
+          totalCards += cards;
+          daysWithCards++;
+        } else {
+          tempStreak = 0; // rupture de streak
+        }
+      }
+      // À la fin de la boucle, tempStreak représente la série en cours
+      currentStreak = tempStreak;
+
+      const dailyAverage = daysWithCards > 0 
+        ? Math.round(totalCards / daysWithCards) 
+        : 0;
+
+      return {
+        dailyAverage,
+        longestStreak,
+        currentStreak
+      };
+    }
+
+    // Calcule les stats une seule fois
+    const stats = computeStats(data);
+
+    // ---------------------------
+    // 2) Initialiser les stats
+    // ---------------------------
+    document.getElementById("daily-average").innerText =
+      `Daily average: ${stats.dailyAverage} cards`;
+    document.getElementById("longest-streak").innerText =
+      `Longest streak: ${stats.longestStreak} days`;
+    document.getElementById("current-streak").innerText =
+      `Current streak: ${stats.currentStreak} days`;
+
+    // ------------------------------------------------
+    // 3) Gérer l'affichage dynamique de la heatmap
+    // ------------------------------------------------
+
     const grid = document.getElementById("grid");
+    let offsetDays = 0; // Permet de se déplacer dans le temps (futur / passé)
+    let endDay = new Date(); // Date de fin (initialement aujourd'hui)
 
     // Retourne la classe correspondant au nombre de cartes
     function getClassByCards(cards) {
@@ -266,38 +363,34 @@
       return "q1"; // 0
     }
 
+    // Détermine le nombre de jours à afficher en fonction de la taille de l’écran
+    function getTotalDays() {
+      return window.matchMedia("(max-width: 768px)").matches ? 140 : 367;
+    }
+
     function renderGrid() {
       grid.innerHTML = "";
-      const today = new Date();
-      const totalDays = 369;  // ~1 an
-      const endDay = new Date(today);
 
-      let totalCards = 0;
-      let longestStreak = 0;
-      let currentStreak = 0;
-      let tempStreak = 0;
+      // Mettre à jour endDay en fonction de offsetDays
+      endDay = new Date();
+      endDay.setDate(endDay.getDate() + offsetDays);
+
+      const totalDays = getTotalDays();
 
       // Tooltip unique
       const tooltip = document.createElement("div");
       tooltip.className = "tooltip";
       document.body.appendChild(tooltip);
 
-      // Détecte si on est sur un écran tactile
-      const isTouchDevice = ('ontouchstart' in window);
+      const isTouchDevice = 'ontouchstart' in window;
 
-      // Fonctions d'affichage / masquage du tooltip
       const showTooltip = (e, message) => {
         const x = e.touches?.[0]?.clientX ?? e.clientX;
         const y = e.touches?.[0]?.clientY ?? e.clientY;
-
-        // Petit formatage du message : exemple, on peut mettre un saut de ligne
-        // ou un style, libre à vous
-        tooltip.innerHTML = message.replace(" on ", "<br><small>on </small>");
-
+        tooltip.innerHTML = message;
         tooltip.style.visibility = "visible";
         tooltip.style.opacity = "1";
 
-        // Positionnement
         const tooltipWidth = tooltip.offsetWidth;
         const adjustedX = Math.min(x + 10, window.innerWidth - tooltipWidth - 10);
         const adjustedY = Math.max(y - 40, 10);
@@ -311,46 +404,37 @@
         tooltip.style.opacity = "0";
       };
 
-      // Pour gérer l'effet agrandi : on déselectionne tous les carrés
       const removeAllHovered = () => {
         const allDays = document.querySelectorAll(".day.hovered");
         allDays.forEach(d => d.classList.remove("hovered"));
       };
 
-      for (let i = totalDays - 1; i >= 1; i--) {
+      // Construction de la grille du plus ancien jour au plus récent
+      for (let i = totalDays - 1; i >= 0; i--) {
         const d = new Date(endDay);
         d.setDate(endDay.getDate() - i);
 
         const day = document.createElement("div");
         day.className = "day";
 
+        // Format de date en EN-GB => "dd/mm/yyyy"
         const dayString = d.toLocaleDateString("en-GB");
         const todayData = data.find(entry => entry.date === dayString) || null;
 
         if (todayData && todayData.cards > 0) {
           const cards = todayData.cards;
-          totalCards += cards;
-
-          tempStreak++;
-          if (tempStreak > longestStreak) {
-            longestStreak = tempStreak;
-          }
-
-          // Couleur en fonction du nombre de cartes
           day.classList.add(getClassByCards(cards));
 
           if (isTouchDevice) {
-            // Sur mobile : un tap => on enlève hovered de tous, on l'ajoute sur ce jour
             day.addEventListener("touchstart", (e) => {
-              e.stopPropagation(); // évite que le doc touchestart ferme direct le tooltip
+              e.stopPropagation();
               removeAllHovered();
               day.classList.add("hovered");
               showTooltip(e, `${cards} reviews on ${dayString}`);
             });
           } else {
-            // Sur desktop : au survol
             day.addEventListener("mouseover", (e) => {
-              removeAllHovered();   // on enlève "hovered" des autres
+              removeAllHovered();
               day.classList.add("hovered");
               showTooltip(e, `${cards} reviews on ${dayString}`);
             });
@@ -361,9 +445,8 @@
           }
 
         } else {
-          // 0 cartes => #333
+          // Jour sans cartes
           day.style.backgroundColor = "#333333";
-          tempStreak = 0;
 
           if (isTouchDevice) {
             day.addEventListener("touchstart", (e) => {
@@ -388,25 +471,17 @@
         grid.appendChild(day);
       }
 
-      // Streak en cours
-      currentStreak = tempStreak;
+      // Mise à jour du texte "Du xx/xx/xxxx au xx/xx/xxxx"
+      const earliestDate = new Date(endDay);
+      earliestDate.setDate(earliestDate.getDate() - (totalDays - 1));
+      // On formate en français
+      const dateMin = earliestDate.toLocaleDateString("fr-FR");
+      const dateMax = endDay.toLocaleDateString("fr-FR");
+      document.getElementById("date-range").innerText = `Du ${dateMin} au ${dateMax}`;
 
-      // Moyenne journalière
-      const daysWithCards = data.filter(d => d.cards > 0).length;
-      const dailyAverage = daysWithCards > 0
-        ? (totalCards / daysWithCards).toFixed(2)
-        : 0;
-
-      document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
-      document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
-      document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
-
-      // ---- Fermeture du tooltip et suppression de l’agrandissement ----
-
-      // 1) Sur mobile, si on tape ailleurs que sur le tooltip => fermer tooltip + déselec
+      // Gérer la fermeture du tooltip sur mobile ou scroll
       if (isTouchDevice) {
         document.addEventListener("touchstart", (ev) => {
-          // Si le tap n’est pas dans le tooltip ni sur un carré .day
           const dayClicked = ev.target.closest(".day");
           if (!tooltip.contains(ev.target) && !dayClicked) {
             hideTooltip();
@@ -415,19 +490,39 @@
         });
       }
 
-      // 2) Lorsqu’on scrolle la page
       window.addEventListener("scroll", () => {
         hideTooltip();
         removeAllHovered();
       }, { passive: true });
 
-      // 3) Si on scrolle horizontalement dans la grille
       grid.addEventListener("scroll", () => {
         hideTooltip();
         removeAllHovered();
       }, { passive: true });
     }
 
+    // ---------------------------
+    // 4) Boutons de navigation
+    // ---------------------------
+    function goBackward() {
+      offsetDays -= 30; // Décale de 30 jours dans le passé
+      renderGrid();
+    }
+    function goForward() {
+      offsetDays += 30; // Décale de 30 jours dans le futur
+      renderGrid();
+    }
+    function resetView() {
+      offsetDays = 0;   // Revient à la date du jour
+      renderGrid();
+    }
+
+    // Écouteurs sur les boutons
+    document.getElementById("btn-left").addEventListener("click", goBackward);
+    document.getElementById("btn-right").addEventListener("click", goForward);
+    document.getElementById("btn-center").addEventListener("click", resetView);
+
+    // Premier rendu de la grille
     renderGrid();
   </script>
 </body>

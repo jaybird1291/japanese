@@ -26,3 +26,6 @@ hasCJKLanguage = false
     subtitle = "Apprend le japonais en autodicate. Objectifs JLPT N5 avril 2025 et N3 fin 2027 !"
     contentDir = "content/fr"
 
+
+[frontmatter]
+lastmod = ["lastmod", ":fileModTime", ":git"]

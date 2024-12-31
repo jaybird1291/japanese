@@ -12,13 +12,13 @@ tags:
 ---
 
 ## **Introduction**
-Ce post ne contient pas de définitions ou d'explications détaillées. Il s'agit de notes résumées, présentées sous forme de bullet points, davantage conçues comme une cheatsheet (fiche pratique) qu'un cours complet.
+Ce post ne contient pas de définitions ni d’explications détaillées. Il s’agit de notes résumées, présentées sous forme de bullet point, davantage conçues comme une cheatsheet (fiche pratique) qu’un cours complet.
 
 ## **Kana**
 ![Kana](pictures/kana.png)
 
 ## **Verbes**
-Ressources très utile : https://www.japaneseverbconjugator.com/
+Ressource très utile : https://www.japaneseverbconjugator.com/
 
 ### Types de verbes 
 

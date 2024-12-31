@@ -11,7 +11,7 @@ tags:
 # weight: 1       # You can add weight to some posts to override the default sorting (date descending)
 ---
 ## **Introduction**
-Vous retrouverez ici une liste d'outils et de ressources qui m'accompagnent. Comme vous le verez, la majorité de ces ressources sont en anglais. Effectivement, ce n'est peut-être pas le plus confortable mais on n'y peut rien. À mes yeux, vous ne pouvez pas vous limiter à des ressources en français. Si vous n'êtes pas à l'aise avec l'anglais, vous devriez peut-être apprendre cette langue avant de vous mettre au japonais. 
+Vous retrouverez ici la liste d’outils et de ressources qui m’accompagnent. Comme vous le verrez, la majorité de ces ressources sont en anglais. Effectivement, ce n’est peut-être pas le plus confortable, mais on n’y peut rien. À mes yeux, vous ne pouvez pas vous limiter à des ressources en français. Si vous n’êtes pas à l’aise avec l’anglais, vous devriez peut-être apprendre cette langue avant de vous lancer dans le japonais.
 
 ## **Guides**
 - TheMoeWay - 30 Day Japanese (https://learnjapanese.moe/guide/)
