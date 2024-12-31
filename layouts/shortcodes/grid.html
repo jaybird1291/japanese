@@ -94,30 +94,31 @@
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .grid-container {
-        grid-gap: 4px; /* Reduced gap for medium screens */
+        grid-gap: 7px; /* Reduced gap for medium screens */
       }
       .day {
-        width: 10px;
-        height: 10px;
+        width: 18px;
+        height: 18px;
       }
       .stats {
         font-size: 14px;
+        gap: 10px;
       }
     }
-    @media (max-width: 480px) {
+    /* @media (max-width: 480px) {
       .grid-container {
         grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
         grid-gap: 2px; /* Minimal gap for small screens */
-      }
+      /* }
       .day {
-        width: 9px;
-        height: 9px;
+        width: 12px;
+        height: 12px;
       }
       .stats {
         font-size: 12px;
         gap: 5px;
       }
-    }
+    } */ 
   </style>
 </head>
 <body>
