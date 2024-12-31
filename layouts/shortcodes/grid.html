@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--
+      Pour un meilleur rendu sur mobile, on garde bien la meta viewport.
+      width=device-width : fixe la largeur de la zone d'affichage
+      initial-scale=1.0 : définit le zoom initial
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatmap</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,6 +28,8 @@
             padding: 10px;
             overflow-x: auto;
             width: 100%;
+            /* Permet un défilement horizontal uniquement (pas obligatoire) */
+            touch-action: pan-x;
         }
 
         .stats {
@@ -41,10 +49,12 @@
             position: relative;
         }
 
+        /* Indication visuelle quand il y a des cartes */
         .day[data-cards] {
             cursor: pointer;
         }
 
+        /* Tooltip */
         .tooltip {
             position: fixed;
             background-color: #333;
@@ -58,12 +68,11 @@
             z-index: 1000;
         }
 
-        .day:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
+        .tooltip[style*="visibility: visible"] {
+            display: block;
         }
 
-        /* Magenta Theme */
+        /* Couleurs (thème magenta) */
         .q1 { background-color: #49006a; }
         .q2 { background-color: #610070; }
         .q3 { background-color: #7a0177; }
@@ -77,32 +86,27 @@
 
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-
             .grid-container {
                 grid-gap: 4px; /* Reduced gap for medium screens */
             }
-
             .day {
                 width: 10px;
                 height: 10px;
             }
-
             .stats {
                 font-size: 14px;
             }
         }
 
         @media (max-width: 480px) {
-
             .grid-container {
                 grid-template-columns: repeat(auto-fill, minmax(10px, 1fr));
                 grid-gap: 2px; /* Minimal gap for small screens */
             }
             .day {
-                width: 8px;
-                height: 8px;
+                width: 9px;
+                height: 9px;
             }
-
             .stats {
                 font-size: 12px;
                 gap: 5px;
@@ -119,6 +123,7 @@
     </div>
 
     <script>
+        // Données d'exemple
         const data = [
             { date: "08/09/2024", cards: 43 },
             { date: "09/09/2024", cards: 42 },
@@ -239,6 +244,7 @@
 
         const grid = document.getElementById("grid");
 
+        // Retourne la classe correspondant au nombre de cartes (pour la couleur)
         function getClassByCards(cards) {
             if (cards >= 168) return "q10";
             if (cards >= 147) return "q9";
@@ -248,111 +254,136 @@
             if (cards >= 63) return "q5";
             if (cards >= 42) return "q4";
             if (cards >= 21) return "q3";
-            if (cards >= 1) return "q2";
+            if (cards >= 1)  return "q2";
+            // 0 => q1
             return "q1";
         }
 
         function renderGrid() {
-    grid.innerHTML = "";
-    const today = new Date();
-    const totalDays = 369;
-    const endDay = new Date(today);
+            grid.innerHTML = "";
+            const today = new Date();
+            // Nombre de jours à afficher (par exemple 369 pour ~1 an)
+            const totalDays = 369;
+            const endDay = new Date(today);
 
-    let totalCards = 0;
-    let longestStreak = 0;
-    let currentStreak = 0;
-    let tempStreak = 0;
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
-    document.body.appendChild(tooltip);
+            let totalCards = 0;
+            let longestStreak = 0;
+            let currentStreak = 0;
+            let tempStreak = 0;
 
-    const isTouchDevice = 'ontouchstart' in window;
+            // Crée un tooltip unique pour toute la page
+            const tooltip = document.createElement("div");
+            tooltip.className = "tooltip";
+            document.body.appendChild(tooltip);
 
-    for (let i = totalDays - 1; i >= 1; i--) {
-        const d = new Date(endDay);
-        d.setDate(endDay.getDate() - i);
+            // Détecte si on est sur un écran tactile
+            const isTouchDevice = ('ontouchstart' in window);
 
-        const day = document.createElement("div");
-        day.className = "day";
+            for (let i = totalDays - 1; i >= 1; i--) {
+                const d = new Date(endDay);
+                d.setDate(endDay.getDate() - i);
 
-        const dayString = d.toLocaleDateString("en-GB");
-        const todayData = data.find(entry => entry.date === dayString) || null;
+                const day = document.createElement("div");
+                day.className = "day";
 
-        if (todayData && todayData.cards > 0) {
-            const cards = todayData.cards;
-            totalCards += cards;
+                // Format jj/mm/aaaa en anglais GB => "dd/MM/yyyy"
+                const dayString = d.toLocaleDateString("en-GB");
+                const todayData = data.find(entry => entry.date === dayString) || null;
 
-            day.classList.add(getClassByCards(cards));
+                // -- GESTION DU TOOLTIP --
+                // On définit des fonctions showTooltip / hideTooltip
+                // qui gèrent l'affichage/masquage du tooltip
+                const showTooltip = (e) => {
+                    // Sur mobile, e.touches[0] -> coordonnées
+                    const x = e.touches?.[0]?.clientX ?? e.clientX;
+                    const y = e.touches?.[0]?.clientY ?? e.clientY;
 
-            tempStreak++;
-            if (tempStreak > longestStreak) {
-                longestStreak = tempStreak;
+                    tooltip.style.visibility = "visible";
+                    tooltip.style.opacity = "1";
+                    
+                    // Positionnement
+                    const tooltipWidth = tooltip.offsetWidth;
+                    const adjustedX = Math.min(x + 10, window.innerWidth - tooltipWidth - 10);
+                    const adjustedY = Math.max(y - 40, 10);
+
+                    tooltip.style.left = `${adjustedX}px`;
+                    tooltip.style.top = `${adjustedY}px`;
+                };
+                const hideTooltip = () => {
+                    tooltip.style.visibility = "hidden";
+                    tooltip.style.opacity = "0";
+                };
+
+                // Cas où il y a des cartes (>0)
+                if (todayData && todayData.cards > 0) {
+                    const cards = todayData.cards;
+                    totalCards += cards;
+
+                    // Ajoute une classe "qX"
+                    day.classList.add(getClassByCards(cards));
+                    // Pour le streak
+                    tempStreak++;
+                    if (tempStreak > longestStreak) {
+                        longestStreak = tempStreak;
+                    }
+
+                    // IMPORTANT : on met du texte dans le tooltip
+                    // pour ne pas l'avoir vide !
+                    // Ex. : "30 reviews on 10/09/2024"
+                    if (isTouchDevice) {
+                        day.addEventListener("touchstart", (e) => {
+                            tooltip.innerText = `${cards} reviews on ${dayString}`;
+                            showTooltip(e);
+                        });
+                        day.addEventListener("touchend", hideTooltip);
+                    } else {
+                        day.addEventListener("mouseover", (e) => {
+                            tooltip.innerText = `${cards} reviews on ${dayString}`;
+                            showTooltip(e);
+                        });
+                        day.addEventListener("mouseout", hideTooltip);
+                    }
+
+                } else {
+                    // S'il n'y a pas de cartes ce jour-là
+                    day.style.backgroundColor = "#333333";
+                    // On brise le streak (tempStreak = 0)
+                    tempStreak = 0;
+
+                    // Idem : on gère le tooltip
+                    if (isTouchDevice) {
+                        day.addEventListener("touchstart", (e) => {
+                            tooltip.innerText = `No reviews on ${dayString}`;
+                            showTooltip(e);
+                        });
+                        day.addEventListener("touchend", hideTooltip);
+                    } else {
+                        day.addEventListener("mouseover", (e) => {
+                            tooltip.innerText = `No reviews on ${dayString}`;
+                            showTooltip(e);
+                        });
+                        day.addEventListener("mouseout", hideTooltip);
+                    }
+                }
+
+                grid.appendChild(day);
             }
 
-            const showTooltip = (e) => {
-                const x = e.touches ? e.touches[0].pageX : e.pageX;
-                const y = e.touches ? e.touches[0].pageY : e.pageY;
-                tooltip.innerText = `${cards} cards reviewed on ${dayString}`;
-                tooltip.style.left = `${x + 10}px`;
-                tooltip.style.top = `${y - 40}px`;
-                tooltip.style.visibility = "visible";
-                tooltip.style.opacity = "1";
-            };
+            // Le streak en cours est la dernière valeur de tempStreak
+            currentStreak = tempStreak;
 
-            const hideTooltip = () => {
-                tooltip.style.visibility = "hidden";
-                tooltip.style.opacity = "0";
-            };
+            // Calcule la moyenne journalière sur les jours > 0
+            const daysWithCards = data.filter(d => d.cards > 0).length;
+            const dailyAverage = daysWithCards > 0
+                ? (totalCards / daysWithCards).toFixed(2)
+                : 0;
 
-            if (isTouchDevice) {
-                day.addEventListener("touchstart", showTooltip);
-                day.addEventListener("touchend", hideTooltip);
-            } else {
-                day.addEventListener("mouseover", showTooltip);
-                day.addEventListener("mouseout", hideTooltip);
-            }
-        } else {
-            day.style.backgroundColor = "#333333";
-
-            const showTooltip = (e) => {
-                const x = e.touches ? e.touches[0].pageX : e.pageX;
-                const y = e.touches ? e.touches[0].pageY : e.pageY;
-                tooltip.innerText = `No reviews on ${dayString}`;
-                tooltip.style.left = `${x + 10}px`;
-                tooltip.style.top = `${y - 40}px`;
-                tooltip.style.visibility = "visible";
-                tooltip.style.opacity = "1";
-            };
-
-            const hideTooltip = () => {
-                tooltip.style.visibility = "hidden";
-                tooltip.style.opacity = "0";
-            };
-
-            if (isTouchDevice) {
-                day.addEventListener("touchstart", showTooltip);
-                day.addEventListener("touchend", hideTooltip);
-            } else {
-                day.addEventListener("mouseover", showTooltip);
-                day.addEventListener("mouseout", hideTooltip);
-            }
-
-            tempStreak = 0;
+            document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
+            document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
+            document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
         }
 
-        grid.appendChild(day);
-    }
-
-    currentStreak = tempStreak;
-
-    const dailyAverage = (totalCards / data.filter(d => d.cards > 0).length).toFixed(2);
-    document.getElementById("daily-average").innerText = `Daily average: ${dailyAverage} cards`;
-    document.getElementById("longest-streak").innerText = `Longest streak: ${longestStreak} days`;
-    document.getElementById("current-streak").innerText = `Current streak: ${currentStreak} days`;
-}
-
-    renderGrid();
-
+        renderGrid();
     </script>
 </body>
 </html>
