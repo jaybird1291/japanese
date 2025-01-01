@@ -160,9 +160,6 @@
   </div>
 
   <script>
-    // --------------------------
-    //      Données d'exemple
-    // --------------------------
     const data = [
       { date: "08/09/2024", cards: 43 },
       { date: "09/09/2024", cards: 42 },
@@ -286,14 +283,14 @@
     // 1) Calculer les stats sur TOUT le dataset
     // ----------------------------------------
     function computeStats(fullData) {
-      // Pour calculer la plus longue série, il faut avancer date par date
-      // On va d'abord trier les données par ordre chronologique
-      // (Le format "dd/mm/yyyy" n’est pas triable directement, donc on convertit en Date)
       const sortedData = [...fullData].sort((a, b) => {
         const [dayA, monthA, yearA] = a.date.split("/").map(Number);
         const [dayB, monthB, yearB] = b.date.split("/").map(Number);
         return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
       });
+
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
 
       let totalCards = 0;
       let daysWithCards = 0;
@@ -301,23 +298,25 @@
       let currentStreak = 0;
       let tempStreak = 0;
 
-      // Itération sur l’ordre chronologique
       for (const dayData of sortedData) {
-        const cards = dayData.cards;
-        if (cards > 0) {
+        const [day, month, year] = dayData.date.split("/").map(Number);
+        const currentDate = new Date(year, month - 1, day);
+
+        if (currentDate.getTime() === today.getTime()) continue;
+
+        if (dayData.cards > 0) {
           tempStreak++;
           if (tempStreak > longestStreak) {
             longestStreak = tempStreak;
           }
-          totalCards += cards;
+          totalCards += dayData.cards;
           daysWithCards++;
         } else {
-          tempStreak = 0; // rupture de streak
+          tempStreak = 0;
         }
       }
-      // À la fin de la boucle, tempStreak représente la série en cours
-      currentStreak = tempStreak;
 
+      currentStreak = tempStreak;
       const dailyAverage = daysWithCards > 0 
         ? Math.round(totalCards / daysWithCards) 
         : 0;
@@ -325,7 +324,7 @@
       return {
         dailyAverage,
         longestStreak,
-        currentStreak
+        currentStreak,
       };
     }
 
