@@ -17,6 +17,11 @@ Vous retrouverez ici la liste d’outils et de ressources qui m’accompagnent. 
 - TheMoeWay - 30 Day Japanese (https://learnjapanese.moe/guide/)
 - Tofugu - Learn Japanese: A Ridiculously Detailed Guide (https://www.tofugu.com/learn-japanese/)
 
+## **Livres**
+- Genki 1 et 2 - Méthode intégrée de japonais débutant
+- Genki 1 et 2 - Cahier d'exercice
+- Making Sense of Japanese: What the Textbooks Don't Tell You (Jay Robin)
+
 ## **Kana**
 - Tofugu - Learn Hiragana: The Ultimate Guide (https://www.tofugu.com/japanese/learn-hiragana/)
 - Learn ALL Kana: Hiragana + Katakana in 2 hours - How to Write and Read Japanese (https://www.youtube.com/watch?v=_wZHqOghvSs)

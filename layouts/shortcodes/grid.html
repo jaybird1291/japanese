@@ -154,9 +154,9 @@
 
   <!-- Statistiques globales (basées sur tout le dataset, pas sur la plage affichée) -->
   <div class="stats">
-    <span id="daily-average">Daily average: xx cards</span>
-    <span id="longest-streak">Longest streak: xx days</span>
-    <span id="current-streak">Current streak: xx days</span>
+    <span id="daily-average">Moyenne quotidienne : xx cards</span>
+    <span id="longest-streak">Plus longue série : xx days</span>
+    <span id="current-streak">Série actuelle : xx days</span>
   </div>
 
   <script>
@@ -335,11 +335,11 @@
     // 2) Initialiser les stats
     // ---------------------------
     document.getElementById("daily-average").innerText =
-      `Daily average: ${stats.dailyAverage} cards`;
+      `Moyenne quotidienne : ${stats.dailyAverage} cards`;
     document.getElementById("longest-streak").innerText =
-      `Longest streak: ${stats.longestStreak} days`;
+      `Plus longue série : ${stats.longestStreak} days`;
     document.getElementById("current-streak").innerText =
-      `Current streak: ${stats.currentStreak} days`;
+      `Série actuelle : ${stats.currentStreak} days`;
 
     // ------------------------------------------------
     // 3) Gérer l'affichage dynamique de la heatmap
@@ -430,13 +430,13 @@
               e.stopPropagation();
               removeAllHovered();
               day.classList.add("hovered");
-              showTooltip(e, `${cards} reviews on ${dayString}`);
+              showTooltip(e, `${cards} cartes révisées le ${dayString}`);
             });
           } else {
             day.addEventListener("mouseover", (e) => {
               removeAllHovered();
               day.classList.add("hovered");
-              showTooltip(e, `${cards} reviews on ${dayString}`);
+              showTooltip(e, `${cards} cartes révisées le ${dayString}`);
             });
             day.addEventListener("mouseout", () => {
               day.classList.remove("hovered");
@@ -453,13 +453,13 @@
               e.stopPropagation();
               removeAllHovered();
               day.classList.add("hovered");
-              showTooltip(e, `No reviews on ${dayString}`);
+              showTooltip(e, `Pas de révision le ${dayString}`);
             });
           } else {
             day.addEventListener("mouseover", (e) => {
               removeAllHovered();
               day.classList.add("hovered");
-              showTooltip(e, `No reviews on ${dayString}`);
+              showTooltip(e, `Pas de révision le ${dayString}`);
             });
             day.addEventListener("mouseout", () => {
               day.classList.remove("hovered");

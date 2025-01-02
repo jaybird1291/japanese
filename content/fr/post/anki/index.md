@@ -9,7 +9,7 @@ weight: 1       # You can add weight to some posts to override the default sorti
 ---
 
 ## Introduction
-Vous retrouverez ici les stats de mon Anki, avec le nombre de cartes révisées par jour et d'autres informations. Vous pouvez cliquer sur les carrés pour obtenir des statistiques plus détaillées !
+Vous retrouverez ici les stats de mon Anki, avec le nombre de cartes révisées par jour et d'autres informations. Vous pouvez survoler / appuyer les carrés pour voir mes stats journalières ! Une série représente un enchaînement ininterrompu de révision journalière. Si je loupe un jour en ne révisant pas mes cartes alors la série est cassée et retourne à zéro ! 
 
 ## Stats
 {{< grid >}}
