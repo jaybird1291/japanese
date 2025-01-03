@@ -199,9 +199,12 @@ Pour transformer un adjectif en **-な** en un **adverbe**, on ajoute **に** ap
 > 「りんご<font color="#ff0000">か</font>バナナを食べますか？」*(Une pomme ou une banane ?)*
 
 ---
-**し** : marque une **<font color="#e36c09">énumération</font>** ou une **<font color="#e36c09">justification</font>** avec un ton non exhaustif.
-> 「やすい<font color="#ff0000">し</font>、おいしいです。」*(C’est bon marché et délicieux.)  
-> 「あたらしい<font color="#ff0000">し</font>、きれいです。」*(C’est nouveau et joli.)  
+**し** : sert à énumérer des <font color="#de7802">raisons</font>, des <font color="#de7802">faits</font> ou des <font color="#de7802">caractéristiques</font> en suggérant qu’il pourrait y en avoir d’autres. Utilisée dans des contextes où le locuteur souhaite présenter plusieurs points pour expliquer une situation ou décrire quelque chose, souvent sans être exhaustif.
+> Énumération des qualités : 「きれい<font color="#ff0000">だし</font>、やさしい<font color="#ff0000">し</font>」 *(Elle est belle, et en plus gentille.)*
+> Justification : 「つかれている<font color="#ff0000">し</font>、ねむい<font color="#ff0000">し</font>、もうかえりたい」 *(Je suis fatigué(e), j’ai sommeil, alors je veux rentrer.)*
+
+
+
 
 
 ## **Teneigo** 
