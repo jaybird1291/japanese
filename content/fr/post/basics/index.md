@@ -380,3 +380,8 @@ Enlevez **-る** et ajoutez **-て**.
 - Toujours commencer par **さん** dans un contexte inconnu ou formel.
 - Passer à **くん** ou **ちゃん** uniquement si la relation est proche ou que la situation le permet.
 - Utiliser **さま** ou **どの** dans des contextes très formels ou spécifiques.
+
+## **Autres**
+### Articulation des phrases
+
+![](pictures/phrase1.png)
