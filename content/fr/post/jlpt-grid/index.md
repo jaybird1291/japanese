@@ -9,7 +9,7 @@ weight: 2       # You can add weight to some posts to override the default sorti
 ---
 
 ## Introduction
-Vous retrouverez ici les stats de mon avancement concernant mon apprentissage du vocabulaire et kanji du JLPT N5 ! 
+Vous retrouverez ici les stats de mon avancement concernant mon apprentissage du vocabulaire et kanji du JLPT N5 ! Ce n'est pas tout mon vocabulaire, seulement ceux du JLPT N5.
 
 ## Stats
 {{< jlpt >}}
