@@ -384,7 +384,7 @@ Enlevez **-る** et ajoutez **-て**.
 ## **Vocabulaire famille**
 
 | Japonais (hiragana)   | フランスご                 |
-|-----------|-----------------------|----------------------------|
+|-----------|-----------------------|
 | ちち (familier)      | père                       |
 | おとうさん (poli)     | père                       |
 | はは (familier)       | mère                       |
