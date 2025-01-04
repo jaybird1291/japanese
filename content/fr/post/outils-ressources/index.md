@@ -16,6 +16,7 @@ Vous retrouverez ici la liste d’outils et de ressources qui m’accompagnent. 
 ## **Guides**
 - TheMoeWay - 30 Day Japanese (https://learnjapanese.moe/guide/)
 - Tofugu - Learn Japanese: A Ridiculously Detailed Guide (https://www.tofugu.com/learn-japanese/)
+- Guide japonais de Tae Kim pour la grammaire japonaise (https://www.guidetojapanese.org/french/index.html)
 
 ## **Livres**
 - Genki 1 et 2 - Méthode intégrée de japonais débutant
@@ -54,9 +55,14 @@ Mes extensions :
 
 ## **Dictionnaires**
 - Jisho (https://jisho.org/)
-- Takoboto (https://takoboto.jp/)
+- Takoboto (https://takoboto.jp/ & https://takoboto.jp/bunpo/)
+
+## **Conjugaisons verbes** 
+- Verbix (https://www.verbix.com/languages/japanese)
+- Japanese Verb Conjugator (https://www.japaneseverbconjugator.com/)
 
 ## **Kanji**
+- Jisho Kanji (https://jisho.org/search/%20%23kanji)
 - Kanji Grid (https://minosvasilias.github.io/kanjigrid/)
 
 ## **Autres**
