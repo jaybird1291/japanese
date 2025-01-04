@@ -204,6 +204,17 @@ Pour transformer un adjectif en **-な** en un **adverbe**, on ajoute **に** ap
 > Justification : 「つかれている<font color="#ff0000">し</font>、ねむい<font color="#ff0000">し</font>、もうかえりたい」 *(Je suis fatigué(e), j’ai sommeil, alors je veux rentrer.)*
 
 
+### Particules de connexion
+Ces particules relient deux propositions ou clauses pour indiquer une relation logique (cause, conséquence, opposition, etc.).
+
+| **Particule** | **Signification principale**   | **Exemple**                      | **Explication**                                 |
+|---------------|--------------------------------|-----------------------------------|------------------------------------------------|
+| **も**        | "aussi"                   | わたしもいきます。   | "Moi aussi, j’y vais"               |
+| **から**      | "parce que", "depuis"     | あついから、まどをあけます。       | "Comme il fait chaud, j’ouvre la fenêtre."  |
+| **けど**      | "mais" (forme familière)    | たかいけど、かいます。              | "C’est cher, mais je l’achète."             |
+| **が**        | "mais" (forme polie)        | あめがふっていますが、いきます。   | "Il pleut, mais j’y vais."                  |
+| **ので**      | "parce que", "comme"      | しずかなので、ねます。             | "Comme c’est calme, je dors."               |
+| **のに**      | "bien que", "malgré", "même si", "et pourtant"      | おかねがないのに、たくさんかいものしました。 | "Bien que je n’aie pas d’argent, j’ai beaucoup acheté." |
 
 
 
@@ -380,6 +391,7 @@ Enlevez **-る** et ajoutez **-て**.
 - Toujours commencer par **さん** dans un contexte inconnu ou formel.
 - Passer à **くん** ou **ちゃん** uniquement si la relation est proche ou que la situation le permet.
 - Utiliser **さま** ou **どの** dans des contextes très formels ou spécifiques.
+
 
 ## **Vocabulaire famille**
 
