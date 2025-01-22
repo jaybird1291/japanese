@@ -363,6 +363,27 @@ La construction **〜てみる** est utilisée pour exprimer l'idée d'**essayer
 
 ---
 
+### Structure ～ていく / ～てくる
+
+Les constructions **～ていく** et **～てくる** sont utilisées pour exprimer la direction ou la temporalité d'une action. Elles ajoutent des nuances supplémentaires en indiquant si l'action se dirige vers l'extérieur ou vers le locuteur, ou si elle se déroule dans le futur ou est déjà en cours.
+
+| **Aspect**             | **～ていく (te iku)**                       | **～てくる (te kuru)**                        |
+|------------------------|---------------------------------------------|-----------------------------------------------|
+| **Direction**          | Vers l'extérieur, s'éloigne                 | Vers le locuteur, revient                      |
+| **Temporalité**        | Action qui continue dans le futur           | Action qui a commencé dans le passé et continue |
+| **Exemples**           | はしっていく <br> (Il va courir plus loin)        | たべてくる <br> (Il vient manger)               |
+| **Changement Progressif** | Peut indiquer un changement qui évolue dans le futur | Peut indiquer un changement qui a évolué jusqu'à maintenant |
+
+Exemple : 
+| **Phrase**          | **Traduction / Explication**                         |
+|---------------------|-------------------------------------------------------|
+| たべてくる          | "Il vient manger." (Manger en venant vers le locuteur) |
+| はしってくる        | "Il vient courir." (Courir en revenant vers le locuteur) |
+| よんできた          | "Il est venu lire." (Lire en venant vers le locuteur) |
+
+---
+
+
 ## **Niveaux de langage (politesse)** 
 
 ### Teineigo 
