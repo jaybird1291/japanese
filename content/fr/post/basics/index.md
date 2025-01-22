@@ -130,78 +130,51 @@ Pour transformer un adjectif en **-な** en un **adverbe**, on ajoute **に** ap
 
 ## **Particules**
 
-**が** : marque le **<font color="#e36c09">sujet</font>** de la phrase, particulièrement lorsqu'on souhaite mettre en avant une information **<font color="#e36c09">nouvelle ou importante</font>**. 
-> 「ねこ<font color="#ff0000">が</font>いる」*(Il y a un chat)*
+Les particules jouent un rôle crucial en japonais : elles servent à marquer les fonctions syntaxiques (sujet, objet, lieu, etc.) et à relier les différentes parties de la phrase. La section suivante détaille chacune d'entre elles afin de vous aider à mieux comprendre leur utilisation et leur importance.
+
+
+### Particules de base
+
+| **Particule** | **Signification principale**                          | **Exemple**                                      | **Explication**                                                       |
+|---------------|-------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------------------|
+| **は**       | Thème / Information générale                          | わたし**は**がくせいです。                        | Introduit un sujet connu ou une information générale.               |
+| **が**       | Sujet (information nouvelle ou importante)          | ねこ**が**いる。                                  | Met en avant le sujet pour signaler une information nouvelle ou importante. |
+| **を**       | Complément d’objet direct (COD)                       | りんご**を**たべる。                              | Indique l’objet sur lequel porte l’action.                           |
+| **に**       | Destination / Point temporel                          | とうきょう**に**いく<br>しちじ**に**おきる           | Sert à indiquer la destination d’un mouvement ou un moment précis.     |
+| **へ**       | Direction / Destination                               | がっこう**へ**いく。                              | Marque la direction vers laquelle se dirige l’action.                |
+| **で**       | Lieu d’action / Moyen                                 | としょかん**で**べんきょうする<br>バス**で**いく      | Indique le lieu où se déroule l’action ou le moyen utilisé pour agir.  |
+| **の**       | Possession / Liaison entre deux noms                  | わたし**の**ほん                                | Marque la possession ou relie deux noms pour exprimer une relation.    |
 
 ---
-**は** : <span style="background:#d4b106">prononcé wa</span> marque le <font color="#de7802">sujet</font> de la phrase - introduit un <font color="#de7802">sujet connu</font> ou une <font color="#de7802">information générale</font>.
->「わたし<font color="#ff0000">は</font>がくせいです」*(Je suis étudiant)*
+
+### Particule attributive
+
+| **Particule** | **Signification principale** | **Exemple**             | **Explication**                                         |
+|---------------|------------------------------|-------------------------|---------------------------------------------------------|
+| **な**       | Liaison d’adjectif en **-な**  | だいじ**な**もの         | Relie un adjectif en **-な** à un nom.                   |
 
 ---
-**よ** : en fin de phrase - ajoute de l'<font color="#de7802">emphase</font> pour signaler une information <font color="#de7802">nouvelle</font> <font color="#de7802">ou</font> <font color="#de7802">importante</font>.
-> 「あしたあめがふる<font color="#ff0000">よ</font>」*(Il va pleuvoir demain, tu sais !)*
+
+### Particules de fin de phrase
+
+| **Particule** | **Signification principale**                              | **Exemple**                                      | **Explication**                                                    |
+|---------------|-----------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------|
+| **よ**       | Emphase / Information nouvelle                            | あしたあめがふる**よ**                          | Ajoute de l’emphase pour signaler une information importante.      |
+| **ね**       | Approbation / Confirmation                                | これはおいしい**ね**                             | Cherche l’approbation ou la confirmation de l’interlocuteur.         |
+| **なあ**      | Expression d’émotion (nostalgie, surprise, désir)         | きょうはいいてんきだ**なあ**                      | Exprime une émotion ou une contemplation personnelle.              |
+| **か**       | Transformation en question / Alternative                  | これはたべもの**か**<br>りんご**か**バナナをたべますか？  | Transforme une phrase en question ou marque une alternative.         |
+| **ん**       | Explication / Justification (contracte de の ou のです)     | きのうはつかれた**ん**です                        | Donne un ton explicatif ou justificateur à la phrase.                |
 
 ---
-**ね** : en fin de phrase - demande l'<font color="#de7802">approbation</font> de la personne.
-> 「これはおいしい<font color="#ff0000">ね</font>」*(C'est délicieux, n'est-ce pas ?)*
 
----
-**な** : permet de lier des adjectifs en "na" avec un nom. 
-> 「だいじ<font color="#ff0000">な</font>もの」*(Une chose importante)*
+### Particules de connexion / Énumération / Citation
 
----
-**を** : indique le <font color="#de7802">COD</font>  *(complément d'objet direct - qui désigne l'objet sur lequel une action est directement effectuée)*. 
-> 「りんご<font color="#ff0000">を</font>たべる」*(Je mange une pomme)*
-
----
-**に** : sert à indiquer la <font color="#de7802">direction</font>, le <font color="#de7802">lieu de destination</font>, ou encore le <font color="#de7802">point temporel</font> (moment où quelque chose se passe). 
->- Destination : 「とうきょう<font color="#ff0000">に</font>いく」 : *(Je vais à Tokyo)*
->  - Temps : 「しちじ<font color="#ff0000">に</font>おきる」*(Se lever à 7 heures)*
-
----
-**へ** : indique la <font color="#de7802">direction</font> ou la <font color="#de7802">destination d'un mouvement</font>. 
-> 「がっこう<font color="#ff0000">へ</font>いく」: *(Aller vers l'école)*
-
----
-**で** : indique le <font color="#de7802">lieu</font> où une <font color="#de7802">action se déroule</font>, ou le <font color="#de7802">moyen utilisé</font> pour <font color="#de7802">effectuer une action</font>.
-> - Lieu : 「としょかん<font color="#ff0000">で</font>べんきょうする」: *(Étudier à la bibliothèque)*
->- Moyen : 「バス<font color="#ff0000">で</font>いく」: *(Aller en bus)*
-
----
-**の** : marque la **<font color="#de7802">possession</font>** ou sert à **<font color="#de7802">relier deux noms</font>** pour montrer une relation (comme un complément de nom en français).
-> 「わたし<font color="#ff0000">の</font>ほん」_(Mon livre)_
-
----
-**なあ** : utilisé à la fin d'une phrase pour **<font color="#de7802">exprimer une émotion</font>**, souvent de la **<font color="#de7802">nostalgie</font>**, de la **<font color="#de7802">surprise</font>**, ou un **<font color="#de7802">désir</font>**. C'est une particule qui donne un ton **<font color="#de7802">contemplatif</font>** ou **<font color="#de7802">emphatique</font>**.
-> 「きょうはいいてんきだ<font color="#ff0000">なあ</font>」_(Quel beau temps aujourd'hui !)_
-
----
-**と** : utilisé pour indiquer une **<font color="#de7802">coordination</font>** (comme "et" pour lister des éléments) ou une **<font color="#de7802">condition</font>** (comme "si"). Il marque également une **<font color="#de7802">citation directe</font>**.
-> - Liste : 「パン<font color="#ff0000">と</font>バター」_(Pain et beurre)_
-> - Condition : 「まどをあける<font color="#ff0000">と</font>、さむくなる」_(Si j'ouvre la fenêtre, il fera froid)_
-> - Citation : 「かれが『いく』<font color="#ff0000">と</font>いった」_(Il a dit "je pars")_
-
----
-**とか** : similaire à **<font color="#de7802">と</font>**, mais indique souvent des **<font color="#de7802">exemples non exhaustifs</font>** ou des éléments **<font color="#de7802">possibles</font>** parmi d'autres. Peut également indiquer une **<font color="#de7802">citation indirecte</font>**.
-> 「ケーキ<font color="#ff0000">とか</font>クッキーがすきです」_(J'aime les gâteaux, les biscuits, etc.)_
-
----
-**って** : utilisé pour indiquer une **<font color="#de7802">citation</font>**, une **<font color="#de7802">rumeur</font>**, ou pour poser une **<font color="#de7802">question indirecte</font>**. Il a un usage familier pour reprendre ce que quelqu'un a dit.
-> 「あしたはやすみだ<font color="#ff0000">って</font>」_(On dit que demain est un jour de congé)_
-
----
-**ん** : forme contractée de **<font color="#de7802">の</font>** ou de **<font color="#de7802">のです</font>**, souvent utilisée pour expliquer quelque chose ou pour **<font color="#de7802">justifier</font>** une affirmation. Elle donne un ton **<font color="#de7802">explicatif</font>** à la phrase.
-> 「きのうはつかれた<font color="#ff0000">ん</font>です」_(J'étais fatigué hier)_
-
----
-**か** : en fin de phrase - transforme une phrase en **<font color="#e36c09">question</font>**, ou marque une **<font color="#e36c09">alternative</font>** entre deux choix.
-> 「これはたべもの<font color="#ff0000">か</font>？」*(Est-ce de la nourriture ?)*  
-> 「りんご<font color="#ff0000">か</font>バナナを食べますか？」*(Une pomme ou une banane ?)*
-
----
-**し** : sert à énumérer des <font color="#de7802">raisons</font>, des <font color="#de7802">faits</font> ou des <font color="#de7802">caractéristiques</font> en suggérant qu’il pourrait y en avoir d’autres. Utilisée dans des contextes où le locuteur souhaite présenter plusieurs points pour expliquer une situation ou décrire quelque chose, souvent sans être exhaustif.
-> Énumération des qualités : 「きれい<font color="#ff0000">だし</font>、やさしい<font color="#ff0000">し</font>」 *(Elle est belle, et en plus gentille.)*
-> Justification : 「つかれている<font color="#ff0000">し</font>、ねむい<font color="#ff0000">し</font>、もうかえりたい」 *(Je suis fatigué(e), j’ai sommeil, alors je veux rentrer.)*
+| **Particule** | **Signification principale**                                            | **Exemple**                                         | **Explication**                                                                          |
+|---------------|-------------------------------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------|
+| **と**       | Coordination ("et"), condition ("si"), citation directe                 | パン**と**バター<br>まどをあける**と**、さむくなる<br>かれが「いく」**と**いった | Utilisée pour lier des éléments, exprimer une condition ou rapporter une citation directe. |
+| **とか**     | Exemples non exhaustifs / Possibilités                                  | ケーキ**とか**クッキーがすきです。                     | Sert à donner des exemples parmi d’autres, sans être exhaustif.                          |
+| **って**     | Citation, rumeur, question indirecte                                    | あしたはやすみだ**って**                           | Utilisée familièrement pour citer ou évoquer une rumeur.                                  |
+| **し**       | Énumération de raisons, faits ou caractéristiques                         | きれい**だし**、やさしい**し**<br>つかれている**し**、ねむい**し**、もうかえりたい | Énumère plusieurs raisons ou caractéristiques sans lister exhaustivement toutes les options. |
 
 
 ### Particules de connexion
@@ -217,8 +190,182 @@ Ces particules relient deux propositions ou clauses pour indiquer une relation l
 | **のに**      | "bien que", "malgré", "même si", "et pourtant"      | おかねがないのに、たくさんかいものしました。 | "Bien que je n’aie pas d’argent, j’ai beaucoup acheté." |
 
 
+## **Formes et constructions verbales**
 
-## **Teneigo** 
+### La Forme en -て
+La forme en **-て** est utilisée pour connecter des phrases ou des idées, exprimer une action en progression ou enchaîner des actions. Elle sert également à donner des instructions et à former des constructions grammaticales plus complexes (par exemple : 〜ている, 〜てから, 〜ても, etc.).
+
+**Adjectifs**
+
+<strong class="alternate">Adjectifs en -い</strong>  
+Pour les adjectifs en **-い**, remplacez **-い** par **-くて**.
+
+| **Adjectif** (-い) | **Te-form** (-くて) | **Traduction**         |
+| ----------------- | ------------------ | ---------------------- |
+| たのしい          | たのしくて         | amusant et…            |
+| はやい           | はやくて           | rapide et…             |
+| ちいさい          | ちいさくて         | petit et…              |
+
+<strong class="alternate">Adjectifs en -な</strong>  
+Pour les adjectifs en **-な**, ajoutez simplement **で** après l’adjectif.
+
+| **Adjectif** (-な) | **Te-form** (で) | **Traduction**       |
+| ----------------- | -------------- | -------------------- |
+| しずかな          | しずかで         | calme et…            |
+| ていねいな         | ていねいで        | poli et…             |
+
+*Exemple d’usage pour un adjectif en -い :*  
+「このえいがは たのしくて、ぜんたいで おもしろい。」  
+*(Ce film est amusant et dans l'ensemble intéressant.)*
+
+**Verbes**
+
+<strong class="alternate">Verbes du groupe ごだん</strong> 
+
+| **Terminaison du verbe** | **Te-form** | **Exemple** (Dictionnaire → Te-form)       |
+| ------------------------ | ----------- | ------------------------------------------ |
+| -う, -つ, -る           | -って       | かう → かって  *(acheter)*                    |
+| -む, -ぶ, -ぬ           | -んで       | よむ → よんで  *(lire)*                       |
+| -く                     | -いて       | かく → かいて  *(écrire)*                     |
+| -ぐ                     | -いで       | およぐ → およいで  *(nager)*                  |
+| -す                     | -して       | はなす → はなして  *(parler)*                 |
+
+<strong class="alternate">Verbes du groupe いちだん</strong>  
+Enlevez **-る** et ajoutez **-て**.
+
+| **Verbe**         | **Te-form** |
+| ----------------- | ----------- |
+| たべる (manger)   | たべて     |
+| みる (voir)       | みて       |
+
+<strong class="alternate">Verbes irréguliers ふきそく</strong> 
+
+| **Verbe**         | **Te-form** |
+| ----------------- | ----------- |
+| する (faire)      | して       |
+| くる (venir)      | きて       |
+
+*Exemple d’usage pour un verbe :*  
+「てがみを かいて、ゆうびんで おくります。」  
+*(J'écris une lettre et je l'envoie par la poste.)*
+
+---
+
+### La structure de 〜ている et 〜てある
+
+La construction **〜ている** peut exprimer différentes nuances selon le contexte :
+- action en cours (progressif)
+- action habituelle 
+- état résultant d'une action passée
+
+La construction **〜てある** quant à elle, est utilisée pour décrire un **état résultant** d'une action intentionnelle, souvent réalisée par quelqu'un pour que quelque chose reste dans un certain état.
+
+
+| **Expression** | **Usage / Nuance**                                      | **Exemple**                  | **Traduction / Explication**                                                                 |
+|----------------|---------------------------------------------------------|------------------------------|---------------------------------------------------------------------------------------------|
+| 〜ている       | Action en cours (progressif)                            | りょうりをしている            | Je suis en train de cuisiner (action qui se déroule actuellement)                             |
+| 〜ている       | Action habituelle                                       | まいあさあるいている          | Je marche tous les matins (action répétée ou une habitude)                                    |
+| 〜ている       | État résultant d'une action passée                      | ドアがあいている              | La porte est ouverte (résultat d'une action antérieure, sans impliquer une intention particulière) |
+| 〜てある       | État résultant d'une action intentionnelle              | テーブルの上に本が置いてある  | Un livre est posé sur la table (l'action a été réalisée exprès pour maintenir cet état)        |
+
+**Différence principale :**  
+- **〜ている** décrit une action en cours, une habitude ou un état résultant sans insistance sur l'intention derrière l'action.  
+- **〜てある** met l'accent sur le fait que l'action a été **intentionnellement** réalisée afin de créer et de maintenir un état particulier.
+
+---
+
+### La structure ～たり～たりする
+Elle permet d'exprimer que l’on fait plusieurs actions, entre autres, sans les énumérer toutes Cette construction veut dire « faire ceci, faire cela, etc. »
+
+Cette structure est : 
+- **Non exhaustif** : La structure indique qu’il y a d’autres actions qui pourraient être faites.
+- **Utiliser la forme passée + り** pour chaque verbe.
+- **Terminer par する** pour signifier que c’est l’action principale.
+
+
+<strong class="alternate">Formation</strong> 
+1. Choisir un verbe que vous voulez utiliser.  
+   Par exemple :  
+   - たべる (manger)  
+   - のむ (boire)
+
+2. Conjuguer le verbe à la forme passée (forme en **た**).  
+   - たべる → **たべた**  
+   - のむ → **のんだ**
+
+3. Ajouter り après le verbe à la forme passée.
+   - たべた → **たべたり**  
+   - のんだ → **のんだり**
+
+4. Terminer avec する pour conclure la série.  
+   - Exemple complet : **たべたり のんだり する**
+
+| **Expression**         | **Usage / Nuance**                                          | **Exemple**                         | **Traduction / Explication**                                                                 |
+|------------------------|-------------------------------------------------------------|-------------------------------------|----------------------------------------------------------------------------------------------|
+| 〜たり〜たりする       | Énumération non exhaustive d'actions                        | たべたり　のんだり　する              | "Je fais des choses comme manger et boire, entre autres"                                     |
+|                        | Permet de donner des exemples sans lister toutes les actions |                                     | Indique que d'autres actions peuvent être faites en plus des exemples donnés.                |
+
+---
+
+### Formation de verbes d’action avec un nom abstrait ou concept + する
+De nombreux noms en japonais représentent des idées ou des actions. En ajoutant **する** après ces noms, on crée un verbe qui exprime l’action liée au concept.
+
+**Formation** : 
+1. **Prendre un nom** (souvent en hiragana ou katakana) qui représente une idée ou un concept.  
+   Par exemple :  
+   - べんきょう (étude)  
+   - よやく (réservation)  
+   - うんどう (exercice)  
+   - そうだん (consultation/discussion)
+
+2. **Ajouter する** après le nom pour créer un verbe.  
+   - べんきょう → **べんきょうする** (étudier)  
+   - よやく → **よやくする** (réserver)  
+   - うんどう → **うんどうする** (faire de l’exercice)  
+   - そうだん → **そうだんする** (consulter/discuter)
+
+| **Expression**          | **Usage / Nuance**                                          | **Exemple**                         | **Traduction / Explication**                                                                 |
+|-------------------------|-------------------------------------------------------------|-------------------------------------|----------------------------------------------------------------------------------------------|
+| Nom + する             | Transformation d’un nom (souvent abstrait ou concept) en verbe  | べんきょうする<br>よやくする         | "Étudier"<br>"Réserver"                                                                         |
+|                         | Permet de créer facilement un verbe d'action à partir d'un concept ou d'une idée | うんどうする<br>そうだんする         | "Faire de l'exercice"<br>"Consulter / Discuter"                                               |
+
+---
+
+### Structure 〜たことがある
+
+L'expression **「〜たことがある」** est utilisée pour indiquer qu'on a déjà fait quelque chose ou qu'une certaine expérience s'est produite dans le passé.
+
+| **Structure**          | **Usage**                                                        | **Exemple**                      | **Traduction / Explication**                  |
+|------------------------|------------------------------------------------------------------|----------------------------------|-----------------------------------------------|
+| Verbe (forme passée た-forme) + ことがある | Exprime qu'une action a été réalisée au moins une fois             | たべたことがある                 | "J'ai déjà mangé."  |
+
+---
+
+### Structure ～ておく
+
+La construction **〜ておく** est utilisée pour indiquer qu'une action est réalisée en prévision de quelque chose, c'est-à-dire pour se préparer ou anticiper un événement futur. Elle exprime l'idée de faire quelque chose à l'avance pour faciliter ou garantir le bon déroulement de situations ultérieures.
+
+| **Structure**              | **Usage / Nuance**                                                        | **Exemple**                           | **Traduction / Explication**                                                               |
+|----------------------------|---------------------------------------------------------------------------|---------------------------------------|--------------------------------------------------------------------------------------------|
+| Verbe (forme en -て) + おく | Indique qu'une action est effectuée en prévision ou par mesure de précaution  | 宿題をしておく                        | "Je fais mes devoirs à l'avance" <br> (pour éviter d'être pressé plus tard)                |
+|                            |                                                                           | 部屋を片付けておく                     | "Je range la chambre en prévision de l'arrivée d'invités"                                   |
+
+---
+
+### Structure ～てみる
+
+La construction **〜てみる** est utilisée pour exprimer l'idée d'**essayer de faire quelque chose afin de voir ce que ça donne**. Elle combine la **forme en -て** d'un verbe avec **みる** (voir), indiquant ainsi une tentative ou une expérience.
+
+| **Structure**               | **Usage / Nuance**                                               | **Exemple**                          | **Traduction / Explication**                                            |
+|-----------------------------|------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
+| Verbe (forme en -て) + みる  | Essayer de faire une action pour en observer les résultats         | 食べてみる                           | "Essayer de manger" <br> (faire un essai pour voir si c'est bon)          |
+|                             |                                                                  | 行ってみる                           | "Essayer d'aller" <br> (se rendre quelque part pour voir ce que ça donne)   |
+
+---
+
+## **Niveaux de langage (politesse)** 
+
+### Teineigo 
 
 | Forme             | Présent | Passé | Négatif | Passé négatif |
 | ----------------- | ------- | ----- | ------- | ------------- |
@@ -239,9 +386,49 @@ Tips :
 - Si le verbe se termine par autre chose que **る**, ou par **る** mais avec une consonne (ex. かる) → **ごだん**.
 - Si c’est **する** ou **くる**, ce sont les irréguliers
 
+### Suffixes de politesse
 
-## **Mots interrogatifs**
-### Les mots interrogatifs de base
+| **Suffixe** | **Usage**                                                                                                                           | **Exemple**                |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| **さん**      | Neutre et poli. Utilisé pour s'adresser à une personne respectueusement (équivalent de "Monsieur/Madame").                          | たなかさん (M./Mme Tanaka)      |
+| **さま**      | Très formel et respectueux. Utilisé pour les clients, la correspondance formelle, ou envers des divinités.                          | おきゃくさま (cher client)       |
+| **くん**      | Utilisé pour s'adresser à un garçon ou un homme jeune. Peut aussi être utilisé par des supérieurs envers des subordonnés masculins. | たろうくん (Taro, garçon)       |
+| **ちゃん**     | Familier et affectueux. Utilisé pour les enfants, les amis proches ou en termes affectueux.                                         | みきちゃん (Miki, petite fille) |
+| **せんぱい**    | Pour s'adresser à un supérieur ou à quelqu’un avec plus d’expérience (école, travail, etc.).                                        | たなかせんぱい (senpai Tanaka)    |
+| **し**       | Forme neutre et impersonnelle, souvent utilisée dans les écrits officiels ou académiques.                                           | たなかし (M./Mme Tanaka)       |
+| **どの**      | Très formel, utilisé dans les correspondances officielles ou dans des contextes anciens.                                            | たなかどの (M./Mme Tanaka)      |
+- Toujours commencer par **さん** dans un contexte inconnu ou formel.
+- Passer à **くん** ou **ちゃん** uniquement si la relation est proche ou que la situation le permet.
+- Utiliser **さま** ou **どの** dans des contextes très formels ou spécifiques.
+
+## **Vocabulaire et expressions**
+
+### Vocabulaire famille
+
+| Japonais (hiragana)   | フランスご                 |
+|-----------|-----------------------|
+| ちち (familier)      | père                       |
+| おとうさん (poli)     | père                       |
+| はは (familier)       | mère                       |
+| おかあさん (poli)     | mère                       |
+| あに (familier)       | frère aîné                 |
+| おにいさん (poli)     | frère aîné                 |
+| あね (familier)       | sœur aînée                 |
+| おねえさん (poli)     | sœur aînée                 |
+| おとうと              | frère cadet                |
+| いもうと              | sœur cadette               |
+| そふ (familier)       | grand-père                 |
+| おじいさん (poli)     | grand-père                 |
+| そぼ (familier)       | grand-mère                 |
+| おばあさん (poli)     | grand-mère                 |
+| おじ                  | oncle                      |
+| おば                  | tante                      |
+| いとこ                | cousin / cousine           |
+
+
+### Mots interrogatifs
+
+Les mots interrogatifs de base :
 
 | Mot         | Traduction          |
 | ----------- | ------------------- |
@@ -256,7 +443,7 @@ Tips :
 | **どうして**    | Pourquoi            |
 | **なぜ**      | Pourquoi (formel)   |
 
-### Les variations avec les particules
+Les variations avec les particules :
 
 <strong class="alternate">Récap</strong> 
 
@@ -296,57 +483,7 @@ Avec +**でも** (indique une possibilité ou une généralité)
 |**どれ**|**どれでも**|N’importe lequel|
 
 
-## **La Forme en -て** 
-Utilisée pour connecter des phrases, former des expressions complexes (comme la forme progressive), ou donner des instructions.
-
-### Adjectifs
-<strong class="alternate">Adjectifs en -い </strong> 
-
- Pour les adjectifs en **-い**, remplacez **-い** par **-くて**.
-
-| **Adjectif** (-い) | **Te-form** (-くて) | **Traduction** |
-| ----------------- | ----------------- | -------------- |
-| たのしい              | たのしくて             | amusant et...  |
-| はやい               | はやくて              | rapide et...   |
-| ちいさい              | ちいさくて             | petit et...    |
-
-<strong class="alternate">Adjectifs en -な</strong> 
-Pour les adjectifs en **-な**, ajoutez simplement **で** après l’adjectif.
-
-| **Adjectif** (-な) | **Te-form** (で) | **Traduction** |
-| ----------------- | --------------- | -------------- |
-| しずかな              | しずかで            | calme et...    |
-| ていねいな             | ていねいで           | poli et...     |
-
-### Verbes
-<strong class="alternate">Verbes du groupe ごだん</strong> 
-
-| **Terminaison du verbe** | **Te-form** | **Exemple** (Dictionnaire → Te-form) |
-| ------------------------ | ----------- | ------------------------------------ |
-| -う, -つ, -る               | -って         | かう → かって (acheter)                   |
-| -む, -ぶ, -ぬ               | -んで         | よむ → よんで (lire)                      |
-| -く                       | -いて         | かく → かいて (écrire)                    |
-| -ぐ                       | -いで         | およぐ → およいで (nager)                   |
-| -す                       | -して         | はなす → はなして (parler)                  |
-
-<strong class="alternate">Pour les verbes du groupe いちだん</strong> 
-
-Enlevez **-る** et ajoutez **-て**.
-
-| **Verbe**    | **Te-form** |
-| ------------ | ----------- |
-| たべる (manger) | たべて         |
-| みる (voir)    | みて          |
-
-<strong class="alternate">Pour les verbes irréguliers ふきそく</strong> 
-
-| **Verbe**  | **Te-form** |
-| ---------- | ----------- |
-| する (faire) | して          |
-| くる (venir) | きて          |
-
-
-## **Expressions de localisation**
+### Expressions de localisation
 
 | Mot               | Définition | Distance locuteur | Distance l'auditeur |
 | ----------------- | ---------- | ----------------- | ------------------- |
@@ -365,7 +502,9 @@ Enlevez **-る** et ajoutez **-て**.
 | **あれ** | Cela là-bas   | Loin              | Loin              |
 
 
-## **Explications verbes être / avoir**
+## **Autres**
+
+### Explications verbes être / avoir
 | Concept                                             | Forme              | Niveau de politesse | Utilisation                                                     | Exemple                                                                      |
 | --------------------------------------------------- | ------------------ | ------------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | **Présence/Existence d'un objet inanimé**           | **ある (aru)**       | Neutre / familier   | Indique qu'un objet existe quelque part                         | 机の上に本がある (Tsukue no ue ni hon ga aru) - "Il y a un livre sur la table"       |
@@ -377,45 +516,6 @@ Enlevez **-る** et ajoutez **-て**.
 | **Description avec Adjectif en い**                  | Pas de **だ**       | Neutre / familier   | Pas de copule nécessaire, l'adjectif seul est complet           | この山は高い (Kono yama wa takai) - "Cette montagne est haute"                     |
 | **Description avec Adjectif en い**                  | **です (desu)**      | Poli                | Ajoute de la politesse à un adjectif en **い** (optionnel)       | この山は高いです (Kono yama wa takai desu) - "Cette montagne est haute"              |
 
-## **Suffixes de politesse**
-
-| **Suffixe** | **Usage**                                                                                                                           | **Exemple**                |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
-| **さん**      | Neutre et poli. Utilisé pour s'adresser à une personne respectueusement (équivalent de "Monsieur/Madame").                          | たなかさん (M./Mme Tanaka)      |
-| **さま**      | Très formel et respectueux. Utilisé pour les clients, la correspondance formelle, ou envers des divinités.                          | おきゃくさま (cher client)       |
-| **くん**      | Utilisé pour s'adresser à un garçon ou un homme jeune. Peut aussi être utilisé par des supérieurs envers des subordonnés masculins. | たろうくん (Taro, garçon)       |
-| **ちゃん**     | Familier et affectueux. Utilisé pour les enfants, les amis proches ou en termes affectueux.                                         | みきちゃん (Miki, petite fille) |
-| **せんぱい**    | Pour s'adresser à un supérieur ou à quelqu’un avec plus d’expérience (école, travail, etc.).                                        | たなかせんぱい (senpai Tanaka)    |
-| **し**       | Forme neutre et impersonnelle, souvent utilisée dans les écrits officiels ou académiques.                                           | たなかし (M./Mme Tanaka)       |
-| **どの**      | Très formel, utilisé dans les correspondances officielles ou dans des contextes anciens.                                            | たなかどの (M./Mme Tanaka)      |
-- Toujours commencer par **さん** dans un contexte inconnu ou formel.
-- Passer à **くん** ou **ちゃん** uniquement si la relation est proche ou que la situation le permet.
-- Utiliser **さま** ou **どの** dans des contextes très formels ou spécifiques.
-
-
-## **Vocabulaire famille**
-
-| Japonais (hiragana)   | フランスご                 |
-|-----------|-----------------------|
-| ちち (familier)      | père                       |
-| おとうさん (poli)     | père                       |
-| はは (familier)       | mère                       |
-| おかあさん (poli)     | mère                       |
-| あに (familier)       | frère aîné                 |
-| おにいさん (poli)     | frère aîné                 |
-| あね (familier)       | sœur aînée                 |
-| おねえさん (poli)     | sœur aînée                 |
-| おとうと              | frère cadet                |
-| いもうと              | sœur cadette               |
-| そふ (familier)       | grand-père                 |
-| おじいさん (poli)     | grand-père                 |
-| そぼ (familier)       | grand-mère                 |
-| おばあさん (poli)     | grand-mère                 |
-| おじ                  | oncle                      |
-| おば                  | tante                      |
-| いとこ                | cousin / cousine           |
-
-## **Autres**
 ### Articulation des phrases
 
 ![](pictures/phrase1.png)
