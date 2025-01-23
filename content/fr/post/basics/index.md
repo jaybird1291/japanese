@@ -27,7 +27,7 @@ Ressource très utile :
 
 | **Groupe** | **Terminaisons typiques** | **Exemples** | **Caractéristiques**                                  |
 | ---------- | ------------------------- | ------------ | ----------------------------------------------------- |
-| ごだん        | -う, -く, -す など             | かく, のむ, はなす  | La dernière syllabe change selon la conjugaison.      |
+| ごだん        | -う, -く, -す, -つ, -ぬ, -ぶ, -む, parfois -る             | かく, のむ, はなす  | La dernière syllabe change selon la conjugaison.      |
 | いちだん       | -る (après い ou え)         | たべる, みる, おきる | Le radical reste stable, seule la terminaison change. |
 | ふきそく       | する, くる                    | べんきょうする, くる  | Conjugaisons spécifiques et irrégulières.             |
 
