@@ -44,12 +44,43 @@ Descriptions :
 	- Le radical reste identique, seule la terminaison change.
 	- **Exemple :** たべる (manger) → たべて (forme -te).
 	  
-3. <strong class="alternate">ふきそく - Verbes</strong> 
-    - Il n’y a que **する (faire)** et **くる (venir)** dans cette catégorie.
+3. <strong class="alternate">ふきそく (irrégulier) - Verbes</strong> 
+    - On y retrouve **する (faire)**, **くる (venir)**, **いく (aller)** et **ある (avoir, exister - objets inanimés)** dans cette catégorie.
     - Leurs conjugaisons ne suivent pas les règles habituelles.
     - **Exemple :** する → して (forme -te), くる → きて (forme -te).
 
 ### Conjugaison
+
+<strong class="alternate">ごだん</strong> 
+
+| **Terminaison du verbe** | **Forme passée** | **Exemple** (Passé) | **Forme passée négative** | **Exemple** (Passé Négatif) |
+| ------------------------ | --------------- | ---------------------------------- | ------------------------- | ---------------------------------------- |
+| -う, -つ, -る           | -った           | かう → かった *(acheter)*          | -わなかった               | かう → かわなかった *(ne pas acheter)*    |
+| -む, -ぶ, -ぬ           | -んだ           | よむ → よんだ *(lire)*             | -まなかった               | よむ → よまなかった *(ne pas lire)*       |
+| -く                     | -いた           | かく → かいた *(écrire)*           | -かなかった               | かく → かかなかった *(ne pas écrire)*     |
+| -ぐ                     | -いだ           | およぐ → およいだ *(nager)*        | -がなかった               | およぐ → およがなかった *(ne pas nager)*  |
+| -す                     | -した           | はなす → はなした *(parler)*        | -さなかった               | はなす → はなさなかった *(ne pas parler)* |
+
+<strong class="alternate">いちだん</strong> 
+
+1. **Passé affirmatif** :  
+   - Remplacer **る** par **た**.  
+   - Ex: **たべる → たべた** *(manger → a mangé)*.
+
+2. **Passé négatif** :  
+   - Remplacer **る** par **なかった**.  
+   - Ex: **たべる → たべなかった** *(ne pas avoir mangé)*.
+
+<strong class="alternate">ふきそく (irrégulier)</strong> 
+
+| **Verbe**  | **Dictionnaire** | **Passé affirmatif** | **Passé négatif** | **Remarque** |
+|----------|---------------|----------------|-----------------|-----------------|
+| **する** *(faire)* | する | した | しなかった | Utilisé dans de nombreux verbes composés (ex: べんきょうする, うんどうする) |
+| **くる** *(venir)* | くる | きた | こなかった | Changement de radical irrégulier |
+| **いく** *(aller)* | いく | **いった** (et non *いいた*) | いかなかった | Suit un modèle **ごだん** mais passé irrégulier |
+| **ある** *(avoir)* | ある | あった | **なかった** (et non *あらなかった*) | Forme négative totalement irrégulière |
+
+
 ![](pictures/Verbes.draw.png)
 
 
