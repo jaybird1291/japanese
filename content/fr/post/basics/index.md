@@ -18,7 +18,9 @@ Ce post ne contient pas de définitions ni d’explications détaillées. Il s�
 ![Kana](pictures/kana.png)
 
 ## **Verbes**
-Ressource très utile : https://www.japaneseverbconjugator.com/ & https://www.verbix.com/languages/japanese
+Ressource très utile : 
+- https://www.japaneseverbconjugator.com/
+- https://www.verbix.com/languages/japanese
 
 ### Types de verbes 
 

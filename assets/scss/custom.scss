@@ -37,3 +37,26 @@ body {
 :root[data-scheme=dark] {
     --card-background: #3f3f3f; 
 }
+
+// .main.full-width {
+//     max-width: 100%; /* ou toute autre valeur plus grande */
+//     width: 100%;
+// }
+
+@media (min-width: 1280px) {
+    .container.extended {
+        max-width: 1760px; /* ou une autre valeur plus grande */
+        --left-sidebar-max-width: 15%; /* Ajustable si nécessaire */
+        --right-sidebar-max-width: 25%; /* Ajustable si nécessaire */
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        --article-font-size: 1.9rem;
+    }
+}
+
+.article-content table {
+    font-size: 1em;
+}

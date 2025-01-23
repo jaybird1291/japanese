@@ -46,7 +46,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
       grid-gap: 5px;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 10px;
       overflow-x: auto;    /* permet le défilement horizontal */
       width: 100%;
@@ -386,7 +386,7 @@
 
     // Détermine le nombre de jours à afficher en fonction de la taille de l’écran
     function getTotalDays() {
-      return window.matchMedia("(max-width: 768px)").matches ? 140 : 367;
+      return window.matchMedia("(max-width: 768px)").matches ? 140 : 360;
     }
 
     function renderGrid() {
