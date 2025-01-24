@@ -66,5 +66,6 @@ Mes extensions :
 - Kanji Grid (https://minosvasilias.github.io/kanjigrid/)
 
 ## **Autres**
+- https://happylilac.net/syogaku.html#down1 (plateforme éducative japonaise dédiée aux élèves du primaire et du secondaire avec une vaste collection de ressources pédagogiques gratuites, notamment des fiches d'exercices téléchargeables en format PDF)
 - https://github.com/yomidevs/yomitan
 - https://tadoku.org/japanese/book-search?level=l-start
