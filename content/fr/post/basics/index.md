@@ -197,6 +197,8 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 | **なあ**      | Expression d’émotion (nostalgie, surprise, désir)         | きょうはいいてんきだ**なあ**                      | Exprime une émotion ou une contemplation personnelle.              |
 | **か**       | Transformation en question / Alternative                  | これはたべもの**か**<br>りんご**か**バナナをたべますか？  | Transforme une phrase en question ou marque une alternative.         |
 | **ん**       | Explication / Justification (contracte de の ou のです)     | きのうはつかれた**ん**です                        | Donne un ton explicatif ou justificateur à la phrase.                |
+| **っけ**      | Rappel de mémoire / Réflexion                             | どこにおいた**っけ**？                           | Utilisé pour se souvenir ou confirmer des informations passées.     |
+
 
 ---
 
@@ -221,6 +223,16 @@ Ces particules relient deux propositions ou clauses pour indiquer une relation l
 | **が**        | "mais" (forme polie)        | あめがふっていますが、いきます。   | "Il pleut, mais j’y vais."                  |
 | **ので**      | "parce que", "comme"      | しずかなので、ねます。             | "Comme c’est calme, je dors."               |
 | **のに**      | "bien que", "malgré", "même si", "et pourtant"      | おかねがないのに、たくさんかいものしました。 | "Bien que je n’aie pas d’argent, j’ai beaucoup acheté." |
+
+### Structure ～か～
+
+La structure **～か～** est utilisée pour intégrer une question au sein d'une phrase principale. Elle permet de poser des questions indirectes ou d'exprimer des incertitudes, des doutes ou des interrogations internes.
+
+| **Structure**           | **Signification principale**                         | **Exemple**                            | **Explication**                                                                                      |
+|-------------------------|------------------------------------------------------|----------------------------------------|------------------------------------------------------------------------------------------------------|
+| **～か～**              | Question indirecte / Interrogation intégrée          | なにをした**か**わかりますか？         | Intègre une question ("Qu'est-ce qu'il a fait ?") au sein d'une phrase principale ("Comprends-tu  "), ce qui donne "comprends-tu ce qu'il a fait ?"         |
+
+---
 
 
 ## **Formes et constructions verbales**
@@ -307,6 +319,78 @@ La construction **〜てある** quant à elle, est utilisée pour décrire un *
 
 ---
 
+### Structure ～ておく
+
+La construction **〜ておく** est utilisée pour indiquer qu'une action est réalisée en prévision de quelque chose, c'est-à-dire pour se préparer ou anticiper un événement futur. Elle exprime l'idée de faire quelque chose à l'avance pour faciliter ou garantir le bon déroulement de situations ultérieures.
+
+| **Structure**              | **Usage / Nuance**                                                        | **Exemple**                           | **Traduction / Explication**                                                               |
+|----------------------------|---------------------------------------------------------------------------|---------------------------------------|--------------------------------------------------------------------------------------------|
+| Verbe (forme en -て) + おく | Indique qu'une action est effectuée en prévision ou par mesure de précaution  | 宿題をしておく                        | "Je fais mes devoirs à l'avance" <br> (pour éviter d'être pressé plus tard)                |
+|                            |                                                                           | 部屋を片付けておく                     | "Je range la chambre en prévision de l'arrivée d'invités"                                   |
+
+---
+
+### Structure ～てみる
+
+La construction **〜てみる** est utilisée pour exprimer l'idée d'**essayer de faire quelque chose afin de voir ce que ça donne**. Elle combine la **forme en -て** d'un verbe avec **みる** (voir), indiquant ainsi une tentative ou une expérience.
+
+| **Structure**               | **Usage / Nuance**                                               | **Exemple**                          | **Traduction / Explication**                                            |
+|-----------------------------|------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
+| Verbe (forme en -て) + みる  | Essayer de faire une action pour en observer les résultats         | 食べてみる                           | "Essayer de manger" <br> (faire un essai pour voir si c'est bon)          |
+|                             |                                                                  | 行ってみる                           | "Essayer d'aller" <br> (se rendre quelque part pour voir ce que ça donne)   |
+
+---
+
+### Structure ～ていく / ～てくる
+
+Les constructions **～ていく** et **～てくる** sont utilisées pour exprimer la direction ou la temporalité d'une action. Elles ajoutent des nuances supplémentaires en indiquant si l'action se dirige vers l'extérieur ou vers le locuteur, ou si elle se déroule dans le futur ou est déjà en cours.
+
+| **Aspect**             | **～ていく (te iku)**                       | **～てくる (te kuru)**                        |
+|------------------------|---------------------------------------------|-----------------------------------------------|
+| **Direction**          | Vers l'extérieur, s'éloigne                 | Vers le locuteur, revient                      |
+| **Temporalité**        | Action qui continue dans le futur           | Action qui a commencé dans le passé et continue |
+| **Exemples**           | はしっていく <br> (Il va courir plus loin)        | たべてくる <br> (Il vient manger)               |
+| **Changement Progressif** | Peut indiquer un changement qui évolue dans le futur | Peut indiquer un changement qui a évolué jusqu'à maintenant |
+
+Exemple : 
+| **Phrase**          | **Traduction / Explication**                         |
+|---------------------|-------------------------------------------------------|
+| たべてくる          | "Il vient manger." (Manger en venant vers le locuteur) |
+| はしってくる        | "Il vient courir." (Courir en revenant vers le locuteur) |
+| よんできた          | "Il est venu lire." (Lire en venant vers le locuteur) |
+
+---
+
+### Structure てしまう
+
+Cela permet d'exprimer un **sentiment de regret** ou le fait que quelque chose s’est produit **par accident** ou **malencontreusement**.
+
+*Exemple :*  
+「わすれてしまった。」  
+*J’ai **oublié** (par accident)*
+
+<strong class="alternate">Construction</strong> 
+
+- Verbe en **て** + しまう  
+- Verbe en **で** + しまう
+
+Il existe aussi la forme **contractée informelle**. 
+
+<strong class="alternate">Construction</strong> 
+
+- on remplace ～てしまう par **ちゃう**  
+- on remplace ～でしまう par **じゃう**
+
+*Exemple :*  
+「わすれちゃう。」  
+*J’ai **oublié** (par accident)*
+
+「のんじゃう。」  
+*J’ai **bu** (par accident)*
+
+
+---
+
 ### La structure ～たり～たりする
 Elle permet d'exprimer que l’on fait plusieurs actions, entre autres, sans les énumérer toutes Cette construction veut dire « faire ceci, faire cela, etc. »
 
@@ -316,7 +400,7 @@ Cette structure est :
 - **Terminer par する** pour signifier que c’est l’action principale.
 
 
-<strong class="alternate">Formation</strong> 
+<strong class="alternate">Construction</strong> 
 1. Choisir un verbe que vous voulez utiliser.  
    Par exemple :  
    - たべる (manger)  
@@ -374,48 +458,58 @@ L'expression **「〜たことがある」** est utilisée pour indiquer qu'on a
 
 ---
 
-### Structure ～ておく
+### Forme potentielle
 
-La construction **〜ておく** est utilisée pour indiquer qu'une action est réalisée en prévision de quelque chose, c'est-à-dire pour se préparer ou anticiper un événement futur. Elle exprime l'idée de faire quelque chose à l'avance pour faciliter ou garantir le bon déroulement de situations ultérieures.
+La **forme potentielle** sert à exprimer :
+- **La capacité** (pouvoir faire quelque chose)
+- **La possibilité** (être en mesure de faire quelque chose)
 
-| **Structure**              | **Usage / Nuance**                                                        | **Exemple**                           | **Traduction / Explication**                                                               |
-|----------------------------|---------------------------------------------------------------------------|---------------------------------------|--------------------------------------------------------------------------------------------|
-| Verbe (forme en -て) + おく | Indique qu'une action est effectuée en prévision ou par mesure de précaution  | 宿題をしておく                        | "Je fais mes devoirs à l'avance" <br> (pour éviter d'être pressé plus tard)                |
-|                            |                                                                           | 部屋を片付けておく                     | "Je range la chambre en prévision de l'arrivée d'invités"                                   |
+En japonais, la capacité de faire certaines actions est exprimée en conjugant le verbe plutôt qu'en ajoutant un mot comme "pouvoir" ou "être capable" comme en français. 
+
+Tous les verbes, une fois conjugués dans leur forme potentielle, deviennent un verbe-ru.
+
+Les règles peuvent se diviser en deux groupes principaux : les verbes-ru et les verbes-u. La forme potentielle du verbe 「する」 est un cas spécial car il devient un tout autre verbe : 「できる」
+
+<strong class="alternate">Construction</strong> 
+
+- Verbes en "ru" : Remplacer le 「**る**」 par 「**られる**」
+- Verbes en "u" : Changer le dernier caractère d'une voyelle "u" en son équivalent "e" et ajouter 「**る**」.
+- Exceptions : 「する」 devient 「できる」 et 「くる」 devient 「こられる」.
+
+<strong class="alternate">Exemples de verbes en -る</strong> 
+
+| **Normal** | **Potentiel** |
+| ---------- | ------------- |
+| たべる     | たべられる     |
+| きる       | きられる       |
+| しんじる   | しんじられる   |
+| ねる       | ねられる       |
+| おきる     | おきられる     |
+| でる       | でられる       |
+| かける     | かけられる     |
+
+<strong class="alternate">Exemples de verbes en -う</strong> 
+
+
+| **Normal** | **Potentiel** | **ローマじ** | **ローマじ (Pot.)** |
+| ---------- | ------------- | ----------- | ------------------- |
+| はなす     | はなせる       | hanasu      | hanaseru            |
+| かく       | かける         | kaku        | kakeru              |
+| あそぶ     | あそべる       | asobu       | asoberu             |
+| まつ       | まてる         | matu        | materu              |
+| のむ       | のめる         | nomu        | nomeru              |
+| とる       | とれる         | toru        | toreru              |
+| しぬ       | しねる         | shinu       | shineru             |
+
+<strong class="alternate">Exceptions</strong> 
+
+| **Normal** | **Potentiel** |
+| ---------- | ------------- |
+| する       | できる         |
+| くる       | こられる       |
+
 
 ---
-
-### Structure ～てみる
-
-La construction **〜てみる** est utilisée pour exprimer l'idée d'**essayer de faire quelque chose afin de voir ce que ça donne**. Elle combine la **forme en -て** d'un verbe avec **みる** (voir), indiquant ainsi une tentative ou une expérience.
-
-| **Structure**               | **Usage / Nuance**                                               | **Exemple**                          | **Traduction / Explication**                                            |
-|-----------------------------|------------------------------------------------------------------|--------------------------------------|-------------------------------------------------------------------------|
-| Verbe (forme en -て) + みる  | Essayer de faire une action pour en observer les résultats         | 食べてみる                           | "Essayer de manger" <br> (faire un essai pour voir si c'est bon)          |
-|                             |                                                                  | 行ってみる                           | "Essayer d'aller" <br> (se rendre quelque part pour voir ce que ça donne)   |
-
----
-
-### Structure ～ていく / ～てくる
-
-Les constructions **～ていく** et **～てくる** sont utilisées pour exprimer la direction ou la temporalité d'une action. Elles ajoutent des nuances supplémentaires en indiquant si l'action se dirige vers l'extérieur ou vers le locuteur, ou si elle se déroule dans le futur ou est déjà en cours.
-
-| **Aspect**             | **～ていく (te iku)**                       | **～てくる (te kuru)**                        |
-|------------------------|---------------------------------------------|-----------------------------------------------|
-| **Direction**          | Vers l'extérieur, s'éloigne                 | Vers le locuteur, revient                      |
-| **Temporalité**        | Action qui continue dans le futur           | Action qui a commencé dans le passé et continue |
-| **Exemples**           | はしっていく <br> (Il va courir plus loin)        | たべてくる <br> (Il vient manger)               |
-| **Changement Progressif** | Peut indiquer un changement qui évolue dans le futur | Peut indiquer un changement qui a évolué jusqu'à maintenant |
-
-Exemple : 
-| **Phrase**          | **Traduction / Explication**                         |
-|---------------------|-------------------------------------------------------|
-| たべてくる          | "Il vient manger." (Manger en venant vers le locuteur) |
-| はしってくる        | "Il vient courir." (Courir en revenant vers le locuteur) |
-| よんできた          | "Il est venu lire." (Lire en venant vers le locuteur) |
-
----
-
 
 ## **Niveaux de langage (politesse)** 
 
