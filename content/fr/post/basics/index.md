@@ -81,7 +81,6 @@ Descriptions :
 | **ある**  | あります | ない      | あった  | なかった      | あって       |
 
 
-
 ## **Adjectifs**
 Les adjectifs se divisent en deux grandes catégories : **adjectifs en -い** et **adjectifs en -な**.
 
