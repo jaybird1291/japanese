@@ -27,8 +27,8 @@ Ressource très utile :
 
 | **Groupe** | **Terminaisons typiques** | **Exemples** | **Caractéristiques**                                  |
 | ---------- | ------------------------- | ------------ | ----------------------------------------------------- |
-| ごだん        | -う, -く, -す, -つ, -ぬ, -ぶ, -む, parfois -る             | かく, のむ, はなす  | La dernière syllabe change selon la conjugaison.      |
-| いちだん       | -る (après い ou え)         | たべる, みる, おきる | Le radical reste stable, seule la terminaison change. |
+| ごだん        | -う, -く, -す, -つ, -ぬ, -ぶ, -む, parfois -る             | かく, のむ, はなす  | La dernière syllabe (lettre) change.      |
+| いちだん       | -る (après un son terminant par い ou え)         | たべる, みる, おきる | Seule la terminaison change. |
 | ふきそく       | する, くる                    | べんきょうする, くる  | Conjugaisons spécifiques et irrégulières.             |
 
 
@@ -36,12 +36,12 @@ Descriptions :
 
 1. <strong class="alternate">ごだん - Verbes</strong> 
 	- Ces verbes se terminent en **-う, -く, -す, -つ, -ぬ, -む, -ぶ, -る** (quand **-る** n’est pas un ichidan).
-	- La dernière syllabe du radical change selon la forme.
+	- La dernière syllabe (lettre) change selon la forme.
 	- **Exemple :** かく (écrire) → かいて (forme -te).
 	  
 2. <strong class="alternate">いちだん - Verbes</strong> 
 	- Ces verbes se terminent en **-る**, précédé d’un son **い** ou **え**.
-	- Le radical reste identique, seule la terminaison change.
+	- Seule la terminaison change.
 	- **Exemple :** たべる (manger) → たべて (forme -te).
 	  
 3. <strong class="alternate">ふきそく (irrégulier) - Verbes</strong> 
@@ -53,13 +53,13 @@ Descriptions :
 
 <strong class="alternate">ごだん</strong> 
 
-| **Terminaison du verbe** | **Forme passée** | **Exemple** (Passé) | **Forme passée négative** | **Exemple** (Passé Négatif) |
-| ------------------------ | --------------- | ---------------------------------- | ------------------------- | ---------------------------------------- |
-| -う, -つ, -る           | -った           | かう → かった *(acheter)*          | -わなかった               | かう → かわなかった *(ne pas acheter)*    |
-| -む, -ぶ, -ぬ           | -んだ           | よむ → よんだ *(lire)*             | -まなかった               | よむ → よまなかった *(ne pas lire)*       |
-| -く                     | -いた           | かく → かいた *(écrire)*           | -かなかった               | かく → かかなかった *(ne pas écrire)*     |
-| -ぐ                     | -いだ           | およぐ → およいだ *(nager)*        | -がなかった               | およぐ → およがなかった *(ne pas nager)*  |
-| -す                     | -した           | はなす → はなした *(parler)*        | -さなかった               | はなす → はなさなかった *(ne pas parler)* |
+| **Terminaison**  | **Polie**     | **Négatif**     | **Passé**  | **Passé négatif**  | **Forme en te** |
+|-------------|----------|------------|--------|---------------|-------------|
+| -う, -つ, -る  | -います    | -わない      | -った   | -わなかった     | -って        |
+| -む, -ぶ, -ぬ  | -みます    | -まない      | -んだ   | -まなかった     | -んで        |
+| -く         | -きます    | -かない      | -いた   | -かなかった     | -いて        |
+| -ぐ         | -ぎます    | -がない      | -いだ   | -がなかった     | -いで        |
+| -す         | -します    | -さない      | -した   | -さなかった     | -して        |
 
 <strong class="alternate">いちだん</strong> 
 
@@ -73,29 +73,13 @@ Descriptions :
 
 <strong class="alternate">ふきそく (irrégulier)</strong> 
 
-| **Verbe**  | **Dictionnaire** | **Passé affirmatif** | **Passé négatif** | **Remarque** |
-|----------|---------------|----------------|-----------------|-----------------|
-| **する** *(faire)* | する | した | しなかった | Utilisé dans de nombreux verbes composés (ex: べんきょうする, うんどうする) |
-| **くる** *(venir)* | くる | きた | こなかった | Changement de radical irrégulier |
-| **いく** *(aller)* | いく | **いった** (et non *いいた*) | いかなかった | Suit un modèle **ごだん** mais passé irrégulier |
-| **ある** *(avoir)* | ある | あった | **なかった** (et non *あらなかった*) | Forme négative totalement irrégulière |
+| **Verbe**                | **Polie**   | **Négatif**   | **Passé**  | **Passé négatif** | **Forme en te** |
+|---------------------|--------|----------|-------|--------------|-------------|
+| **する**     | します   | しない    | した   | しなかった    | して         |
+| **くる**    | きます   | こない    | きた   | こなかった    | きて         |
+| **いく**     | いきます  | いかない   | いった | いかなかった  | いって       |
+| **ある**  | あります | ない      | あった  | なかった      | あって       |
 
-
-![](pictures/Verbes.draw.png)
-
-
-| **Forme Positive** | **Forme Négative**                 | **Forme Passée**                  | **Forme Passée Négative**            |
-| ------------------ | ---------------------------------- | --------------------------------- | ------------------------------------ |
-| いく                 | いか<font color="#d83931">ない</font>  | いっ<font color="#4dabf7">た</font>  | いか<font color="#9252ff">なかった</font>  |
-| ねる                 | ね<font color="#d83931">ない</font>   | ね<font color="#4dabf7">た</font>   | ね<font color="#9252ff">なかった</font>   |
-| のむ                 | のま<font color="#d83931">ない</font>  | のん<font color="#4dabf7">だ</font>  | のま<font color="#9252ff">なかった</font>  |
-| たべる                | たべ<font color="#d83931">ない</font>  | たべ<font color="#4dabf7">た</font>  | たべ<font color="#9252ff">なかった</font>  |
-| かく                 | かか<font color="#d83931">ない</font>  | かい<font color="#4dabf7">た</font>  | かか<font color="#9252ff">なかった</font>  |
-| はなす                | はなさ<font color="#d83931">ない</font> | はなし<font color="#4dabf7">た</font> | はなさ<font color="#9252ff">なかった</font> |
-| みる                 | み<font color="#d83931">ない</font>   | み<font color="#4dabf7">た</font>   | み<font color="#9252ff">なかった</font>   |
-| わかる                | わから<font color="#d83931">ない</font> | わかっ<font color="#4dabf7">た</font> | わから<font color="#9252ff">なかった</font> |
-| しぬ                 | しな<font color="#d83931">ない</font>  | しん<font color="#4dabf7">だ</font>  | し<font color="#9252ff">ななかった</font>  |
-| あそぶ                | あそば<font color="#d83931">ない</font> | あそん<font color="#4dabf7">だ</font> | あそば<font color="#9252ff">なかった</font> |
 
 
 ## **Adjectifs**
