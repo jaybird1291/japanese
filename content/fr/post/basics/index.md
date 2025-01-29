@@ -469,8 +469,8 @@ Tips :
 | おにいさん (poli)     | frère aîné                 |
 | あね (familier)       | sœur aînée                 |
 | おねえさん (poli)     | sœur aînée                 |
-| おとうと              | frère cadet                |
-| いもうと              | sœur cadette               |
+| おとうと              | petit frère                |
+| いもうと              | petite sœur               |
 | そふ (familier)       | grand-père                 |
 | おじいさん (poli)     | grand-père                 |
 | そぼ (familier)       | grand-mère                 |
