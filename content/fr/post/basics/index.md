@@ -196,7 +196,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ### Particules courantes
 
-**は (ha)**  
+<strong class="alternate">は (ha - prononcé wa)</strong> 
 - **Fonction principale :** Marque le thème de la phrase, c'est-à-dire ce dont on parle.  
 - **Exemple :**  
   - 今日は暑い。 *(Aujourd'hui, il fait chaud.)*  
@@ -204,7 +204,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**が (ga)**  
+<strong class="alternate">が (ga)</strong>  
 - **Fonction principale :** Indique le sujet grammatical (souvent nouveau ou contrasté).  
 - **Exemple :**  
   - 猫がいる。 *(Il y a un chat.)*  
@@ -213,7 +213,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**を (wo)**  
+<strong class="alternate">を (wo)</strong>  
 - **Fonction principale :** Marque le complément d'objet direct (COD) de l'action.  
 - **Exemple :**  
   - 本を読む。 *(Lire un livre.)*  
@@ -221,7 +221,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**に (ni)**  
+<strong class="alternate">に (ni)</strong>  
 - **Fonction principale :** Indique la direction précise, le destinataire ou un moment spécifique.  
 - **Exemples :**  
   - 学校に行く。 *(Aller à l'école.)*  
@@ -230,7 +230,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**の (no)**  
+<strong class="alternate">の (no)</strong>  
 - **Fonction principale :** Exprime la possession ou la relation entre deux éléments.  
 - **Exemple :**  
   - 彼の本 *(Le livre de lui.)*  
@@ -238,7 +238,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**へ (he)**  
+<strong class="alternate">へ (he)</strong> 
 - **Fonction principale :** Indique une direction vague, moins précise que **に**.  
 - **Exemple :**  
   - 東京へ行く。 *(Aller vers Tokyo.)*  
@@ -246,7 +246,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**で (de)**  
+<strong class="alternate">で (de)</strong> 
 - **Fonction principale :** Marque le lieu de l'action, le moyen utilisé, ou la cause.  
 - **Exemples :**  
   - バスで行く。 *(Aller en bus.)*  
@@ -255,7 +255,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**も (mo)**  
+<strong class="alternate">も (mo)</strong> 
 - **Fonction principale :** Signifie "aussi", "en plus", ou "même", ajoutant un élément similaire.  
 - **Exemple :**  
   - 私も行く。 *(Moi aussi, j’y vais.)*  
@@ -263,7 +263,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**ので (node)**  
+<strong class="alternate">ので (node)</strong>  
 - **Fonction principale :** Exprime la cause ou la raison de façon polie.  
 - **Exemple :**  
   - 雨が降っているので、出かけません。 *(Comme il pleut, je ne sors pas.)*  
@@ -271,7 +271,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**のに (noni)**  
+<strong class="alternate">のに (noni)</strong>  
 - **Fonction principale :** Exprime une contradiction ou une opposition, souvent avec une nuance de déception.  
 - **Exemple :**  
   - 一生懸命勉強したのに、試験に落ちた。 *(Même si j'ai étudié dur, j'ai échoué à l'examen.)*  
@@ -279,7 +279,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**とか (toka)**  
+<strong class="alternate">とか (toka)</strong>  
 - **Fonction principale :** Énumération incomplète ou donner des exemples.  
 - **Exemple :**  
   - 果物とか野菜とか買いました。 *(J’ai acheté des fruits, des légumes, etc.)*  
@@ -287,7 +287,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**し (shi)**  
+<strong class="alternate">し (shi)</strong> 
 - **Fonction principale :** Énumérer plusieurs faits ou raisons de manière cumulative.  
 - **Exemple :**  
   - 彼は親切だし、面白いし、頼りになる。 *(Il est gentil, amusant et fiable.)*  
@@ -295,7 +295,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**から (kara)**  
+<strong class="alternate">から (kara)</strong>
 - **Fonction principale :** Exprime la cause, la raison, ou l'origine, souvent informelle.  
 - **Exemple :**  
   - 寒いから、外に出たくない。 *(Il fait froid, donc je ne veux pas sortir.)*  
@@ -303,7 +303,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**けど (kedo)**  
+<strong class="alternate">けど (kedo)</strong>
 - **Fonction principale :** Marque une concession ou opposition, souvent traduit par "mais" ou "cependant" dans un registre poli.  
 - **Exemple :**  
   - 行きたいけど、時間がない。 *(Je veux y aller, mais je n'ai pas le temps.)*  
@@ -311,7 +311,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**と (to)**  
+<strong class="alternate">と (to)</strong>
 - **Fonction principale :**  
   - Sert à citer ou rapporter des paroles.  
   - Utilisé pour énumérer des éléments ("et").  
@@ -322,7 +322,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**よ (yo)**  
+<strong class="alternate">よ (yo)</strong> 
 - **Fonction principale :** Particule finale qui renforce une affirmation ou signale une information nouvelle.  
 - **Exemple :**  
   - これは本当だよ。 *(C’est vraiment vrai, tu sais.)*  
@@ -330,7 +330,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**ね (ne)**  
+<strong class="alternate">ね (ne)</strong> 
 - **Fonction principale :** Cherche l'approbation ou la confirmation, équivalent à "n'est-ce pas ?".  
 - **Exemple :**  
   - いい天気ですね。 *(Il fait beau, n'est-ce pas ?)*  
@@ -338,7 +338,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**なあ (naa)**  
+<strong class="alternate">なあ (naa)</strong>
 - **Fonction principale :** Exprime une émotion ou une réflexion personnelle, souvent avec nostalgie.  
 - **Exemple :**  
   - もう帰りたいなあ。 *(J’ai vraiment envie de rentrer…)*  
@@ -346,7 +346,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**か (ka)**  
+<strong class="alternate">か (ka)</strong> 
 - **Fonction principale :** Transforme la phrase en question.  
 - **Exemple :**  
   - これは何ですか？ *(Qu'est-ce que c'est ?)*  
@@ -354,7 +354,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**っけ (kke)**  
+<strong class="alternate">っけ (kke)</strong> 
 - **Fonction principale :** Utilisée pour se rappeler ou vérifier une information oubliée.  
 - **Exemple :**  
   - 彼の名前は何だったっけ？ *(Comment s’appelait-il déjà ?)*  
@@ -362,7 +362,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**さ (sa)**  
+<strong class="alternate">さ (sa)</strong> 
 - **Fonction principale :** Particule finale familière, souvent masculine, qui souligne un fait évident.  
 - **Exemple :**  
   - それは当たり前さ。 *(C’est évident, voyons !)*  
@@ -370,7 +370,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**ぞ (zo)**  
+<strong class="alternate">ぞ (zo)</strong>
 - **Fonction principale :** Ajoute une tonalité virile et affirmée, exprimant une forte assurance.  
 - **Exemple :**  
   - 行くぞ！ *(On y va !)*  
@@ -378,7 +378,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**わ (wa)**  
+<strong class="alternate">わ (wa)</strong> 
 - **Fonction principale :** Particule finale à connotation douce, souvent féminine, qui adoucit l'affirmation.  
 - **Exemple :**  
   - 今日は楽しいわ。 *(Aujourd'hui, c'est agréable.)*  
@@ -386,7 +386,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
 
 ---
 
-**の (no)** (en fin de phrase)  
+<strong class="alternate">の (no)</strong> (en fin de phrase)  
 - **Fonction principale :**  
   - Justifie une situation ou pose une question de manière douce.  
 - **Exemples :**  
