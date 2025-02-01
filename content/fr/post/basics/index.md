@@ -24,61 +24,115 @@ Ressource très utile :
 
 ### Types de verbes 
 
-
-| **Groupe** | **Terminaisons typiques** | **Exemples** | **Caractéristiques**                                  |
-| ---------- | ------------------------- | ------------ | ----------------------------------------------------- |
-| ごだん        | -う, -く, -す, -つ, -ぬ, -ぶ, -む, parfois -る             | かく, のむ, はなす  | La dernière syllabe (lettre) change.      |
-| いちだん       | -る (après un son terminant par い ou え)         | たべる, みる, おきる | Seule la terminaison change. |
-| ふきそく       | する, くる                    | べんきょうする, くる  | Conjugaisons spécifiques et irrégulières.             |
-
-
-Descriptions :
-
 1. <strong class="alternate">ごだん - Verbes</strong> 
 	- Ces verbes se terminent en **-う, -く, -す, -つ, -ぬ, -む, -ぶ, -る** (quand **-る** n’est pas un ichidan).
-	- La dernière syllabe (lettre) change selon la forme.
-	- **Exemple :** かく (écrire) → かいて (forme -te).
-	  
+
 2. <strong class="alternate">いちだん - Verbes</strong> 
 	- Ces verbes se terminent en **-る**, précédé d’un son **い** ou **え**.
-	- Seule la terminaison change.
-	- **Exemple :** たべる (manger) → たべて (forme -te).
 	  
 3. <strong class="alternate">ふきそく (irrégulier) - Verbes</strong> 
     - On y retrouve **する (faire)**, **くる (venir)**, **いく (aller)** et **ある (avoir, exister - objets inanimés)** dans cette catégorie.
-    - Leurs conjugaisons ne suivent pas les règles habituelles.
-    - **Exemple :** する → して (forme -te), くる → きて (forme -te).
 
 ### Conjugaison
 
 <strong class="alternate">ごだん</strong> 
 
-| **Terminaison**  | **Polie**     | **Négatif**     | **Passé**  | **Passé négatif**  | **Forme en te** |
-|-------------|----------|------------|--------|---------------|-------------|
-| -う, -つ, -る  | -います    | -わない      | -った   | -わなかった     | -って        |
-| -む, -ぶ, -ぬ  | -みます    | -まない      | -んだ   | -まなかった     | -んで        |
-| -く         | -きます    | -かない      | -いた   | -かなかった     | -いて        |
-| -ぐ         | -ぎます    | -がない      | -いだ   | -がなかった     | -いで        |
-| -す         | -します    | -さない      | -した   | -さなかった     | -して        |
+Remplacez la voyelle う (-u) par la voyelle de la colonne correspondante (a, i, e, o) pour ajouter la terminaison voulue (ex. か**う** → か**い**ます、はな**す** → はな**し**ます、つ**く** → つ**き**ます).
+
+|                        | **Affirmatif** | **Négatif** | **Passé aff. -た** | **Passé nég.** | **Forme en -て** |
+|------------------------|----------------|-------------|-------------------|----------------|-----------------|
+| **Neutre**             |                | ～a ない     | ...た/だ          | ～a なかった   | ...て/で        |
+| **Poli**               | ～i ます       | ～i ません   | ～i ました        | ～i ませんでした |                 |
+
+|                        | **Impératif aff.** | **Impératif nég.** | **Imp. aut. aff.** | **Imp. aut. nég.** | **Volonté aff.** |
+|------------------------|--------------------|--------------------|--------------------|--------------------|------------------|
+| **Neutre**             | ...て              | ～a ないで         | え                 | うな               | ～o う           |
+| **Poli**               | ...てください       | ～a ないでください  | ～i なさい          |                    | ～i ましょう     |
+
+|                        | **Potentiel aff.** | **Potentiel nég.** | **Passif aff.**    | **Passif nég.**    | **Causatif aff.** |
+|------------------------|--------------------|--------------------|--------------------|--------------------|-------------------|
+| **Neutre**             | ～e る             | ～e ない            | ～a れる            | ～a れない          | ～a せる           |
+| **Poli**               | ～e ます           | ～e ません           | ～a れます          | ～a れません         | ～a せます          |
+
+|                        | **Causatif nég.**  | **Cond. aff.**     | **Cond. nég.**     | **Cond. aff. tara** | **Cond. nég. tara** |
+|------------------------|--------------------|--------------------|--------------------|---------------------|---------------------|
+| **Neutre**             | ～a せます          | えば               | ～a なければ         | ...たら             | ～a なかった         |
+| **Poli**               | ～a せません         |                    |                    | ～i ましたら        | ～i ませんでしたら    |
+
 
 <strong class="alternate">いちだん</strong> 
 
-1. **Passé affirmatif** :  
-   - Remplacer **る** par **た**.  
-   - Ex: **たべる → たべた** *(manger → a mangé)*.
+Retirer le る (-ru) et ajouter la terminaison appropriée (ex. たべる → 食べます、みる → みます、おきる → おきます、きる → きます)
 
-2. **Passé négatif** :  
-   - Remplacer **る** par **なかった**.  
-   - Ex: **たべる → たべなかった** *(ne pas avoir mangé)*.
+Suivez le tableau pour les verbes ごだん mais en ne souciant pas des ～x (il suffit simplement de remplacer る par ce qu'il suit dans le tableau ; ex. できる → できます、できる → できて...)
 
 <strong class="alternate">ふきそく (irrégulier)</strong> 
 
-| **Verbe**                | **Polie**   | **Négatif**   | **Passé**  | **Passé négatif** | **Forme en te** |
-|---------------------|--------|----------|-------|--------------|-------------|
-| **する**     | します   | しない    | した   | しなかった    | して         |
-| **くる**    | きます   | こない    | きた   | こなかった    | きて         |
-| **いく**     | いきます  | いかない   | いった | いかなかった  | いって       |
-| **ある**  | あります | ない      | あった  | なかった      | あって       |
+**する (faire)**
+
+|                        | **Affirmatif** | **Négatif**    | **Passé aff. (-た)** | **Passé nég.**      | **Forme en -て**   |
+|------------------------|----------------|----------------|----------------------|---------------------|--------------------|
+| **Neutre**             | する           | しない         | した                 | しなかった          | して               |
+| **Poli**               | します         | しません       | しました             | しませんでした       | してください       |
+
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
+| **Neutre**             | しろ / せよ       | するな            | しなさい                 | –                         | しよう          |
+| **Poli**               | –                  | –                  | –                         | –                         | しましょう      |
+
+|                        | **Potentiel aff.** | **Potentiel nég.** | **Passif aff.**  | **Passif nég.**   | **Causatif aff.** |
+|------------------------|--------------------|--------------------|------------------|-------------------|-------------------|
+| **Neutre**             | できる             | できない          | される          | されない         | させる           |
+| **Poli**               | できます           | できません       | されます        | されません       | させます         |
+
+---
+
+**くる (venir)**
+
+|                        | **Affirmatif** | **Négatif**    | **Passé aff. (-た)** | **Passé nég.**      | **Forme en -て**   |
+|------------------------|----------------|----------------|----------------------|---------------------|--------------------|
+| **Neutre**             | くる           | こない         | きた                 | こなかった          | きて               |
+| **Poli**               | きます         | きません       | きました             | きませんでした       | きてください       |
+
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
+| **Neutre**             | こい              | くるな            | くるなさい               | –                         | こよう          |
+| **Poli**               | –                  | –                  | –                         | –                         | きましょう      |
+
+|                        | **Potentiel aff.** | **Potentiel nég.** | **Passif aff.**  | **Passif nég.**   | **Causatif aff.** |
+|------------------------|--------------------|--------------------|------------------|-------------------|-------------------|
+| **Neutre**             | こられる          | こられない         | こられる        | こられない        | こさせる         |
+| **Poli**               | こられます        | こられません       | こられます      | こられません      | こさせます       |
+
+---
+
+**いく (aller)**
+
+> *Note : Bien que **いく** soit un verbe de type godan, il présente quelques irrégularités (notamment pour le passé affirmatif et la forme en -て).*
+
+|                        | **Affirmatif** | **Négatif**    | **Passé aff. (-た)** | **Passé nég.**      | **Forme en -て**   |
+|------------------------|----------------|----------------|----------------------|---------------------|--------------------|
+| **Neutre**             | いく           | いかない       | いった               | いかなかった        | いって             |
+| **Poli**               | いきます       | いきません     | いきました           | いきませんでした     | いってください     |
+
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
+| **Neutre**             | いけ              | いくな            | いきなさい                | –                         | いこう          |
+| **Poli**               | –                  | –                  | –                         | –                         | いきましょう    |
+
+|                        | **Potentiel aff.** | **Potentiel nég.** | **Passif aff.**  | **Passif nég.**   | **Causatif aff.** |
+|------------------------|--------------------|--------------------|------------------|-------------------|-------------------|
+| **Neutre**             | いける             | いけない          | いかれる         | いかれない       | いかせる         |
+| **Poli**               | いけます           | いけません        | いかれます       | いかれません     | いかせます       |
+
+---
+
+**ある (avoir, exister pour objets inanimés)**
+|                        | **Affirmatif** | **Négatif**  | **Passé aff. (-た)** | **Passé nég.**      | **Forme en -て** |
+|------------------------|----------------|--------------|----------------------|---------------------|------------------|
+| **Neutre**             | ある           | ない         | あった               | なかった           | あって           |
+| **Poli**               | あります       | ありません   | ありました           | ありませんでした     | –                |
+
 
 
 ## **Adjectifs**
@@ -88,43 +142,38 @@ Les adjectifs se divisent en deux grandes catégories : **adjectifs en -い** 
 - Se terminent toujours par **-い** dans leur forme de base.
 - Ils sont intrinsèquement adjectifs et peuvent être utilisés seuls sans particules.
 
-| **Adjectif** (-い) | **Traduction** |
-| ----------------- | -------------- |
-| たのしい              | amusant        |
-| はやい               | rapide         |
-| ちいさい              | petit          |
 
 ### Adjectifs en -な 
 - Ne se terminent pas par **-い** (sauf exceptions comme **きれい**).
-- Nécessitent la particule **-な** pour qualifier un nom.
-- Ils partagent certains traits avec les noms grammaticaux.
-
-| **Adjectif** (-な) | **Traduction** |
-| ----------------- | -------------- |
-| しずかな              | calme          |
-| ていねいな             | poli           |
-| ゆうめいな             | célèbre        |
+- Nécessitent la particule **-な** pour qualifier un nom (la particule -な est uniquement utilisée lorsque l'adjectif précède un nom (forme attributive)).
 
 ### Conjugaison
-![](pictures/Adjectifs-i.draw.png)
 
+<strong class="alternate">Adjectifs en -い</strong> (ex. たのしい)
 
-| **Forme Positive** | **Forme Négative**                  | **Forme Passée**                    | **Forme Passée Négative**             |
-| ------------------ | ----------------------------------- | ----------------------------------- | ------------------------------------- |
-| かわいい               | かわい<font color="#d83931">くない</font> | かわい<font color="#4dabf7">かった</font> | かわい<font color="#9252ff">くなかった</font> |
-| すごい                | すご<font color="#d83931">くない</font>  | すご<font color="#4dabf7">かった</font>  | すご<font color="#9252ff">くなかった</font>  |
-| おいしい               | おいし<font color="#d83931">くない</font> | おいし<font color="#4dabf7">かった</font> | おいし<font color="#9252ff">くなかった</font> |
-| あぶない               | あぶな<font color="#d83931">くない</font> | あぶな<font color="#4dabf7">かった</font> | あぶな<font color="#9252ff">くなかった</font> |
-| つよい                | つよ<font color="#d83931">くない</font>  | つよ<font color="#4dabf7">かった</font>  | つよ<font color="#9252ff">くなかった</font>  |
+| **Forme**               | **Transformation**                        | **Résultat**     |
+|-------------------------|-------------------------------------------|------------------|
+| **Affirmatif**          | –                                         | たのしい         |
+| **Négatif**             | Remplacer **-い** par **-くない**         | たのしくない     |
+| **Passé affirmatif**    | Remplacer **-い** par **-かった**         | たのしかった     |
+| **Passé négatif**       | Remplacer **-い** par **-くなかった**     | たのしくなかった |
 
-![](pictures/Adjectifs-na.draw.png)
+Pour la forme poli, rajoutez simplement です après 
 
-| **Forme Positive** | **Forme Négative**                    | **Forme Passée**                     | **Forme Passée Négative**               |
-| ------------------ | ------------------------------------- | ------------------------------------ | --------------------------------------- |
-| しんせつ               | しんせつ<font color="#d83931">じゃない</font> | しんせつ<font color="#4dabf7">だった</font> | しんせつ<font color="#9252ff">じゃなかった</font> |
-| きれい                | きれい<font color="#d83931">じゃない</font>  | きれい<font color="#4dabf7">だった</font>  | きれい<font color="#9252ff">じゃなかった</font>  |
-| すき                 | すき<font color="#d83931">じゃない</font>   | すき<font color="#4dabf7">だった</font>   | すき<font color="#9252ff">じゃなかった</font>   |
-| だいじ                | だいじ<font color="#d83931">じゃない</font>  | だいじ<font color="#4dabf7">だった</font>  | だいじ<font color="#9252ff">じゃなかった</font>  |
+<strong class="alternate">Adjectifs en -な</strong> (ex. しずか (calme))
+
+| **Forme**               | **Transformation**                     | **Résultat**          |
+|-------------------------|----------------------------------------|-----------------------|
+| **Affirmatif neutre**          | Ajouter **-だ**         | しずかだ              |
+| **Affirmatif poli**          | Ajouter **です**              | しずかです              |
+| **Négatif neutre**             | Ajouter **-じゃない**                  | しずかじゃない        |
+| **Négatif poli**             | Ajouter **-じゃありません** ou (moins utilisé) **-ではない**                 | しずかじゃありません / しずかではありません         |
+| **Passé affirmatif neutre**    | Ajouter **-だった**                    | しずかだった          |
+| **Passé affirmatif poli**    |   Ajouter **-でした**                 | しずかでした          |
+| **Passé négatif neutre**       | Ajouter **-じゃなかった**              | しずかじゃなかった    |
+| **Passé négatif poli**       | Ajouter **-じゃありませんでした** ou (moins utilisé) **-ではありませんでした**              | しずかじゃありませんでした / しずかではありませんでした   |
+
+Attention, n'oubliez pas d'ajouter な après l'adjectif s'il qualifie un nom !
 
 ### Transformation des adjectifs en -い en adverbes
 Pour transformer un adjectif en **-い** en un **adverbe**, on remplace la terminaison **-い** par **-く**.
@@ -132,80 +181,222 @@ Pour transformer un adjectif en **-い** en un **adverbe**, on remplace la termi
 | **Adjectif** (-い) | **Adverbe** (-く) | **Traduction**                 |
 | ----------------- | ---------------- | ------------------------------ |
 | はやい (rapide)      | はやく              | rapidement                     |
-| おおきい (grand)      | おおきく             | grandement / de manière grande |
-| たのしい (amusant)    | たのしく             | de manière amusante            |
 
 ### Transformation des adjectifs en -な en adverbes
-Pour transformer un adjectif en **-な** en un **adverbe**, on ajoute **に** après **l’adjectif**.
+Pour transformer un adjectif en **-な** en un **adverbe**, on ne met pas de **な** mais un **に** après **l’adjectif**.
 
 | **Adjectif** (-な) | **Adverbe** (に) | **Traduction** |
 | ----------------- | --------------- | -------------- |
 | しずかな (calme)      | しずかに            | calmement      |
-| ていねいな (poli)      | ていねいに           | poliment       |
 
 
 ## **Particules**
 
 Les particules jouent un rôle crucial en japonais : elles servent à marquer les fonctions syntaxiques (sujet, objet, lieu, etc.) et à relier les différentes parties de la phrase. La section suivante détaille chacune d'entre elles afin de vous aider à mieux comprendre leur utilisation et leur importance.
 
-
-### Particules de base
-
-| **Particule** | **Signification principale**                          | **Exemple**                                      | **Explication**                                                       |
-|---------------|-------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------------------------|
-| **は**       | Thème / Information générale                          | わたし**は**がくせいです。                        | Introduit un sujet connu ou une information générale.               |
-| **が**       | Sujet (information nouvelle ou importante)          | ねこ**が**いる。                                  | Met en avant le sujet pour signaler une information nouvelle ou importante. |
-| **を**       | Complément d’objet direct (COD)                       | りんご**を**たべる。                              | Indique l’objet sur lequel porte l’action.                           |
-| **に**       | Destination / Point temporel                          | とうきょう**に**いく<br>しちじ**に**おきる           | Sert à indiquer la destination d’un mouvement ou un moment précis.     |
-| **へ**       | Direction / Destination                               | がっこう**へ**いく。                              | Marque la direction vers laquelle se dirige l’action.                |
-| **で**       | Lieu d’action / Moyen                                 | としょかん**で**べんきょうする<br>バス**で**いく      | Indique le lieu où se déroule l’action ou le moyen utilisé pour agir.  |
-| **の**       | Possession / Liaison entre deux noms                  | わたし**の**ほん                                | Marque la possession ou relie deux noms pour exprimer une relation.    |
+**は (ha)**  
+- **Fonction principale :** Marque le thème de la phrase, c'est-à-dire ce dont on parle.  
+- **Exemple :**  
+  - 今日は暑い。 *(Aujourd'hui, il fait chaud.)*  
+- **Remarque :** Ne marque pas nécessairement le sujet grammatical, mais l'élément sur lequel porte la phrase.
 
 ---
 
-### Particule attributive
-
-| **Particule** | **Signification principale** | **Exemple**             | **Explication**                                         |
-|---------------|------------------------------|-------------------------|---------------------------------------------------------|
-| **な**       | Liaison d’adjectif en **-な**  | だいじ**な**もの         | Relie un adjectif en **-な** à un nom.                   |
-
----
-
-### Particules de fin de phrase
-
-| **Particule** | **Signification principale**                              | **Exemple**                                      | **Explication**                                                    |
-|---------------|-----------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------|
-| **よ**       | Emphase / Information nouvelle                            | あしたあめがふる**よ**                          | Ajoute de l’emphase pour signaler une information importante.      |
-| **ね**       | Approbation / Confirmation                                | これはおいしい**ね**                             | Cherche l’approbation ou la confirmation de l’interlocuteur.         |
-| **なあ**      | Expression d’émotion (nostalgie, surprise, désir)         | きょうはいいてんきだ**なあ**                      | Exprime une émotion ou une contemplation personnelle.              |
-| **か**       | Transformation en question / Alternative                  | これはたべもの**か**<br>りんご**か**バナナをたべますか？  | Transforme une phrase en question ou marque une alternative.         |
-| **ん**       | Explication / Justification (contracte de の ou のです)     | きのうはつかれた**ん**です                        | Donne un ton explicatif ou justificateur à la phrase.                |
-| **っけ**      | Rappel de mémoire / Réflexion                             | どこにおいた**っけ**？                           | Utilisé pour se souvenir ou confirmer des informations passées.     |
-
+**が (ga)**  
+- **Fonction principale :** Indique le sujet grammatical (souvent nouveau ou contrasté).  
+- **Exemple :**  
+  - 猫がいる。 *(Il y a un chat.)*  
+- **Nuance informelle :** Peut signifier "mais" ou "cependant" dans des contextes familiers.  
+- **Remarque :** Met l'accent sur le sujet plutôt que sur le thème général.
 
 ---
 
-### Particules de connexion / Énumération / Citation
+**を (wo)**  
+- **Fonction principale :** Marque le complément d'objet direct (COD) de l'action.  
+- **Exemple :**  
+  - 本を読む。 *(Lire un livre.)*  
+- **Remarque :** Placé juste après le mot qui subit l'action.
 
-| **Particule** | **Signification principale**                                            | **Exemple**                                         | **Explication**                                                                          |
-|---------------|-------------------------------------------------------------------------|-----------------------------------------------------|------------------------------------------------------------------------------------------|
-| **と**       | Coordination ("et"), condition ("si"), citation directe                 | パン**と**バター<br>まどをあける**と**、さむくなる<br>かれが「いく」**と**いった | Utilisée pour lier des éléments, exprimer une condition ou rapporter une citation directe. |
-| **とか**     | Exemples non exhaustifs / Possibilités                                  | ケーキ**とか**クッキーがすきです。                     | Sert à donner des exemples parmi d’autres, sans être exhaustif.                          |
-| **って**     | Citation, rumeur, question indirecte                                    | あしたはやすみだ**って**                           | Utilisée familièrement pour citer ou évoquer une rumeur.                                  |
-| **し**       | Énumération de raisons, faits ou caractéristiques                         | きれい**だし**、やさしい**し**<br>つかれている**し**、ねむい**し**、もうかえりたい | Énumère plusieurs raisons ou caractéristiques sans lister exhaustivement toutes les options. |
+---
+
+**に (ni)**  
+- **Fonction principale :** Indique la direction précise, le destinataire ou un moment spécifique.  
+- **Exemples :**  
+  - 学校に行く。 *(Aller à l'école.)*  
+  - 三時に会う。 *(Se rencontrer à trois heures.)*  
+- **Remarque :** Précis par rapport à **へ** qui est plus vague.
+
+---
+
+**の (no)**  
+- **Fonction principale :** Exprime la possession ou la relation entre deux éléments.  
+- **Exemple :**  
+  - 彼の本 *(Le livre de lui.)*  
+- **Remarque :** Sert aussi à transformer des groupes nominaux en modificateurs.
+
+---
+
+**へ (he)**  
+- **Fonction principale :** Indique une direction vague, moins précise que **に**.  
+- **Exemple :**  
+  - 東京へ行く。 *(Aller vers Tokyo.)*  
+- **Remarque :** Se prononce **e** même si écrit **へ**.
+
+---
+
+**で (de)**  
+- **Fonction principale :** Marque le lieu de l'action, le moyen utilisé, ou la cause.  
+- **Exemples :**  
+  - バスで行く。 *(Aller en bus.)*  
+  - 学校で勉強する。 *(Étudier à l'école.)*  
+- **Remarque :** Polyvalente pour exprimer le contexte de l'action.
+
+---
+
+**も (mo)**  
+- **Fonction principale :** Signifie "aussi", "en plus", ou "même", ajoutant un élément similaire.  
+- **Exemple :**  
+  - 私も行く。 *(Moi aussi, j’y vais.)*  
+- **Remarque :** Peut insister sur l'inclusion ou l'exagération.
+
+---
+
+**ので (node)**  
+- **Fonction principale :** Exprime la cause ou la raison de façon polie.  
+- **Exemple :**  
+  - 雨が降っているので、出かけません。 *(Comme il pleut, je ne sors pas.)*  
+- **Remarque :** Utilisé dans des contextes formels pour justifier une action.
+
+---
+
+**のに (noni)**  
+- **Fonction principale :** Exprime une contradiction ou une opposition, souvent avec une nuance de déception.  
+- **Exemple :**  
+  - 一生懸命勉強したのに、試験に落ちた。 *(Même si j'ai étudié dur, j'ai échoué à l'examen.)*  
+- **Remarque :** Traduit par "bien que" ou "même si".
+
+---
+
+**とか (toka)**  
+- **Fonction principale :** Énumération incomplète ou donner des exemples.  
+- **Exemple :**  
+  - 果物とか野菜とか買いました。 *(J’ai acheté des fruits, des légumes, etc.)*  
+- **Remarque :** Implique qu'il y a d'autres éléments similaires.
+
+---
+
+**し (shi)**  
+- **Fonction principale :** Énumérer plusieurs faits ou raisons de manière cumulative.  
+- **Exemple :**  
+  - 彼は親切だし、面白いし、頼りになる。 *(Il est gentil, amusant et fiable.)*  
+- **Remarque :** Utilisé pour renforcer une affirmation avec plusieurs arguments.
+
+---
+
+**から (kara)**  
+- **Fonction principale :** Exprime la cause, la raison, ou l'origine, souvent informelle.  
+- **Exemple :**  
+  - 寒いから、外に出たくない。 *(Il fait froid, donc je ne veux pas sortir.)*  
+- **Remarque :** Peut également indiquer l'origine géographique ou temporelle.
+
+---
+
+**けど (kedo)**  
+- **Fonction principale :** Marque une concession ou opposition, souvent traduit par "mais" ou "cependant" dans un registre poli.  
+- **Exemple :**  
+  - 行きたいけど、時間がない。 *(Je veux y aller, mais je n'ai pas le temps.)*  
+- **Remarque :** Adoucit l'affirmation tout en signalant un contraste.
+
+---
+
+**と (to)**  
+- **Fonction principale :**  
+  - Sert à citer ou rapporter des paroles.  
+  - Utilisé pour énumérer des éléments ("et").  
+- **Exemples :**  
+  - 彼は「行く」と言った。 *(Il a dit "j’y vais".)*  
+  - リンゴとバナナを買った。 *(J'ai acheté des pommes et des bananes.)*  
+- **Remarque :** Très polyvalente, elle s'adapte selon le contexte.
+
+---
+
+**よ (yo)**  
+- **Fonction principale :** Particule finale qui renforce une affirmation ou signale une information nouvelle.  
+- **Exemple :**  
+  - これは本当だよ。 *(C’est vraiment vrai, tu sais.)*  
+- **Remarque :** Met l'accent sur ce que l'on affirme.
+
+---
+
+**ね (ne)**  
+- **Fonction principale :** Cherche l'approbation ou la confirmation, équivalent à "n'est-ce pas ?".  
+- **Exemple :**  
+  - いい天気ですね。 *(Il fait beau, n'est-ce pas ?)*  
+- **Remarque :** Crée une connivence entre les interlocuteurs.
+
+---
+
+**なあ (naa)**  
+- **Fonction principale :** Exprime une émotion ou une réflexion personnelle, souvent avec nostalgie.  
+- **Exemple :**  
+  - もう帰りたいなあ。 *(J’ai vraiment envie de rentrer…)*  
+- **Remarque :** Utilisée dans des contextes informels pour exprimer des sentiments.
+
+---
+
+**か (ka)**  
+- **Fonction principale :** Transforme la phrase en question.  
+- **Exemple :**  
+  - これは何ですか？ *(Qu'est-ce que c'est ?)*  
+- **Remarque :** Indispensable pour poser des questions en japonais.
+
+---
+
+**っけ (kke)**  
+- **Fonction principale :** Utilisée pour se rappeler ou vérifier une information oubliée.  
+- **Exemple :**  
+  - 彼の名前は何だったっけ？ *(Comment s’appelait-il déjà ?)*  
+- **Remarque :** Courant dans les conversations informelles.
+
+---
+
+**さ (sa)**  
+- **Fonction principale :** Particule finale familière, souvent masculine, qui souligne un fait évident.  
+- **Exemple :**  
+  - それは当たり前さ。 *(C’est évident, voyons !)*  
+- **Remarque :** Donne un ton plus décontracté et assertif.
+
+---
+
+**ぞ (zo)**  
+- **Fonction principale :** Ajoute une tonalité virile et affirmée, exprimant une forte assurance.  
+- **Exemple :**  
+  - 行くぞ！ *(On y va !)*  
+- **Remarque :** Typiquement masculin et familier.
+
+---
+
+**わ (wa)**  
+- **Fonction principale :** Particule finale à connotation douce, souvent féminine, qui adoucit l'affirmation.  
+- **Exemple :**  
+  - 今日は楽しいわ。 *(Aujourd'hui, c'est agréable.)*  
+- **Remarque :** Souvent utilisée dans un registre intime ou familier.
+
+---
+
+**の (no)** (en fin de phrase)  
+- **Fonction principale :**  
+  - Justifie une situation ou pose une question de manière douce.  
+- **Exemples :**  
+  - どうして来なかったの？ *(Pourquoi n'es-tu pas venu(e) ?)*  
+  - これは私の本なの。 *(C’est mon livre, tu sais.)*  
+- **Remarque :** Souvent utilisée pour adoucir les phrases ou les questions, avec une nuance féminine.
 
 
-### Particules de connexion
-Ces particules relient deux propositions ou clauses pour indiquer une relation logique (cause, conséquence, opposition, etc.).
+![Particules - 1](pictures/particules-1.png)
+![Particules - 2](pictures/particules-3.png)
+![Particules - 3](pictures/particules-2.png)
 
-| **Particule** | **Signification principale**   | **Exemple**                      | **Explication**                                 |
-|---------------|--------------------------------|-----------------------------------|------------------------------------------------|
-| **も**        | "aussi"                   | わたしもいきます。   | "Moi aussi, j’y vais"               |
-| **から**      | "parce que", "depuis"     | あついから、まどをあけます。       | "Comme il fait chaud, j’ouvre la fenêtre."  |
-| **けど**      | "mais" (forme familière)    | たかいけど、かいます。              | "C’est cher, mais je l’achète."             |
-| **が**        | "mais" (forme polie)        | あめがふっていますが、いきます。   | "Il pleut, mais j’y vais."                  |
-| **ので**      | "parce que", "comme"      | しずかなので、ねます。             | "Comme c’est calme, je dors."               |
-| **のに**      | "bien que", "malgré", "même si", "et pourtant"      | おかねがないのに、たくさんかいものしました。 | "Bien que je n’aie pas d’argent, j’ai beaucoup acheté." |
 
 ### Structure ～か～
 
