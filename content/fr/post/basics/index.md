@@ -194,6 +194,8 @@ Pour transformer un adjectif en **-な** en un **adverbe**, on ne met pas de **�
 
 Les particules jouent un rôle crucial en japonais : elles servent à marquer les fonctions syntaxiques (sujet, objet, lieu, etc.) et à relier les différentes parties de la phrase. La section suivante détaille chacune d'entre elles afin de vous aider à mieux comprendre leur utilisation et leur importance.
 
+### Particules courantes
+
 **は (ha)**  
 - **Fonction principale :** Marque le thème de la phrase, c'est-à-dire ce dont on parle.  
 - **Exemple :**  
