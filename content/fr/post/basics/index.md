@@ -394,6 +394,7 @@ Les particules jouent un rôle crucial en japonais : elles servent à marquer le
   - これは私の本なの。 *(C’est mon livre, tu sais.)*  
 - **Remarque :** Souvent utilisée pour adoucir les phrases ou les questions, avec une nuance féminine.
 
+### Fiches de révision
 
 ![Particules - 1](pictures/particules-1.png)
 ![Particules - 2](pictures/particules-3.png)
