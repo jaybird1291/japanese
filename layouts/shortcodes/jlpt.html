@@ -1,0 +1,5117 @@
+<div class="jlpt-grid-wrapper">
+
+  <!-- Titre / texte de présentation -->
+  <div class="jlpt-grid-header">
+  </div>
+
+  <!-- Barre de recherche -->
+  <input
+    type="text"
+    id="jlpt-search-bar"
+    placeholder="Rechercher un mot"
+  />
+
+  <!-- Boutons distincts : "Tout", "Kanji", "Vocabulaire" -->
+  <div class="jlpt-mode-buttons">
+    <button id="jlpt-all-btn" class="jlpt-mode-btn">Tout</button>
+    <button id="jlpt-kanji-btn" class="jlpt-mode-btn">Kanji</button>
+    <button id="jlpt-vocab-btn" class="jlpt-mode-btn">Vocabulaire</button>
+  </div>
+
+  <!-- NOUVEAU : Boutons pour filtrer la connaissance ("all", "known", "unknown") -->
+  <div class="jlpt-knowledge-buttons">
+    <button id="knowledge-all-btn" class="jlpt-mode-btn">Tous</button>
+    <button id="knowledge-known-btn" class="jlpt-mode-btn">Connu</button>
+    <button id="knowledge-unknown-btn" class="jlpt-mode-btn">Inconnu</button>
+  </div>
+
+  <!-- Progression Vocabulaire -->
+  <div class="jlpt-progress-container" id="jlpt-progress-vocab-container">
+    <span id="jlpt-progress-vocab-text"></span>
+    <div class="jlpt-progress-bar">
+      <div id="jlpt-progress-vocab-fill"></div>
+    </div>
+  </div>
+
+  <!-- Progression Kanji -->
+  <div class="jlpt-progress-container" id="jlpt-progress-kanji-container">
+    <span id="jlpt-progress-kanji-text"></span>
+    <div class="jlpt-progress-bar">
+      <div id="jlpt-progress-kanji-fill"></div>
+    </div>
+  </div>
+
+  <div class="jlpt-grid-header">
+    Basé sur l'API de Jisho.org
+  </div>
+
+  <!-- Conteneur de la grille -->
+  <div class="jlpt-grid" id="jlpt-grid"></div>
+</div>
+
+<style>
+/* ----------------------------------------- */
+/*         Thème principal (dark)           */
+/* ----------------------------------------- */
+
+/* Wrapper principal, background #3f3f3f */
+.jlpt-grid-wrapper {
+  background-color: #433845;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 1200px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #eee; /* texte clair sur fond sombre */
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.jlpt-grid-header {
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 0.65em;
+  font-style: italic; /* Texte en italique */
+}
+
+.jlpt-grid-header h2 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+}
+
+.jlpt-grid-header p {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+/* ----------------------------------------- */
+/*   Barre de recherche (dark)              */
+/* ----------------------------------------- */
+#jlpt-search-bar {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 1rem auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.15rem;
+  border: 1px solid #433845;
+  border-radius: 5px;
+  outline: none;
+  background-color: #65576a;
+  color: #eee;
+  transition: box-shadow 0.2s;
+}
+
+#jlpt-search-bar::placeholder {
+  color: #bbb;
+}
+
+#jlpt-search-bar:focus {
+  box-shadow: 0 0 5px rgba(100, 149, 237, 0.5);
+}
+
+/* ----------------------------------------- */
+/*   Boutons mode d'affichage               */
+/* ----------------------------------------- */
+.jlpt-mode-buttons, .jlpt-knowledge-buttons {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.jlpt-mode-btn {
+  display: inline-block;
+  margin: 0.3rem 0.4rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #65576a;
+  color: #eee;
+  font-size: 0.95rem;
+  border: 1px solid #666;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.jlpt-mode-btn:hover {
+  background-color: #897690;
+}
+
+/* ----------------------------------------- */
+/*   Barres de progression (2)              */
+/* ----------------------------------------- */
+.jlpt-progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.jlpt-progress-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 14px;
+  background-color: #635869;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0.4rem;
+}
+
+/* Barre 1 (vocab) en vert */
+#jlpt-progress-vocab-fill {
+  height: 100%;
+  background-color: #2ecc71; /* Vert */
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Barre 2 (kanji) en rose #e8729f */
+#jlpt-progress-kanji-fill {
+  height: 100%;
+  background-color: #e8729f;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+#jlpt-progress-vocab-text,
+#jlpt-progress-kanji-text {
+  font-size: 1.15rem;
+  margin-bottom: 0.3rem;
+  color: #eee;
+  text-align: center;
+}
+
+/* ----------------------------------------- */
+/*   Grille du vocabulaire                  */
+/* ----------------------------------------- */
+.jlpt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 1rem;
+}
+
+.jlpt-grid-item {
+  position: relative;
+  border: 1px solid #666;
+  border-radius: 8px;
+  padding: 1.2rem 0.5rem;
+  text-align: center;
+  font-size: 1.65rem;
+  cursor: default;
+  color: #fff;
+
+  /* Transition pour l'effet "zoom + halo" */
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+/* Effet "zoom + halo" via la classe .hovered */
+.jlpt-grid-item.hovered {
+  transform: scale(1.25);
+  z-index: 10;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+/* ----- Tooltip (survol) ----- */
+.jlpt-grid-item[data-title]:hover::after {
+  z-index: 9999;
+  content: attr(data-title);
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 1.10rem;
+  line-height: 1.3;
+  pointer-events: none;
+  opacity: 0.85;
+
+  /* On autorise un retour à la ligne et on force une certaine largeur */
+  display: inline-block;     /* indispensable pour min-width / max-width */
+  min-width: 150px;          /* la largeur minimum souhaitée (adaptable) */
+  max-width: 400px;          /* la largeur maximum souhaitée (adaptable) */
+  
+  /* Permet au texte de passer à la ligne si nécessaire */
+  white-space: normal;
+  word-wrap: break-word;      /* ou word-break: break-word; */
+}
+
+/* ----------------------------------------- */
+/*   Couleurs différentes selon l'état       */
+/* ----------------------------------------- */
+/* 1) Aucun appris */
+.not-learned {
+  background-color: #544c5a; /* gris foncé */
+}
+/* 2) Vocab seulement */
+.vocab-learned {
+  background-color: #2e4b2e; /* vert sombre */
+}
+/* 3) Kanji seulement */
+.kanji-learned {
+  background-color: #664057; /* violet/rose sombre */
+}
+/* 4) Les deux appris */
+.both-learned {
+  /* Au lieu de votre background-color actuelle, 
+     on met un gradient coupé net à 50% */
+     background: linear-gradient(
+    135deg, 
+    /* première moitié */ #2e4b2e 50%, 
+    /* seconde moitié  */ #664057 50%
+  );
+}
+
+@media (max-width: 600px) {
+  .jlpt-grid-item {
+    font-size: 1.2rem;
+  }
+}
+</style>
+
+<script>
+// -------------------------------------------
+//   Données : items (vocab + kanji)
+//   learned = vocab appris ?
+//   learnedKanji = kanji appris ?
+// -------------------------------------------
+const jlptVocabN5 = [
+  {
+    "kanji": "学校",
+    "reading": "がっこう",
+    "meaning": "school",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "川",
+    "reading": "かわ",
+    "meaning": "river, stream",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "手",
+    "reading": "て",
+    "meaning": "hand, arm",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "戸",
+    "reading": "と",
+    "meaning": "door (esp. Japanese-style)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "メガネ",
+    "meaning": "glasses, eyeglasses, spectacles",
+    "learned": false
+  },
+  {
+    "kanji": "煙草",
+    "reading": "タバコ",
+    "meaning": "tobacco, cigarette, cigar",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "赤",
+    "reading": "あか",
+    "meaning": "red, crimson, scarlet",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "仕事",
+    "reading": "しごと",
+    "meaning": "work, job, labor, labour, business, task, assignment, occupation, employment",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "英語",
+    "reading": "えいご",
+    "meaning": "English (language)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "問題",
+    "reading": "もんだい",
+    "meaning": "question (e.g. on a test), problem",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "部屋",
+    "reading": "へや",
+    "meaning": "room, chamber",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "子供",
+    "reading": "こども",
+    "meaning": "child, children",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "時間",
+    "reading": "じかん",
+    "meaning": "time",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "雨",
+    "reading": "あめ",
+    "meaning": "rain",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "先生",
+    "reading": "せんせい",
+    "meaning": "teacher, instructor, master",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "年",
+    "reading": "とし",
+    "meaning": "year",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "手紙",
+    "reading": "てがみ",
+    "meaning": "letter, note",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "電話",
+    "reading": "でんわ",
+    "meaning": "telephone call, phone call",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "水",
+    "reading": "みず",
+    "meaning": "water (esp. cool or cold)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "病気",
+    "reading": "びょうき",
+    "meaning": "illness (usu. excluding minor ailments, e.g. common cold), disease, sickness",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "会社",
+    "reading": "かいしゃ",
+    "meaning": "company, corporation, firm",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "上げる",
+    "reading": "あげる",
+    "meaning": "to raise, to elevate",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "結婚",
+    "reading": "けっこん",
+    "meaning": "marriage",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "言葉",
+    "reading": "ことば",
+    "meaning": "language, dialect",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "目",
+    "reading": "め",
+    "meaning": "eye, eyeball",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "走る",
+    "reading": "はしる",
+    "meaning": "to run",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "名前",
+    "reading": "なまえ",
+    "meaning": "name",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "旅行",
+    "reading": "りょこう",
+    "meaning": "travel, trip, journey, excursion, tour",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "道",
+    "reading": "みち",
+    "meaning": "road, path, street, lane, passage",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "飛行機",
+    "reading": "ひこうき",
+    "meaning": "airplane, aeroplane, plane, aircraft",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "映画",
+    "reading": "えいが",
+    "meaning": "movie, film, motion picture",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "音楽",
+    "reading": "おんがく",
+    "meaning": "music",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "木",
+    "reading": "き",
+    "meaning": "tree, shrub, bush",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大学",
+    "reading": "だいがく",
+    "meaning": "university, college",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "時計",
+    "reading": "とけい",
+    "meaning": "clock, watch, timepiece",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "家族",
+    "reading": "かぞく",
+    "meaning": "family",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "花",
+    "reading": "はな",
+    "meaning": "flower, blossom, bloom, petal",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "猫",
+    "reading": "ねこ",
+    "meaning": "cat (esp. the domestic cat, Felis catus)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎日",
+    "reading": "まいにち",
+    "meaning": "every day",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "宿題",
+    "reading": "しゅくだい",
+    "meaning": "homework, assignment",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "雪",
+    "reading": "ゆき",
+    "meaning": "snow, snowfall",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "山",
+    "reading": "やま",
+    "meaning": "mountain, hill",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "窓",
+    "reading": "まど",
+    "meaning": "window",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "動物",
+    "reading": "どうぶつ",
+    "meaning": "animal",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "夜",
+    "reading": "よる",
+    "meaning": "evening, night",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "料理",
+    "reading": "りょうり",
+    "meaning": "cooking, cookery, cuisine, food, dish",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "夏",
+    "reading": "なつ",
+    "meaning": "summer",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "新聞",
+    "reading": "しんぶん",
+    "meaning": "newspaper",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "公園",
+    "reading": "こうえん",
+    "meaning": "(public) park",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "意味",
+    "reading": "いみ",
+    "meaning": "meaning, significance, sense",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "bicycle, bike",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "足",
+    "reading": "あし",
+    "meaning": "foot, paw, arm (of an octopus, squid, etc.)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "電車",
+    "reading": "でんしゃ",
+    "meaning": "train, electric train",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "散歩",
+    "reading": "さんぽ",
+    "meaning": "walk, stroll",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "声",
+    "reading": "こえ",
+    "meaning": "voice",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "朝",
+    "reading": "あさ",
+    "meaning": "morning",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "歌",
+    "reading": "うた",
+    "meaning": "song, singing",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "靴",
+    "reading": "くつ",
+    "meaning": "shoe, shoes, boots, footwear, footgear",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "箱",
+    "reading": "はこ",
+    "meaning": "box, case, chest, package, pack, crate",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "机",
+    "reading": "つくえ",
+    "meaning": "desk",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "帽子",
+    "reading": "ぼうし",
+    "meaning": "hat, cap",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "海",
+    "reading": "うみ",
+    "meaning": "sea, ocean, waters",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "授業",
+    "reading": "じゅぎょう",
+    "meaning": "lesson, class, teaching, instruction, classwork, schoolwork",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "銀行",
+    "reading": "ぎんこう",
+    "meaning": "bank, banking institution",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "写真",
+    "reading": "しゃしん",
+    "meaning": "photograph, photo, picture, photography",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "冬",
+    "reading": "ふゆ",
+    "meaning": "winter",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "村",
+    "reading": "むら",
+    "meaning": "village",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "傘",
+    "reading": "かさ",
+    "meaning": "umbrella, parasol",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "口",
+    "reading": "くち",
+    "meaning": "mouth",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "橋",
+    "reading": "はし",
+    "meaning": "bridge",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "病院",
+    "reading": "びょういん",
+    "meaning": "hospital, clinic, doctor's office, doctor's surgery, infirmary",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "春",
+    "reading": "はる",
+    "meaning": "spring, springtime",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "図書館",
+    "reading": "としょかん",
+    "meaning": "library",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "買い物",
+    "reading": "かいもの",
+    "meaning": "shopping, purchased goods",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "椅子",
+    "reading": "いす",
+    "meaning": "chair, seat, stool, bench",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "自動車",
+    "reading": "じどうしゃ",
+    "meaning": "car, automobile, motorcar, motor vehicle, auto",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "色",
+    "reading": "いろ",
+    "meaning": "colour, color, hue, tint, tinge, shade",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "卵",
+    "reading": "たまご",
+    "meaning": "eggs, egg, spawn, roe",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "肉",
+    "reading": "にく",
+    "meaning": "flesh",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "風邪",
+    "reading": "かぜ",
+    "meaning": "(common) cold, influenza, flu, ague, inflammatory respiratory system illness (in general)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "掃除",
+    "reading": "そうじ",
+    "meaning": "cleaning, sweeping, dusting, scrubbing",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "紙",
+    "reading": "かみ",
+    "meaning": "paper",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鍵",
+    "reading": "かぎ",
+    "meaning": "key",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "雑誌",
+    "reading": "ざっし",
+    "meaning": "magazine, journal, periodical",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "切符",
+    "reading": "きっぷ",
+    "meaning": "ticket",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "外国人",
+    "reading": "がいこくじん",
+    "meaning": "foreigner, foreign citizen, foreign national, alien, non-Japanese",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "財布",
+    "reading": "さいふ",
+    "meaning": "wallet, purse, coin purse, billfold, pocketbook",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鉛筆",
+    "reading": "えんぴつ",
+    "meaning": "pencil",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大人",
+    "reading": "おとな",
+    "meaning": "adult, grown-up",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "地図",
+    "reading": "ちず",
+    "meaning": "map, atlas, chart, plan",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "塩",
+    "reading": "しお",
+    "meaning": "salt, common salt, table salt, sodium chloride",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "砂糖",
+    "reading": "さとう",
+    "meaning": "sugar",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "夏休み",
+    "reading": "なつやすみ",
+    "meaning": "summer vacation, summer holiday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "池",
+    "reading": "いけ",
+    "meaning": "pond",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "郵便局",
+    "reading": "ゆうびんきょく",
+    "meaning": "post office",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "教室",
+    "reading": "きょうしつ",
+    "meaning": "classroom, lecture room",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "耳",
+    "reading": "みみ",
+    "meaning": "ear",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "切手",
+    "reading": "きって",
+    "meaning": "stamp (postage), merchandise certificate",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "台所",
+    "reading": "だいどころ",
+    "meaning": "kitchen",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "電気",
+    "reading": "でんき",
+    "meaning": "electricity",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "歯",
+    "reading": "は",
+    "meaning": "tooth, teeth",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "作文",
+    "reading": "さくぶん",
+    "meaning": "writing (an essay, prose, etc.), composition",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "紅茶",
+    "reading": "こうちゃ",
+    "meaning": "black tea",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "家庭",
+    "reading": "かてい",
+    "meaning": "home, household, family, hearth",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "野菜",
+    "reading": "やさい",
+    "meaning": "vegetable",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "風呂",
+    "reading": "ふろ",
+    "meaning": "bath, bathing, bathtub, bathroom",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "玄関",
+    "reading": "げんかん",
+    "meaning": "entrance, front door, entryway, entranceway, entry hall, vestibule, porch, foyer, mud room",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "地下鉄",
+    "reading": "ちかてつ",
+    "meaning": "subway, metro, underground (railway)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鼻",
+    "reading": "はな",
+    "meaning": "nose",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "緑",
+    "reading": "みどり",
+    "meaning": "green",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "昼",
+    "reading": "ひる",
+    "meaning": "noon, midday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "西",
+    "reading": "にし",
+    "meaning": "west",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "白",
+    "reading": "しろ",
+    "meaning": "white",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "洗濯",
+    "reading": "せんたく",
+    "meaning": "washing, laundry",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "冷蔵庫",
+    "reading": "れいぞうこ",
+    "meaning": "refrigerator, fridge",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "火曜日",
+    "reading": "かようび",
+    "meaning": "Tuesday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "南",
+    "reading": "みなみ",
+    "meaning": "south",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "北",
+    "reading": "きた",
+    "meaning": "north",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "茶色",
+    "reading": "ちゃいろ",
+    "meaning": "brown, light brown, tawny",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "喫茶店",
+    "reading": "きっさてん",
+    "meaning": "coffee shop, tearoom, coffee lounge, coffeehouse, cafe",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "喫茶店",
+    "reading": "きっさてん",
+    "meaning": "coffee shop, tearoom, coffee lounge, coffeehouse, cafe",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "青",
+    "reading": "あお",
+    "meaning": "blue, azure",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "靴下",
+    "reading": "くつした",
+    "meaning": "socks, sock, stockings, stocking",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "封筒",
+    "reading": "ふうとう",
+    "meaning": "envelope",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "辺",
+    "reading": "へん",
+    "meaning": "area, vicinity, region",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "黄色",
+    "reading": "きいろ",
+    "meaning": "yellow, amber",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "映画館",
+    "reading": "えいがかん",
+    "meaning": "movie theatre, movie theater, cinema",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "箸",
+    "reading": "はし",
+    "meaning": "chopsticks",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "食堂",
+    "reading": "しょくどう",
+    "meaning": "dining room, dining hall, cafeteria, canteen, messroom",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "牛肉",
+    "reading": "ぎゅうにく",
+    "meaning": "beef",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "交差点",
+    "reading": "こうさてん",
+    "meaning": "crossing, intersection",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "茶碗",
+    "reading": "ちゃわん",
+    "meaning": "rice bowl, tea cup, teacup",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "曇り",
+    "reading": "くもり",
+    "meaning": "cloudiness, cloudy weather",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "漢字",
+    "reading": "かんじ",
+    "meaning": "kanji, Chinese character",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "背広",
+    "reading": "せびろ",
+    "meaning": "business suit",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "灰皿",
+    "reading": "はいざら",
+    "meaning": "ashtray",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "万年筆",
+    "reading": "まんねんひつ",
+    "meaning": "fountain pen",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大使館",
+    "reading": "たいしかん",
+    "meaning": "embassy",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "交番",
+    "reading": "こうばん",
+    "meaning": "police box, koban, small neighborhood police station",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "豚肉",
+    "reading": "ぶたにく",
+    "meaning": "pork",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "飲む",
+    "reading": "のむ",
+    "meaning": "to drink, to swallow, to take (medicine)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "頭",
+    "reading": "あたま",
+    "meaning": "head",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "日曜日",
+    "reading": "にちようび",
+    "meaning": "Sunday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "誕生日",
+    "reading": "たんじょうび",
+    "meaning": "birthday",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "可愛い",
+    "reading": "かわいい",
+    "meaning": "cute, adorable, charming, lovely, pretty",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鞄",
+    "reading": "かばん",
+    "meaning": "bag, satchel, briefcase, basket",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "土曜日",
+    "reading": "どようび",
+    "meaning": "Saturday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "月曜日",
+    "reading": "げつようび",
+    "meaning": "Monday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "金曜日",
+    "reading": "きんようび",
+    "meaning": "Friday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "花瓶",
+    "reading": "かびん",
+    "meaning": "(flower) vase",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "木曜日",
+    "reading": "もくようび",
+    "meaning": "Thursday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "本棚",
+    "reading": "ほんだな",
+    "meaning": "bookshelves, bookshelf, bookcase",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "石鹸",
+    "reading": "せっけん",
+    "meaning": "soap",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "水曜日",
+    "reading": "すいようび",
+    "meaning": "Wednesday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "飴",
+    "reading": "あめ",
+    "meaning": "(hard) candy, toffee",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "八百屋",
+    "reading": "やおや",
+    "meaning": "greengrocer, fruit and vegetable shop",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "成る",
+    "reading": "なる",
+    "meaning": "to become, to get, to grow, to turn, to reach, to attain",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "より",
+    "meaning": "than",
+    "learned": false
+  },
+  {
+    "kanji": "一番",
+    "reading": "いちばん",
+    "meaning": "number one, first, first place",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "私",
+    "reading": "わたし",
+    "meaning": "I, me",
+    "learned": true,
+    "learnedKanji": true
+  },
+  {
+    "kanji": "外",
+    "reading": "そと",
+    "meaning": "outside, exterior",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "姉",
+    "reading": "あね",
+    "meaning": "older sister, elder sister",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "百",
+    "reading": "ひゃく",
+    "meaning": "hundred, 100",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "有る",
+    "reading": "ある",
+    "meaning": "to be, to exist, to live",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "其の",
+    "reading": "その",
+    "meaning": "that, the",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "言う",
+    "reading": "いう",
+    "meaning": "to say, to utter, to declare",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出来る",
+    "reading": "できる",
+    "meaning": "to be able to do, to be possible, to be permitted (to do)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "良い",
+    "reading": "よい",
+    "meaning": "good, excellent, fine, nice, pleasant, agreeable",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "下さい",
+    "reading": "ください",
+    "meaning": "please (give me)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "見る",
+    "reading": "みる",
+    "meaning": "to see, to look, to watch, to view, to observe",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "此の",
+    "reading": "この",
+    "meaning": "this",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "自分",
+    "reading": "じぶん",
+    "meaning": "myself, yourself, oneself, himself, herself",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "知る",
+    "reading": "しる",
+    "meaning": "to know, to be aware (of), to be conscious (of), to learn (of), to find out, to discover",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "持つ",
+    "reading": "もつ",
+    "meaning": "to hold (in one's hand), to take, to carry",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何",
+    "reading": "なに",
+    "meaning": "what",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "車",
+    "reading": "くるま",
+    "meaning": "car, automobile, vehicle",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "話す",
+    "reading": "はなす",
+    "meaning": "to talk, to speak, to converse, to chat",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今",
+    "reading": "いま",
+    "meaning": "now, the present time, just now, soon, immediately",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今日",
+    "reading": "きょう",
+    "meaning": "today, this day",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "買う",
+    "reading": "かう",
+    "meaning": "to buy, to purchase",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "読む",
+    "reading": "よむ",
+    "meaning": "to read",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "皆",
+    "reading": "みんな",
+    "meaning": "everyone, everybody, all",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "新しい",
+    "reading": "あたらしい",
+    "meaning": "new, novel, fresh, recent, latest, up-to-date, modern",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "話",
+    "reading": "はなし",
+    "meaning": "talk, speech, chat, conversation",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "明日",
+    "reading": "あした",
+    "meaning": "tomorrow",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "昨日",
+    "reading": "きのう",
+    "meaning": "yesterday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出る",
+    "reading": "でる",
+    "meaning": "to leave, to exit, to go out, to come out, to get out",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "勉強",
+    "reading": "べんきょう",
+    "meaning": "study",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "取る",
+    "reading": "とる",
+    "meaning": "to take, to pick up, to grab, to catch, to hold",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "誰",
+    "reading": "だれ",
+    "meaning": "who",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お金",
+    "reading": "おかね",
+    "meaning": "money",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "男",
+    "reading": "おとこ",
+    "meaning": "man, male",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "犬",
+    "reading": "いぬ",
+    "meaning": "dog",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "使う",
+    "reading": "つかう",
+    "meaning": "to use (a tool, method, etc.), to make use of, to put to use",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大変",
+    "reading": "たいへん",
+    "meaning": "very, greatly, terribly, awfully",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "待つ",
+    "reading": "まつ",
+    "meaning": "to wait",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "作る",
+    "reading": "つくる",
+    "meaning": "to make, to produce, to manufacture, to build, to construct",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "後ろ",
+    "reading": "うしろ",
+    "meaning": "back, behind, rear",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "町",
+    "reading": "まち",
+    "meaning": "town, block, neighbourhood, neighborhood",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "駅",
+    "reading": "えき",
+    "meaning": "railway station, train station",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "少し",
+    "reading": "すこし",
+    "meaning": "a little, a bit, a small amount, a few, some, slightly, somewhat",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "貴方",
+    "reading": "あなた",
+    "meaning": "you",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "欲しい",
+    "reading": "ほしい",
+    "meaning": "wanting (to have), desiring, wishing for",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "行く",
+    "reading": "いく",
+    "meaning": "to go, to move (towards), to head (towards), to leave (for)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "乗る",
+    "reading": "のる",
+    "meaning": "to get on (train, plane, bus, ship, etc.), to get in, to board, to take, to embark",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大きな",
+    "reading": "おおきな",
+    "meaning": "big, large, great",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "医者",
+    "reading": "いしゃ",
+    "meaning": "doctor, physician",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "終わる",
+    "reading": "おわる",
+    "meaning": "to end, to come to an end, to finish, to close, to be over",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "学生",
+    "reading": "がくせい",
+    "meaning": "student (esp. a university student)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "長い",
+    "reading": "ながい",
+    "meaning": "long (distance, length)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何の",
+    "reading": "どの",
+    "meaning": "which, what (way)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "国",
+    "reading": "くに",
+    "meaning": "country, state",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "又",
+    "reading": "また",
+    "meaning": "again, once more, once again, another time, some other time",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "高い",
+    "reading": "たかい",
+    "meaning": "high, tall, expensive",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "余り",
+    "reading": "あまり",
+    "meaning": "remainder, remnant, rest, balance, surplus, remains (of a meal), leftovers",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "難しい",
+    "reading": "むずかしい",
+    "meaning": "difficult, hard, troublesome, complicated, serious (disease, problem, etc.)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "友達",
+    "reading": "ともだち",
+    "meaning": "friend, companion",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "本当",
+    "reading": "ほんとう",
+    "meaning": "truth, reality, actuality, fact",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一つ",
+    "reading": "ひとつ",
+    "meaning": "one",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "寝る",
+    "reading": "ねる",
+    "meaning": "to sleep (lying down)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "生徒",
+    "reading": "せいと",
+    "meaning": "pupil, student, schoolchild",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "忙しい",
+    "reading": "いそがしい",
+    "meaning": "busy, occupied, hectic",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "両親",
+    "reading": "りょうしん",
+    "meaning": "parents, both parents",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "泳ぐ",
+    "reading": "およぐ",
+    "meaning": "to swim",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出す",
+    "reading": "だす",
+    "meaning": "to take out, to get out",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "立つ",
+    "reading": "たつ",
+    "meaning": "to stand (up), to rise, to get to one's feet, to stand on end (e.g. of hairs), to stick up",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "早い",
+    "reading": "はやい",
+    "meaning": "fast, quick, rapid, swift, speedy, brisk, prompt",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "楽しい",
+    "reading": "たのしい",
+    "meaning": "enjoyable, fun, pleasant, happy, delightful",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "面白い",
+    "reading": "おもしろい",
+    "meaning": "interesting, fascinating, intriguing, enthralling",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "絵",
+    "reading": "え",
+    "meaning": "picture, drawing, painting, sketch",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "女の子",
+    "reading": "おんなのこ",
+    "meaning": "girl, daughter, baby girl",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "着る",
+    "reading": "きる",
+    "meaning": "to wear (from the shoulders down), to put on",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "上手",
+    "reading": "じょうず",
+    "meaning": "skillful, skilled, proficient, good (at), adept, clever",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "古い",
+    "reading": "ふるい",
+    "meaning": "old, aged, ancient, antiquated, antique, timeworn",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "強い",
+    "reading": "つよい",
+    "meaning": "strong, potent, competent, domineering, tough",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "全部",
+    "reading": "ぜんぶ",
+    "meaning": "all, entire, whole, altogether",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "呼ぶ",
+    "reading": "よぶ",
+    "meaning": "to call out (to), to call, to invoke",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "午後",
+    "reading": "ごご",
+    "meaning": "afternoon, p.m.",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "掛ける",
+    "reading": "かける",
+    "meaning": "to hang up (e.g. a coat, a picture on the wall), to let hang, to suspend (from), to hoist (e.g. sail), to raise (e.g. flag)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "辞書",
+    "reading": "じしょ",
+    "meaning": "dictionary, lexicon",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "天気",
+    "reading": "てんき",
+    "meaning": "weather",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "体",
+    "reading": "からだ",
+    "meaning": "body",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大きい",
+    "reading": "おおきい",
+    "meaning": "big, large, great",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "昨夜",
+    "reading": "ゆうべ",
+    "meaning": "last night, yesterday evening",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "質問",
+    "reading": "しつもん",
+    "meaning": "question, inquiry, enquiry",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "有名",
+    "reading": "ゆうめい",
+    "meaning": "famous, well-known",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "兄",
+    "reading": "あに",
+    "meaning": "older brother, elder brother",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "歌う",
+    "reading": "うたう",
+    "meaning": "to sing",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "上る",
+    "reading": "のぼる",
+    "meaning": "to ascend, to go up, to climb",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "服",
+    "reading": "ふく",
+    "meaning": "clothes (esp. Western clothes), clothing, dress, costume, suit, outfit",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鳥",
+    "reading": "とり",
+    "meaning": "bird",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "時々",
+    "reading": "ときどき",
+    "meaning": "sometimes, occasionally, at times, from time to time, now and then, once in a while, at intervals",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "妹",
+    "reading": "いもうと",
+    "meaning": "younger sister",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "二つ",
+    "reading": "ふたつ",
+    "meaning": "two",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "頼む",
+    "reading": "たのむ",
+    "meaning": "to request, to beg, to ask",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今朝",
+    "reading": "けさ",
+    "meaning": "this morning",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お父さん",
+    "reading": "おとうさん",
+    "meaning": "father, dad, papa",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "遅い",
+    "reading": "おそい",
+    "meaning": "slow",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "借りる",
+    "reading": "かりる",
+    "meaning": "to borrow",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "薬",
+    "reading": "くすり",
+    "meaning": "medicine, pharmaceuticals, (legal) drugs, pill, ointment, salve",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "庭",
+    "reading": "にわ",
+    "meaning": "garden, yard, courtyard",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "外国",
+    "reading": "がいこく",
+    "meaning": "foreign country",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "元気",
+    "reading": "げんき",
+    "meaning": "lively, full of spirit, energetic, vigorous, vital, spirited",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "小さい",
+    "reading": "ちいさい",
+    "meaning": "small, little, tiny",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "弟",
+    "reading": "おとうと",
+    "meaning": "younger brother, little brother, kid brother",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今年",
+    "reading": "ことし",
+    "meaning": "this year",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "魚",
+    "reading": "さかな",
+    "meaning": "fish",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お母さん",
+    "reading": "おかあさん",
+    "meaning": "mother, mom, mum, ma",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "男の子",
+    "reading": "おとこのこ",
+    "meaning": "boy, son, baby boy",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "飛ぶ",
+    "reading": "とぶ",
+    "meaning": "to fly, to soar",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "売る",
+    "reading": "うる",
+    "meaning": "to sell",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "静か",
+    "reading": "しずか",
+    "meaning": "quiet, silent",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "休む",
+    "reading": "やすむ",
+    "meaning": "to be absent, to take a day off",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "食べ物",
+    "reading": "たべもの",
+    "meaning": "food",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大切",
+    "reading": "たいせつ",
+    "meaning": "important, significant, serious, crucial",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "来週",
+    "reading": "らいしゅう",
+    "meaning": "next week",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "警官",
+    "reading": "けいかん",
+    "meaning": "police officer, policeman, constable",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "建物",
+    "reading": "たてもの",
+    "meaning": "building",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "暖かい",
+    "reading": "あたたかい",
+    "meaning": "warm, mild, (pleasantly) hot",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "降りる",
+    "reading": "おりる",
+    "meaning": "to descend (e.g. a mountain), to go down, to come down",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "止まる",
+    "reading": "とまる",
+    "meaning": "to stop (moving), to come to a stop",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一緒",
+    "reading": "いっしょ",
+    "meaning": "(doing) together",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "先週",
+    "reading": "せんしゅう",
+    "meaning": "last week, the week before",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "白い",
+    "reading": "しろい",
+    "meaning": "white",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "二",
+    "reading": "に",
+    "meaning": "two, 2",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "少ない",
+    "reading": "すくない",
+    "meaning": "few, little, small (amount), low, scarce, insufficient, seldom, rare",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "赤い",
+    "reading": "あかい",
+    "meaning": "red, crimson, scarlet, vermilion",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "洗う",
+    "reading": "あらう",
+    "meaning": "to wash, to cleanse, to rinse",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "嫌い",
+    "reading": "きらい",
+    "meaning": "disliked, hated, disagreeable",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "立派",
+    "reading": "りっぱ",
+    "meaning": "splendid, fine, handsome, elegant, imposing, prominent, impressive",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "暇",
+    "reading": "ひま",
+    "meaning": "spare time, free time, leisure",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お茶",
+    "reading": "おちゃ",
+    "meaning": "tea (esp. green or barley)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "広い",
+    "reading": "ひろい",
+    "meaning": "spacious, vast, wide",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "去年",
+    "reading": "きょねん",
+    "meaning": "last year",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "隣",
+    "reading": "となり",
+    "meaning": "next (to), adjoining, adjacent",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大好き",
+    "reading": "だいすき",
+    "meaning": "liking very much, loving (something or someone), adoring, being very fond of",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "女",
+    "reading": "おんな",
+    "meaning": "woman, female",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "多分",
+    "reading": "たぶん",
+    "meaning": "probably, likely, perhaps, maybe",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "切る",
+    "reading": "きる",
+    "meaning": "to cut, to cut through, to perform (surgery)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "嫌",
+    "reading": "いや",
+    "meaning": "disliking, not wanting, unwilling (to do), reluctant",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎朝",
+    "reading": "まいあさ",
+    "meaning": "every morning",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "荷物",
+    "reading": "にもつ",
+    "meaning": "luggage, baggage, package",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "番号",
+    "reading": "ばんごう",
+    "meaning": "number, series of digits",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "返す",
+    "reading": "かえす",
+    "meaning": "to return (something), to restore, to put back",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "来年",
+    "reading": "らいねん",
+    "meaning": "next year",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "明るい",
+    "reading": "あかるい",
+    "meaning": "light, bright, well-lit, well-lighted",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "近い",
+    "reading": "ちかい",
+    "meaning": "near, close, short (distance)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "向こう",
+    "reading": "むこう",
+    "meaning": "opposite side, other side",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "始め",
+    "reading": "はじめ",
+    "meaning": "beginning, start, outset, opening",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "痛い",
+    "reading": "いたい",
+    "meaning": "painful, sore",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "秋",
+    "reading": "あき",
+    "meaning": "autumn, fall",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "休み",
+    "reading": "やすみ",
+    "meaning": "rest, recess, respite",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "十",
+    "reading": "じゅう",
+    "meaning": "ten, 10",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "練習",
+    "reading": "れんしゅう",
+    "meaning": "practice, training, drill, (an) exercise, workout",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "先月",
+    "reading": "せんげつ",
+    "meaning": "last month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "上着",
+    "reading": "うわぎ",
+    "meaning": "coat, jacket, outerwear",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "結構",
+    "reading": "けっこう",
+    "meaning": "splendid, nice, wonderful, delightful, lovely, excellent, fine",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "兄弟",
+    "reading": "きょうだい",
+    "meaning": "siblings, brothers and sisters",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎年",
+    "reading": "まいとし",
+    "meaning": "every year, yearly, annually",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "来月",
+    "reading": "らいげつ",
+    "meaning": "next month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "五",
+    "reading": "ご",
+    "meaning": "five, 5",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "飲み物",
+    "reading": "のみもの",
+    "meaning": "drink, beverage",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "牛乳",
+    "reading": "ぎゅうにゅう",
+    "meaning": "(cow's) milk",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "弱い",
+    "reading": "よわい",
+    "meaning": "weak, frail, delicate, tender, unskilled, weak (wine)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "三",
+    "reading": "さん",
+    "meaning": "three, 3",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大丈夫",
+    "reading": "だいじょうぶ",
+    "meaning": "safe, secure, sound, problem-free, without fear, all right, alright, OK, okay",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "黒い",
+    "reading": "くろい",
+    "meaning": "black",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "皆さん",
+    "reading": "みなさん",
+    "meaning": "all, everyone, everybody",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "半分",
+    "reading": "はんぶん",
+    "meaning": "half",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "押す",
+    "reading": "おす",
+    "meaning": "to push, to thrust, to shove",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "勤める",
+    "reading": "つとめる",
+    "meaning": "to work (for), to be employed (at), to serve (in)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "熱い",
+    "reading": "あつい",
+    "meaning": "hot (to the touch)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "三つ",
+    "reading": "みっつ",
+    "meaning": "three",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "果物",
+    "reading": "くだもの",
+    "meaning": "fruit",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今週",
+    "reading": "こんしゅう",
+    "meaning": "this week",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "甘い",
+    "reading": "あまい",
+    "meaning": "sweet-tasting, sweet, sugary, sugared",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "右",
+    "reading": "みぎ",
+    "meaning": "right, right-hand side",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "晩",
+    "reading": "ばん",
+    "meaning": "evening, night",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "階段",
+    "reading": "かいだん",
+    "meaning": "stairs, stairway, staircase",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "大勢",
+    "reading": "おおぜい",
+    "meaning": "crowd of people, great number of people",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "幾つ",
+    "reading": "いくつ",
+    "meaning": "how many",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "張る",
+    "reading": "はる",
+    "meaning": "to stick, to paste, to affix",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "夕方",
+    "reading": "ゆうがた",
+    "meaning": "early evening (usu. from 3pm to 6pm), dusk",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "低い",
+    "reading": "ひくい",
+    "meaning": "low (rank, degree, value, content, quality, etc.)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "左",
+    "reading": "ひだり",
+    "meaning": "left, left-hand side",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎週",
+    "reading": "まいしゅう",
+    "meaning": "every week",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "下手",
+    "reading": "へた",
+    "meaning": "unskillful, poor, awkward",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "千",
+    "reading": "せん",
+    "meaning": "thousand, 1,000",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "渡す",
+    "reading": "わたす",
+    "meaning": "to ferry across (e.g. a river), to carry across, to traverse",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "午前",
+    "reading": "ごぜん",
+    "meaning": "morning, a.m.",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "便利",
+    "reading": "べんり",
+    "meaning": "convenient, handy, useful",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "丸い",
+    "reading": "まるい",
+    "meaning": "round, circular, spherical",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今月",
+    "reading": "こんげつ",
+    "meaning": "this month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "浴びる",
+    "reading": "あびる",
+    "meaning": "to dash over oneself (e.g. water), to take (e.g. shower), to bask in (e.g. the sun), to bathe in, to be flooded with (e.g. light), to be covered in",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "半",
+    "reading": "はん",
+    "meaning": "half, semi-, partial",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "洋服",
+    "reading": "ようふく",
+    "meaning": "Western-style clothes (cf. traditional Japanese clothes)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "撮る",
+    "reading": "とる",
+    "meaning": "to take (a photograph)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "締める",
+    "reading": "しめる",
+    "meaning": "to tie, to fasten, to tighten",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "文章",
+    "reading": "ぶんしょう",
+    "meaning": "writing, composition, essay, article, passage, prose, (writing) style",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "薄い",
+    "reading": "うすい",
+    "meaning": "thin (of an object)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "八",
+    "reading": "はち",
+    "meaning": "eight, 8",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "横",
+    "reading": "よこ",
+    "meaning": "horizontal (as opposed to vertical), lying down",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "四つ",
+    "reading": "よっつ",
+    "meaning": "four, 4",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "六",
+    "reading": "ろく",
+    "meaning": "six, 6",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "丈夫",
+    "reading": "じょうぶ",
+    "meaning": "healthy, robust, strong, solid, durable",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "東",
+    "reading": "ひがし",
+    "meaning": "east",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎晩",
+    "reading": "まいばん",
+    "meaning": "every night",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "五つ",
+    "reading": "いつつ",
+    "meaning": "five",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "晴れ",
+    "reading": "はれ",
+    "meaning": "clear weather, fine weather",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "細い",
+    "reading": "ほそい",
+    "meaning": "thin, slender, fine",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "廊下",
+    "reading": "ろうか",
+    "meaning": "corridor, hallway, passageway",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "太い",
+    "reading": "ふとい",
+    "meaning": "fat, thick",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "縦",
+    "reading": "たて",
+    "meaning": "the vertical, height",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "七つ",
+    "reading": "ななつ",
+    "meaning": "seven",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "九つ",
+    "reading": "ここのつ",
+    "meaning": "nine",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "留学生",
+    "reading": "りゅうがくせい",
+    "meaning": "overseas student, exchange student",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一昨年",
+    "reading": "おととし",
+    "meaning": "year before last",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "人",
+    "reading": "ひと",
+    "meaning": "person, someone, somebody",
+    "learned": true,
+    "learnedKanji": true
+  },
+  {
+    "kanji": "居る",
+    "reading": "いる",
+    "meaning": "to be (of animate objects), to exist",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "其れ",
+    "reading": "それ",
+    "meaning": "that, it",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "物",
+    "reading": "もの",
+    "meaning": "thing, object, article, stuff, substance",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "家",
+    "reading": "いえ",
+    "meaning": "house, residence, dwelling",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "本",
+    "reading": "ほん",
+    "meaning": "book, volume, script",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "迚も",
+    "reading": "とても",
+    "meaning": "very, awfully, exceedingly",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "会う",
+    "reading": "あう",
+    "meaning": "to meet, to encounter, to see",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "好き",
+    "reading": "すき",
+    "meaning": "liking, being fond of, to one's liking, to one's taste, preferred, favourite",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "分かる",
+    "reading": "わかる",
+    "meaning": "to understand, to comprehend, to grasp, to see, to get, to follow",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "此れ",
+    "reading": "これ",
+    "meaning": "this, this one",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "聞く",
+    "reading": "きく",
+    "meaning": "to hear",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "所",
+    "reading": "ところ",
+    "meaning": "place, spot, scene, site",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "先",
+    "reading": "さき",
+    "meaning": "point, tip, end, nozzle",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何時も",
+    "reading": "いつも",
+    "meaning": "always, all the time, at all times",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "書く",
+    "reading": "かく",
+    "meaning": "to write, to compose, to pen",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "沢山",
+    "reading": "たくさん",
+    "meaning": "a lot, lots, plenty, many, a large number, much, a great deal, a good deal",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "入る",
+    "reading": "はいる",
+    "meaning": "to enter, to come in, to go in, to get in, to arrive",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "置く",
+    "reading": "おく",
+    "meaning": "to put, to place",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何処",
+    "reading": "どこ",
+    "meaning": "where, what place",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "住む",
+    "reading": "すむ",
+    "meaning": "to live (of humans), to reside, to inhabit, to dwell, to abide",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "食べる",
+    "reading": "たべる",
+    "meaning": "to eat",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "歩く",
+    "reading": "あるく",
+    "meaning": "to walk",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "働く",
+    "reading": "はたらく",
+    "meaning": "to work, to labor, to labour",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "着く",
+    "reading": "つく",
+    "meaning": "to arrive at, to reach",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "上",
+    "reading": "うえ",
+    "meaning": "above, over, up",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "悪い",
+    "reading": "わるい",
+    "meaning": "bad, poor, undesirable",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "教える",
+    "reading": "おしえる",
+    "meaning": "to teach, to instruct",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "降る",
+    "reading": "ふる",
+    "meaning": "to fall (of rain, snow, ash, etc.), to come down",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "死ぬ",
+    "reading": "しぬ",
+    "meaning": "to die, to pass away",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "帰る",
+    "reading": "かえる",
+    "meaning": "to return, to come home, to go home, to go back",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "多い",
+    "reading": "おおい",
+    "meaning": "many, numerous, a lot",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出かける",
+    "reading": "でかける",
+    "meaning": "to go out (e.g. on an excursion or outing), to leave, to depart, to start, to set out",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "若い",
+    "reading": "わかい",
+    "meaning": "young, youthful",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "掛かる",
+    "reading": "かかる",
+    "meaning": "to take (a resource, e.g. time or money)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "同じ",
+    "reading": "おなじ",
+    "meaning": "same, identical, equal, alike, equivalent",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "起きる",
+    "reading": "おきる",
+    "meaning": "to get up, to rise, to blaze up (fire)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "座る",
+    "reading": "すわる",
+    "meaning": "to sit, to squat",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "店",
+    "reading": "みせ",
+    "meaning": "store, shop, establishment, restaurant",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "入れる",
+    "reading": "いれる",
+    "meaning": "to put in, to let in, to take in, to bring in, to insert, to install (e.g. software), to set (a jewel, etc.), to ink in (e.g. tattoo)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何方",
+    "reading": "どなた",
+    "meaning": "who",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一寸",
+    "reading": "ちょっと",
+    "meaning": "a little, a bit, slightly",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "疲れる",
+    "reading": "つかれる",
+    "meaning": "to get tired, to tire, to get fatigued, to become exhausted, to grow weary",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "開ける",
+    "reading": "あける",
+    "meaning": "to open (a door, etc.), to unwrap (e.g. parcel, package), to unlock",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何故",
+    "reading": "なぜ",
+    "meaning": "why, how, for what reason",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一日",
+    "reading": "いちにち",
+    "meaning": "one day",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "寒い",
+    "reading": "さむい",
+    "meaning": "cold (e.g. weather)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "見せる",
+    "reading": "みせる",
+    "meaning": "to show, to display",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "違う",
+    "reading": "ちがう",
+    "meaning": "to differ (from), to be different, to be distinct, to be unlike, to vary, to disagree (with)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "如何して",
+    "reading": "どうして",
+    "meaning": "how, in what way, by what means",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "付ける",
+    "reading": "つける",
+    "meaning": "to attach, to join, to connect, to add, to append, to affix, to stick, to glue, to fasten, to sew on, to apply (ointment), to put against",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "覚える",
+    "reading": "おぼえる",
+    "meaning": "to memorize, to memorise, to commit to memory, to learn by heart, to bear in mind, to remember",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "近く",
+    "reading": "ちかく",
+    "meaning": "near, neighbourhood, neighborhood, vicinity",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "風",
+    "reading": "かぜ",
+    "meaning": "wind, breeze, draught, draft",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "困る",
+    "reading": "こまる",
+    "meaning": "to be troubled, to have difficulty, to be in a fix, to be at a loss, to be stumped, to be embarrassed",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "生まれる",
+    "reading": "うまれる",
+    "meaning": "to be born",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "丁度",
+    "reading": "ちょうど",
+    "meaning": "exactly, precisely, just, right, opportunely, fortunately",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "初めて",
+    "reading": "はじめて",
+    "meaning": "for the first time",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "始まる",
+    "reading": "はじまる",
+    "meaning": "to begin, to start, to commence",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "貸す",
+    "reading": "かす",
+    "meaning": "to lend, to loan",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "綺麗",
+    "reading": "きれい",
+    "meaning": "pretty, lovely, beautiful, fair",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "幾ら",
+    "reading": "いくら",
+    "meaning": "how much",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "空",
+    "reading": "そら",
+    "meaning": "sky, the air, the heavens",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "弾く",
+    "reading": "ひく",
+    "meaning": "to play (a stringed or keyboard instrument)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "暑い",
+    "reading": "あつい",
+    "meaning": "hot, warm, sultry, heated",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "遊ぶ",
+    "reading": "あそぶ",
+    "meaning": "to play (games, sports), to enjoy oneself, to have a good time",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "然し",
+    "reading": "しかし",
+    "meaning": "however, but",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "無くす",
+    "reading": "なくす",
+    "meaning": "to lose (something)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "色々",
+    "reading": "いろいろ",
+    "meaning": "various, a variety of, all sorts of, many (different)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "渡る",
+    "reading": "わたる",
+    "meaning": "to cross over, to go across",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "暗い",
+    "reading": "くらい",
+    "meaning": "dark, gloomy, murky",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "此方",
+    "reading": "こちら",
+    "meaning": "this way, this direction",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "重い",
+    "reading": "おもい",
+    "meaning": "heavy, weighty",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "今晩",
+    "reading": "こんばん",
+    "meaning": "tonight, this evening",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "美味しい",
+    "reading": "おいしい",
+    "meaning": "good(-tasting), nice, delicious, tasty",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "消す",
+    "reading": "けす",
+    "meaning": "to erase, to rub out, to rub off, to cross out, to delete",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "易しい",
+    "reading": "やさしい",
+    "meaning": "easy, plain, simple",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "閉める",
+    "reading": "しめる",
+    "meaning": "to close, to shut",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "安い",
+    "reading": "やすい",
+    "meaning": "cheap, inexpensive",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "遠い",
+    "reading": "とおい",
+    "meaning": "far, distant, far away, a long way off, in the distance",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "短い",
+    "reading": "みじかい",
+    "meaning": "short",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "消える",
+    "reading": "きえる",
+    "meaning": "to disappear, to vanish, to go out of sight, to go away, to become lost",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "晴れる",
+    "reading": "はれる",
+    "meaning": "to clear up, to clear away, to be sunny, to stop raining",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "消える",
+    "reading": "きえる",
+    "meaning": "to disappear, to vanish, to go out of sight, to go away, to become lost",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "冷たい",
+    "reading": "つめたい",
+    "meaning": "cold (to the touch), chilly, icy, freezing",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "青い",
+    "reading": "あおい",
+    "meaning": "blue, azure",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "頁",
+    "reading": "ページ",
+    "meaning": "page",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "吹く",
+    "reading": "ふく",
+    "meaning": "to blow (of the wind)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "奥さん",
+    "reading": "おくさん",
+    "meaning": "wife, your wife, his wife, married lady, madam",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "引く",
+    "reading": "ひく",
+    "meaning": "to pull, to tug, to lead (e.g. a horse)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "段々",
+    "reading": "だんだん",
+    "meaning": "gradually, by degrees, little by little, more and more, increasingly",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "習う",
+    "reading": "ならう",
+    "meaning": "to take lessons in, to be taught, to learn (from a teacher), to study (under a teacher), to get training in",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "彼処",
+    "reading": "あそこ",
+    "meaning": "there, over there, that place, yonder, you-know-where",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "狭い",
+    "reading": "せまい",
+    "meaning": "narrow, confined, small, cramped",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "軽い",
+    "reading": "かるい",
+    "meaning": "light (i.e. not heavy), feeling light (i.e. offering little resistance, moving easily)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "脱ぐ",
+    "reading": "ぬぐ",
+    "meaning": "to take off (clothes, shoes, etc.), to undress",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "万",
+    "reading": "まん",
+    "meaning": "10,000, ten thousand",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "並ぶ",
+    "reading": "ならぶ",
+    "meaning": "to line up, to stand in a line",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "煩い",
+    "reading": "うるさい",
+    "meaning": "noisy, loud",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "吸う",
+    "reading": "すう",
+    "meaning": "to smoke, to breathe in, to inhale",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "閉まる",
+    "reading": "しまる",
+    "meaning": "to be shut, to close, to be closed",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "詰らない",
+    "reading": "つまらない",
+    "meaning": "dull, uninteresting, boring, tedious",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "咲く",
+    "reading": "さく",
+    "meaning": "to bloom, to flower, to blossom, to open",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "真っ直ぐ",
+    "reading": "まっすぐ",
+    "meaning": "straight (ahead), direct, upright, erect",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一",
+    "reading": "いち",
+    "meaning": "one, 1",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お祖母さん",
+    "reading": "おばあさん",
+    "meaning": "grandmother",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "其方",
+    "reading": "そちら",
+    "meaning": "that way, that direction",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "涼しい",
+    "reading": "すずしい",
+    "meaning": "cool, refreshing",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "厚い",
+    "reading": "あつい",
+    "meaning": "thick, deep, heavy",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お兄さん",
+    "reading": "おにいさん",
+    "meaning": "older brother, elder brother",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お姉さん",
+    "reading": "おねえさん",
+    "meaning": "older sister, elder sister",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "危ない",
+    "reading": "あぶない",
+    "meaning": "dangerous, risky, hazardous, perilous, precarious",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "並べる",
+    "reading": "ならべる",
+    "meaning": "to line up, to set up, to arrange in a line",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "汚い",
+    "reading": "きたない",
+    "meaning": "dirty, filthy, foul, unclean",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お腹",
+    "reading": "おなか",
+    "meaning": "belly, abdomen, stomach",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "不味い",
+    "reading": "まずい",
+    "meaning": "bad(-tasting), unpalatable, unsavoury, unsavory, awful, terrible, unpleasant",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "曇る",
+    "reading": "くもる",
+    "meaning": "to get cloudy, to cloud over, to become overcast",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "ご飯",
+    "reading": "ごはん",
+    "meaning": "cooked rice",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お菓子",
+    "reading": "おかし",
+    "meaning": "confections, sweets, candy, cake",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "磨く",
+    "reading": "みがく",
+    "meaning": "to polish, to shine, to burnish, to scour, to scrub, to brush (teeth), to grind (e.g. a lens)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "黄色い",
+    "reading": "きいろい",
+    "meaning": "yellow",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "賑やか",
+    "reading": "にぎやか",
+    "meaning": "bustling, busy, crowded, lively, prosperous, thriving",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "鳴く",
+    "reading": "なく",
+    "meaning": "to cry, to whine",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "夕飯",
+    "reading": "ゆうはん",
+    "meaning": "evening meal, dinner, supper",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "葉書",
+    "reading": "はがき",
+    "meaning": "postcard",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "朝ご飯",
+    "reading": "あさごはん",
+    "meaning": "breakfast",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "Ｙシャツ",
+    "reading": "ワイシャツ",
+    "meaning": "(formal) shirt, dress shirt, business shirt, button-up shirt",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "六つ",
+    "reading": "むっつ",
+    "meaning": "six",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お手洗い",
+    "reading": "おてあらい",
+    "meaning": "toilet, restroom, lavatory, bathroom",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お巡りさん",
+    "reading": "おまわりさん",
+    "meaning": "police officer",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "零",
+    "reading": "れい",
+    "meaning": "zero, nought",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "差す",
+    "reading": "さす",
+    "meaning": "to shine",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "２０日",
+    "reading": "はつか",
+    "meaning": "20th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "粁",
+    "reading": "キロメートル",
+    "meaning": "kilometer, kilometre",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "八つ",
+    "reading": "やっつ",
+    "meaning": "eight",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "再来年",
+    "reading": "さらいねん",
+    "meaning": "year after next",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "燐寸",
+    "reading": "マッチ",
+    "meaning": "match (for lighting a fire)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "良く",
+    "reading": "よく",
+    "meaning": "nicely, properly, well, skillfully, skilfully",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "其処",
+    "reading": "そこ",
+    "meaning": "there (place relatively near listener)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "小さな",
+    "reading": "ちいさな",
+    "meaning": "small, little, tiny",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "答える",
+    "reading": "こたえる",
+    "meaning": "to answer, to reply",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "もう一度",
+    "reading": "もういちど",
+    "meaning": "once more, again",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "要る",
+    "reading": "いる",
+    "meaning": "to be needed, to be necessary, to be required, to be wanted, to need, to want",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お風呂",
+    "reading": "おふろ",
+    "meaning": "bath",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "背",
+    "reading": "せ",
+    "meaning": "back",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お弁当",
+    "reading": "おべんとう",
+    "meaning": "bento, Japanese box lunch",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "晩御飯",
+    "reading": "ばんごはん",
+    "meaning": "dinner, evening meal",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "昼ご飯",
+    "reading": "ひるごはん",
+    "meaning": "lunch, midday meal",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "でも",
+    "meaning": "but, however, though, nevertheless, still, yet, even so, also, as well",
+    "learned": true
+  },
+  {
+    "kanji": "等",
+    "reading": "など",
+    "meaning": "et cetera, etc., and the like, and so forth",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "クラス",
+    "meaning": "class",
+    "learned": false
+  },
+  {
+    "reading": "プール",
+    "meaning": "(swimming) pool",
+    "learned": false
+  },
+  {
+    "kanji": "中",
+    "reading": "なか",
+    "meaning": "inside, interior",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "テレビ",
+    "meaning": "television, TV",
+    "learned": true
+  },
+  {
+    "kanji": "珈琲",
+    "reading": "コーヒー",
+    "meaning": "coffee",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "ホテル",
+    "meaning": "hotel",
+    "learned": false
+  },
+  {
+    "reading": "ニュース",
+    "meaning": "news",
+    "learned": false
+  },
+  {
+    "reading": "テーブル",
+    "meaning": "table",
+    "learned": false
+  },
+  {
+    "reading": "カメラ",
+    "meaning": "camera",
+    "learned": false
+  },
+  {
+    "reading": "タクシー",
+    "meaning": "taxi",
+    "learned": false
+  },
+  {
+    "reading": "スポーツ",
+    "meaning": "sport, sports",
+    "learned": false
+  },
+  {
+    "reading": "ラジオ",
+    "meaning": "radio",
+    "learned": false
+  },
+  {
+    "reading": "ペン",
+    "meaning": "pen",
+    "learned": false
+  },
+  {
+    "reading": "レストラン",
+    "meaning": "restaurant (esp. Western-style)",
+    "learned": false
+  },
+  {
+    "reading": "テスト",
+    "meaning": "test (of ability, knowledge, etc.), exam, examination, quiz",
+    "learned": false
+  },
+  {
+    "reading": "ベッド",
+    "meaning": "bed",
+    "learned": false
+  },
+  {
+    "reading": "ナイフ",
+    "meaning": "knife",
+    "learned": false
+  },
+  {
+    "reading": "シャツ",
+    "meaning": "shirt (undergarment), undershirt, singlet",
+    "learned": false
+  },
+  {
+    "reading": "ネクタイ",
+    "meaning": "tie, necktie",
+    "learned": false
+  },
+  {
+    "reading": "ギター",
+    "meaning": "guitar",
+    "learned": false
+  },
+  {
+    "kanji": "米",
+    "reading": "メートル",
+    "meaning": "metre (unit of length), meter",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "セーター",
+    "meaning": "sweater, jumper",
+    "learned": false
+  },
+  {
+    "reading": "アパート",
+    "meaning": "apartment building, apartment block, apartment house",
+    "learned": false
+  },
+  {
+    "reading": "ポケット",
+    "meaning": "pocket",
+    "learned": false
+  },
+  {
+    "reading": "バター",
+    "meaning": "butter",
+    "learned": false
+  },
+  {
+    "reading": "キロ",
+    "meaning": "kilo-, 1000",
+    "learned": false
+  },
+  {
+    "reading": "スカート",
+    "meaning": "skirt",
+    "learned": false
+  },
+  {
+    "reading": "レコード",
+    "meaning": "record (e.g. LP)",
+    "learned": false
+  },
+  {
+    "reading": "エレベーター",
+    "meaning": "elevator, lift",
+    "learned": false
+  },
+  {
+    "kanji": "洋袴",
+    "reading": "ズボン",
+    "meaning": "trousers, pants",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "ポスト",
+    "meaning": "postbox, mailbox, mail box, pillar box",
+    "learned": false
+  },
+  {
+    "reading": "コピー",
+    "meaning": "copy, photocopy",
+    "learned": false
+  },
+  {
+    "reading": "シャワー",
+    "meaning": "shower",
+    "learned": false
+  },
+  {
+    "reading": "ハンカチ",
+    "meaning": "handkerchief",
+    "learned": false
+  },
+  {
+    "kanji": "一昨日",
+    "reading": "おととい",
+    "meaning": "day before yesterday",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "テープ",
+    "meaning": "tape",
+    "learned": false
+  },
+  {
+    "reading": "ストーブ",
+    "meaning": "(room) heater, stove",
+    "learned": false
+  },
+  {
+    "reading": "カップ",
+    "meaning": "cup (drinking vessel, measure, brassiere, prize, etc.)",
+    "learned": false
+  },
+  {
+    "reading": "ボールペン",
+    "meaning": "ball-point pen",
+    "learned": false
+  },
+  {
+    "reading": "スプーン",
+    "meaning": "spoon",
+    "learned": false
+  },
+  {
+    "reading": "スリッパ",
+    "meaning": "slipper, slippers",
+    "learned": false
+  },
+  {
+    "kanji": "醤油",
+    "reading": "しょうゆ",
+    "meaning": "soy sauce, soya sauce, shoyu",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "はい",
+    "meaning": "yes, that is correct",
+    "learned": true
+  },
+  {
+    "reading": "ペット",
+    "meaning": "pet",
+    "learned": false
+  },
+  {
+    "reading": "テープレコーダー",
+    "meaning": "tape recorder",
+    "learned": false
+  },
+  {
+    "kanji": "為る",
+    "reading": "する",
+    "meaning": "to do, to carry out, to perform",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "彼",
+    "reading": "あれ",
+    "meaning": "that, that thing",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "１日",
+    "reading": "ついたち",
+    "meaning": "first day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "３日",
+    "reading": "みっか",
+    "meaning": "3rd day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "５日",
+    "reading": "いつか",
+    "meaning": "5th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "２日",
+    "reading": "ふつか",
+    "meaning": "2nd day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "１０日",
+    "reading": "とおか",
+    "meaning": "10th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "６日",
+    "reading": "むいか",
+    "meaning": "6th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "８日",
+    "reading": "ようか",
+    "meaning": "8th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "９日",
+    "reading": "ここのか",
+    "meaning": "9th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "来る",
+    "reading": "くる",
+    "meaning": "to come (spatially or temporally), to approach, to arrive",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "後",
+    "reading": "あと",
+    "meaning": "behind, rear",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一人",
+    "reading": "ひとり",
+    "meaning": "one person",
+    "learned": true,
+    "learnedKanji": true
+  },
+  {
+    "kanji": "二人",
+    "reading": "ふたり",
+    "meaning": "two persons, two people, pair, couple",
+    "learned": true,
+    "learnedKanji": true
+  },
+  {
+    "kanji": "側",
+    "reading": "そば",
+    "meaning": "near, close, beside, vicinity, proximity, besides, while",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "辛い",
+    "reading": "からい",
+    "meaning": "spicy, hot",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "門",
+    "reading": "もん",
+    "meaning": "gate",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "角",
+    "reading": "かど",
+    "meaning": "corner, edge",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "毎月",
+    "reading": "まいつき",
+    "meaning": "every month, each month, monthly",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "七",
+    "reading": "しち",
+    "meaning": "seven",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "伯母さん",
+    "reading": "おばさん",
+    "meaning": "aunt",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "四",
+    "reading": "し",
+    "meaning": "four, 4",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お酒",
+    "reading": "おさけ",
+    "meaning": "alcohol, sake",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "入り口",
+    "reading": "いりぐち",
+    "meaning": "entrance, entry, gate, approach, mouth",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出口",
+    "reading": "でぐち",
+    "meaning": "exit, way out",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "お皿",
+    "reading": "おさら",
+    "meaning": "plate, dish",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "此処",
+    "reading": "ここ",
+    "meaning": "here, this place",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "前",
+    "reading": "まえ",
+    "meaning": "in front (of), before (e.g. a building)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "もう",
+    "meaning": "already, yet, by now, now, (not) any more, (not) any longer",
+    "learned": true
+  },
+  {
+    "kanji": "如何",
+    "reading": "どう",
+    "meaning": "how, in what way, how about",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "方",
+    "reading": "かた",
+    "meaning": "direction, way",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "未だ",
+    "reading": "まだ",
+    "meaning": "still, as yet, only",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "もっと",
+    "meaning": "(some) more, even more, longer, further",
+    "learned": true
+  },
+  {
+    "kanji": "何時",
+    "reading": "いつ",
+    "meaning": "when, at what time, how soon",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "パーティー",
+    "meaning": "party (social gathering)",
+    "learned": false
+  },
+  {
+    "kanji": "他",
+    "reading": "ほか",
+    "meaning": "another place, some other place, somewhere else, outside",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "次",
+    "reading": "つぎ",
+    "meaning": "next, following, subsequent",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "ドア",
+    "meaning": "door",
+    "learned": false
+  },
+  {
+    "kanji": "何方",
+    "reading": "どちら",
+    "meaning": "which way, which direction, where",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "誰か",
+    "reading": "だれか",
+    "meaning": "someone, somebody",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "開く",
+    "reading": "あく",
+    "meaning": "to open (e.g. doors)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "どうぞ",
+    "meaning": "please, kindly, pray, I beg (of you)",
+    "learned": true
+  },
+  {
+    "reading": "こんな",
+    "meaning": "this sort of, this kind of, like this, such",
+    "learned": false
+  },
+  {
+    "kanji": "下",
+    "reading": "した",
+    "meaning": "below, down, under, younger (e.g. daughter)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "而して",
+    "reading": "そして",
+    "meaning": "and, and then, thus, and now, and finally",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "ゆっくり",
+    "meaning": "slowly, unhurriedly, without haste, leisurely, at one's leisure",
+    "learned": false
+  },
+  {
+    "reading": "さあ",
+    "meaning": "come (on), come now, come along, here",
+    "learned": true
+  },
+  {
+    "reading": "どうも",
+    "meaning": "thank you, thanks",
+    "learned": true
+  },
+  {
+    "reading": "じゃあ",
+    "meaning": "then, well, so, well then",
+    "learned": true
+  },
+  {
+    "reading": "それから",
+    "meaning": "and then, after that",
+    "learned": false
+  },
+  {
+    "reading": "ええ",
+    "meaning": "yes, that is correct, right",
+    "learned": false
+  },
+  {
+    "reading": "ノート",
+    "meaning": "notebook, copy-book, exercise book",
+    "learned": false
+  },
+  {
+    "kanji": "釦",
+    "reading": "ボタン",
+    "meaning": "button (clothing)",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "デパート",
+    "meaning": "department store",
+    "learned": false
+  },
+  {
+    "reading": "トイレ",
+    "meaning": "toilet, restroom, bathroom, lavatory",
+    "learned": true
+  },
+  {
+    "reading": "それでは",
+    "meaning": "well, ..., right, ..., now, ...",
+    "learned": true
+  },
+  {
+    "kanji": "明後日",
+    "reading": "あさって",
+    "meaning": "day after tomorrow",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "何れ",
+    "reading": "どれ",
+    "meaning": "which (of three or more)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "２０歳",
+    "reading": "はたち",
+    "meaning": "20 years old",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "彼方",
+    "reading": "あちら",
+    "meaning": "that way, that direction, over there, yonder",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "では",
+    "meaning": "then, well, so, well then",
+    "learned": false
+  },
+  {
+    "reading": "フィルム",
+    "meaning": "film",
+    "learned": false
+  },
+  {
+    "kanji": "温い",
+    "reading": "ぬるい",
+    "meaning": "lukewarm, tepid",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "４日",
+    "reading": "よっか",
+    "meaning": "4th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "カレンダー",
+    "meaning": "calendar",
+    "learned": false
+  },
+  {
+    "kanji": "７日",
+    "reading": "なのか",
+    "meaning": "7th day of the month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "然うして",
+    "reading": "そうして",
+    "meaning": "and, like that",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "瓦",
+    "reading": "グラム",
+    "meaning": "gram, gramme",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "瓩",
+    "reading": "キログラム",
+    "meaning": "kilogram, kilogramme",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "直ぐに",
+    "reading": "すぐに",
+    "meaning": "immediately, right away, at once, instantly",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "kanji": "一月",
+    "reading": "ひとつき",
+    "meaning": "one month",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "あの",
+    "meaning": "say, well, um, er",
+    "learned": true
+  },
+  {
+    "kanji": "忘れる",
+    "reading": "わすれる",
+    "meaning": "to forget, to leave carelessly, to be forgetful of, to forget about, to forget (an article)",
+    "learned": true,
+    "learnedKanji": false
+  },
+  {
+    "reading": "カレー",
+    "meaning": "curry (esp. Japanese curry)",
+    "learned": false
+  },
+  {
+    "kanji": "字引",
+    "reading": "じびき",
+    "meaning": "dictionary",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "パン",
+    "meaning": "bread, (sweet) pastry",
+    "learned": false
+  },
+  {
+    "reading": "バス",
+    "meaning": "bus",
+    "learned": false
+  },
+  {
+    "reading": "いいえ",
+    "meaning": "no",
+    "learned": true
+  },
+  {
+    "kanji": "三",
+    "reading": "サン",
+    "meaning": "three",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "コート",
+    "meaning": "coat",
+    "learned": false
+  },
+  {
+    "kanji": "洋杯",
+    "reading": "コップ",
+    "meaning": "glass (drinking vessel), tumbler",
+    "learned": false,
+    "learnedKanji": false
+  },
+  {
+    "reading": "フォーク",
+    "meaning": "fork",
+    "learned": false
+  },
+  {
+    "reading": "ラジカセ",
+    "meaning": "radio-cassette player",
+    "learned": false
+  },
+  {
+    "reading": "マッチ",
+    "meaning": "match (contest)",
+    "learned": false
+  },
+  {
+    "kanji": "父",
+    "meaning": "father, dad, papa",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "友",
+    "meaning": "friend",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "読",
+    "meaning": "read",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "母",
+    "meaning": "mother",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "生",
+    "meaning": "life, genuine, birth",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "書",
+    "meaning": "write",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "出",
+    "meaning": "exit, leave, go out, come out, put out, protrude",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "見",
+    "meaning": "see, hopes, chances, idea, opinion, look at, visible",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "長",
+    "meaning": "long, leader, superior, senior",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "行",
+    "meaning": "long, leader, superior, senior",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "日",
+    "meaning": "day, sun, Japan, counter for days",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "金",
+    "meaning": "gold",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "九",
+    "meaning": "nine",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "入",
+    "meaning": "enter, insert",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "円",
+    "meaning": "circle, yen, round",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "小",
+    "meaning": "little, small",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "高",
+    "meaning": "tall, high, expensive",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "土",
+    "meaning": "soil, earth, ground, Turkey",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "火",
+    "meaning": "fire",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "語",
+    "meaning": "word, speech, language",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "聞",
+    "meaning": "hear, ask, listen",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "休",
+    "meaning": "rest, day off, retire, sleep",
+    "learnedKanji": false
+  },
+  {
+    "kanji": "食",
+    "meaning": "eat, food",
+    "learnedKanji": false
+  },
+];
+
+const allowedKanji = [
+  "日", "一", "人", "国", "年", "大", "十", "二", "本", "中", "出", "三", "見", "月", "長", "生", "五", "時", "上", "七", "行", "四", "後", "金", "前", "九", "入", "学", "間", "円", "東", "八", "六", "下", "今", "気", "小", "七", "高", "山", "女", "外", "百", "先", "名", "川", "千", "来", "水", "男", "話", "校", "北", "土", "午", "木", "車", "書", "半", "白", "天", "西", "電", "火", "右", "語", "左", "聞", "休", "食", "何", "南", "万", "毎", "雨", "母", "読", "友", "父"
+];
+
+/**
+ * Vérifie si TOUTES les lettres/kanji de 'str' sont présentes dans 'allowed'.
+ * - str : string (éventuellement composé de plusieurs kanji)
+ * - allowed : tableau de caractères kanji autorisés
+ */
+ function allCharsAllowed(str, allowed) {
+  // On passe la string en tableau de caractères [...str],
+  // et on vérifie que chaque caractère est dans allowedKanji.
+  return [...(str || "")].every(char => allowed.includes(char));
+}
+
+// On parcourt la liste jlptVocabN5
+jlptVocabN5.forEach(item => {
+  // Si item.kanji existe et que tous ses caractères ne sont pas autorisés
+  if (item.kanji && !allCharsAllowed(item.kanji, allowedKanji)) {
+    // On supprime le kanji ET la clé learnedKanji, 
+    // puisqu'il n'est pas logique de "faire apprendre" un kanji non autorisé.
+    delete item.kanji;
+    delete item.learnedKanji;
+  }
+
+  // Si vous voulez par exemple aussi supprimer la clé learnedKanji quand kanji n’existe pas du tout
+  // (c'est à vous de voir la logique métier)
+  // if (!item.kanji) {
+  //   delete item.learnedKanji;
+  // }
+});
+
+
+// -------------------------------------------
+//   Modes d'affichage : "all", "kanji", "no-kanji"
+let viewMode = 'all';  // Par défaut : tout
+let searchFilter = ''; // Filtre texte
+
+// -------------------------------------------
+//   NOUVEAU : Filtre de connaissance
+//   "all" = on affiche tous (connu + inconnu)
+//   "known" = on affiche seulement ceux qu'on connaît (dans le mode actif)
+//   "unknown" = on affiche seulement ceux qu'on ne connaît pas (dans le mode actif)
+// -------------------------------------------
+let knowledgeFilter = 'all';
+
+// -------------------------------------------
+//   Récupération de la classe couleur
+//   selon learned / learnedKanji + le mode
+// -------------------------------------------
+function getCssClassForItem(item) {
+  // Si on est en mode Kanji, alors la couleur dépend
+  // uniquement de learnedKanji
+  if (viewMode === 'kanji') {
+    return item.learnedKanji ? 'kanji-learned' : 'not-learned';
+  }
+  // Mode "no-kanji" => seul 'learned' compte
+  if (viewMode === 'no-kanji') {
+    return item.learned ? 'vocab-learned' : 'not-learned';
+  }
+  // Sinon, mode "all" => logique habituelle
+  const { learned, learnedKanji } = item;
+  if (learned && learnedKanji) {
+    return 'both-learned';
+  } else if (learned) {
+    return 'vocab-learned';
+  } else if (learnedKanji) {
+    return 'kanji-learned';
+  } else {
+    return 'not-learned';
+  }
+}
+
+// -------------------------------------------
+//   Mise à jour de l'affichage global
+// -------------------------------------------
+function updateDisplay() {
+  renderGrid();
+  updateProgressBars();
+}
+
+// -------------------------------------------
+//   Rendu de la grille selon le mode & la recherche
+//   et le knowledgeFilter
+// -------------------------------------------
+function renderGrid() {
+  const gridContainer = document.getElementById('jlpt-grid');
+  gridContainer.innerHTML = '';
+
+  // Filtrage de base
+  const filteredItems = jlptVocabN5.filter(item => {
+    // 1) Filtre par mode
+    if (viewMode === 'kanji') {
+      // on n'affiche que les items qui ont un kanji
+      if (!item.kanji) return false;
+    } else if (viewMode === 'no-kanji') {
+      // on n'affiche que les items qui n'ont pas de kanji
+      if (item.kanji) return false;
+    }
+    // 2) Filtre texte
+    const displayString = (item.kanji || item.reading || '').toLowerCase();
+    const tooltip = `${item.reading || ''} — ${item.meaning || ''}`.toLowerCase();
+    if (!displayString.includes(searchFilter) && !tooltip.includes(searchFilter)) {
+      return false;
+    }
+    // 3) Filtre de connaissance
+    if (knowledgeFilter === 'known') {
+      // On veut seulement les items "connus"
+      if (viewMode === 'kanji') {
+        // connu en kanji => item.learnedKanji === true
+        if (!item.learnedKanji) return false;
+      } else if (viewMode === 'no-kanji') {
+        // connu en vocab => item.learned === true
+        if (!item.learned) return false;
+      } else {
+        // mode all => item est connu s'il est appris en vocab OU kanji
+        if (!item.learned && !item.learnedKanji) return false;
+      }
+    } else if (knowledgeFilter === 'unknown') {
+      // On veut seulement les items "inconnus"
+      if (viewMode === 'kanji') {
+        // inconnu en kanji => !item.learnedKanji
+        if (item.learnedKanji) return false;
+      } else if (viewMode === 'no-kanji') {
+        // inconnu en vocab => !item.learned
+        if (item.learned) return false;
+      } else {
+        // mode all => item est inconnu s'il n'est appris ni en vocab ni en kanji
+        if (item.learned || item.learnedKanji) return false;
+      }
+    }
+
+    return true;
+  });
+
+  // Création des éléments
+  filteredItems.forEach(item => {
+    const gridItem = document.createElement('div');
+    gridItem.classList.add('jlpt-grid-item');
+
+    // Couleur selon l'état (dépend du mode)
+    const stateClass = getCssClassForItem(item);
+    gridItem.classList.add(stateClass);
+
+    // Tooltip
+    gridItem.dataset.title = `${item.reading || ''} — ${item.meaning || ''}`;
+    // Affichage kanji ou lecture
+    gridItem.textContent = item.kanji || item.reading;
+
+    // Effet "zoom + halo" au survol
+    gridItem.addEventListener('mouseover', () => {
+      gridItem.classList.add('hovered');
+    });
+    gridItem.addEventListener('mouseout', () => {
+      gridItem.classList.remove('hovered');
+    });
+
+    gridContainer.appendChild(gridItem);
+  });
+}
+
+// -------------------------------------------
+//   Mise à jour des barres de progression
+// -------------------------------------------
+function updateProgressBars() {
+  // Récupération conteneurs
+  const vocabContainer = document.getElementById('jlpt-progress-vocab-container');
+  const kanjiContainer = document.getElementById('jlpt-progress-kanji-container');
+
+  //   *** Mode "all" -> 2 barres visibles
+  if (viewMode === 'all') {
+    vocabContainer.style.display = 'flex';
+    kanjiContainer.style.display = 'flex';
+
+    // Calcul vocab total
+    const totalVocab = jlptVocabN5.length;
+    const learnedVocab = jlptVocabN5.filter(item => item.learned).length;
+    const pctVocab = totalVocab ? Math.round((learnedVocab / totalVocab) * 100) : 0;
+
+    // Calcul kanji total
+    const kanjiItems = jlptVocabN5.filter(item => item.kanji);
+    const totalKanji = kanjiItems.length;
+    const learnedKanji = kanjiItems.filter(item => item.learnedKanji).length;
+    const pctKanji = totalKanji ? Math.round((learnedKanji / totalKanji) * 100) : 0;
+
+    // Mise à jour
+    document.getElementById('jlpt-progress-vocab-fill').style.width = pctVocab + '%';
+    document.getElementById('jlpt-progress-vocab-text').textContent =
+      `Vocabulaire : ${learnedVocab} / ${totalVocab} (${pctVocab}%)`;
+
+    document.getElementById('jlpt-progress-kanji-fill').style.width = pctKanji + '%';
+    document.getElementById('jlpt-progress-kanji-text').textContent =
+      `Kanji : ${learnedKanji} / ${totalKanji} (${pctKanji}%)`;
+
+  //   *** Mode "kanji" -> 1 barre kanji visible
+  } else if (viewMode === 'kanji') {
+    vocabContainer.style.display = 'none';
+    kanjiContainer.style.display = 'flex';
+
+    const kanjiItems = jlptVocabN5.filter(item => item.kanji);
+    const totalKanji = kanjiItems.length;
+    const learnedKanji = kanjiItems.filter(item => item.learnedKanji).length;
+    const pctKanji = totalKanji ? Math.round((learnedKanji / totalKanji) * 100) : 0;
+
+    document.getElementById('jlpt-progress-kanji-fill').style.width = pctKanji + '%';
+    document.getElementById('jlpt-progress-kanji-text').textContent =
+      `Kanji (vue filtrée) : ${learnedKanji} / ${totalKanji} (${pctKanji}%)`;
+
+  //   *** Mode "no-kanji" -> 1 barre vocab visible
+  } else {
+    vocabContainer.style.display = 'flex';
+    kanjiContainer.style.display = 'none';
+
+    // Items sans kanji
+    const noKanjiItems = jlptVocabN5.filter(item => !item.kanji);
+    const totalNoKanji = noKanjiItems.length;
+    const learnedNoKanji = noKanjiItems.filter(item => item.learned).length;
+    const pctNoKanji = totalNoKanji ? Math.round((learnedNoKanji / totalNoKanji) * 100) : 0;
+
+    document.getElementById('jlpt-progress-vocab-fill').style.width = pctNoKanji + '%';
+    document.getElementById('jlpt-progress-vocab-text').textContent =
+      `Vocab sans kanji : ${learnedNoKanji} / ${totalNoKanji} (${pctNoKanji}%)`;
+  }
+}
+
+// -------------------------------------------
+//   Gestion de la recherche
+// -------------------------------------------
+function onSearchInput(e) {
+  searchFilter = e.target.value.toLowerCase();
+  updateDisplay();
+}
+
+// -------------------------------------------
+//   Gestion des boutons
+// -------------------------------------------
+function setViewMode(mode) {
+  viewMode = mode;
+  updateDisplay();
+}
+
+// NOUVEAU : gérer le filtre de connaissance
+function setKnowledgeFilter(mode) {
+  knowledgeFilter = mode;
+  updateDisplay();
+}
+
+// -------------------------------------------
+//   Initialisation
+// -------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  // 1) Premier rendu
+  updateDisplay();
+
+  // 2) Barre de recherche
+  document.getElementById('jlpt-search-bar').addEventListener('input', onSearchInput);
+
+  // 3) Boutons d’affichage (all / kanji / vocab)
+  document.getElementById('jlpt-all-btn').addEventListener('click', () => setViewMode('all'));
+  document.getElementById('jlpt-kanji-btn').addEventListener('click', () => setViewMode('kanji'));
+  document.getElementById('jlpt-vocab-btn').addEventListener('click', () => setViewMode('no-kanji'));
+
+  // 4) NOUVEAU : Boutons de connaissance (all / known / unknown)
+  document.getElementById('knowledge-all-btn').addEventListener('click', () => setKnowledgeFilter('all'));
+  document.getElementById('knowledge-known-btn').addEventListener('click', () => setKnowledgeFilter('known'));
+  document.getElementById('knowledge-unknown-btn').addEventListener('click', () => setKnowledgeFilter('unknown'));
+});
+</script>

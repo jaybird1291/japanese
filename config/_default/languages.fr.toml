@@ -1,0 +1,24 @@
+disabled = false
+languageCode = "fr"
+languageName = "French"
+weight = 1
+title = "Jaybird1291"
+
+[params]
+  displayName = "FR"
+  isoCode = "fr"
+  rtl = false
+  dateFormat = "2 January 2006"
+  logo = "img/avatar.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  # description = "My awesome website"
+  # copyright = "Copy, _right?_ :thinking_face:"
+
+[params.author]
+  name = "Jaybird1291"
+  image = "img/avatar.png"
+  imageQuality = 100
+  headline = "Étudiant en cybersécurité et apprend le japonais en autodidacte. <br> Objectifs JLPT N5 juin 2025 et N3 fin 2027 !"
+  links = [
+    { shield = "https://jaybird1291.github.io/blog-cyber/" },
+  ]
