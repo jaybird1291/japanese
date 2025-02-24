@@ -2,7 +2,7 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://blowfish.page/docs/getting-started/
 
-theme = "Princess" # UNCOMMENT THIS LINE
+theme = "blowfish" # UNCOMMENT THIS LINE
 baseURL = "https://jaybird1291.github.io/japanese/"
 defaultContentLanguage = "fr"
 
