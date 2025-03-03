@@ -44,7 +44,7 @@ Remplacez la voyelle う (-u) par la voyelle de la colonne correspondante (a, i,
 | **Neutre**             |                | ～a ない     | ...た/だ          | ～a なかった   | ...て/で        |
 | **Poli**               | ～i ます       | ～i ません   | ～i ました        | ～i ませんでした |                 |
 
-|                        | **Impératif aff.** | **Impératif nég.** | **Imp. aut. aff.** | **Imp. aut. nég.** | **Volonté aff.** |
+|                        | **Impératif aff.** | **Impératif nég.** | **Imp. aut. aff.** | **Imp. aut. nég.** | **Volitive aff.** |
 |------------------------|--------------------|--------------------|--------------------|--------------------|------------------|
 | **Neutre**             | ...て              | ～a ないで         | え                 | うな               | ～o う           |
 | **Poli**               | ...てください       | ～a ないでください  | ～i なさい          |                    | ～i ましょう     |
@@ -75,7 +75,7 @@ Suivez le tableau pour les verbes ごだん mais en ne souciant pas des ～x (il
 | **Neutre**             | する           | しない         | した                 | しなかった          | して               |
 | **Poli**               | します         | しません       | しました             | しませんでした       | してください       |
 
-|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volitive aff.** |
 |------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
 | **Neutre**             | しろ / せよ       | するな            | しなさい                 | –                         | しよう          |
 | **Poli**               | –                  | –                  | –                         | –                         | しましょう      |
@@ -94,7 +94,7 @@ Suivez le tableau pour les verbes ごだん mais en ne souciant pas des ～x (il
 | **Neutre**             | くる           | こない         | きた                 | こなかった          | きて               |
 | **Poli**               | きます         | きません       | きました             | きませんでした       | きてください       |
 
-|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volitive aff.** |
 |------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
 | **Neutre**             | こい              | くるな            | くるなさい               | –                         | こよう          |
 | **Poli**               | –                  | –                  | –                         | –                         | きましょう      |
@@ -115,7 +115,7 @@ Suivez le tableau pour les verbes ごだん mais en ne souciant pas des ～x (il
 | **Neutre**             | いく           | いかない       | いった               | いかなかった        | いって             |
 | **Poli**               | いきます       | いきません     | いきました           | いきませんでした     | いってください     |
 
-|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volonté aff.** |
+|                        | **Impératif aff.** | **Impératif nég.** | **Impératif (aut.) aff.** | **Impératif (aut.) nég.** | **Volitive aff.** |
 |------------------------|--------------------|--------------------|---------------------------|---------------------------|------------------|
 | **Neutre**             | いけ              | いくな            | いきなさい                | –                         | いこう          |
 | **Poli**               | –                  | –                  | –                         | –                         | いきましょう    |
@@ -565,7 +565,6 @@ Il existe aussi la forme **contractée informelle**.
 「のんじゃう。」  
 *J’ai **bu** (par accident)*
 
-
 ---
 
 ### Structure ～たり / ～たりする
@@ -685,6 +684,223 @@ Les règles peuvent se diviser en deux groupes principaux : les verbes-ru et les
 | する       | できる         |
 | くる       | こられる       |
 
+
+---
+
+### Forme Volitionnelle + とする
+
+La structure **[Verbe à la forme volitionnelle] + とする** sert à exprimer l'intention ou l'effort d'accomplir une action, c'est-à-dire « essayer de » faire quelque chose ou « être sur le point de » faire quelque chose.
+
+<strong class="alternate">Formation</strong>
+
+1. **Transformer le verbe à la forme volitionnelle (la forme "you" ou "ou-form")**
+
+   - **Verbes en -る (ichidan)**  
+     Remplacer **る** par **よう**.  
+     Par exemple :  
+     - たべる → **たべよう** ("manger" → "essayer de manger")
+
+   - **Verbes en -う (godan)**  
+     Changer la dernière syllabe en son équivalent en **う** (en général, on remplace la voyelle finale par "ou").  
+     Par exemple :  
+     - いく → **いこう** ("aller" → "essayer d'aller")  
+     - はなす → **はなそう** ("parler" → "essayer de parler")
+
+   - **Exceptions**  
+     - する → **しよう** ("faire" → "essayer de faire")  
+     - くる → **こよう** ("venir" → "essayer de venir")
+
+2. **Ajouter とする**  
+   La construction complète devient :  
+   **[Verbe à la forme volitionnelle] + とする**  
+   Cela indique que le sujet s'apprête à faire l'action ou fait l'effort de la réaliser.
+
+<strong class="alternate">Exemples</strong>
+
+| **Verbe (base)** | **Forme Volitionnelle** | **Expression complète**     | **Traduction / Explication**                                   |
+| ---------------- | ----------------------- | --------------------------- | -------------------------------------------------------------- |
+| たべる           | たべよう               | たべようとする              | "Essayer de manger" / "Être sur le point de manger"            |
+| いく             | いこう                 | いこうとする                | "Essayer d'aller" / "Être sur le point d'y aller"               |
+| する             | しよう                 | しようとする                | "Essayer de faire"                                             |
+                       |
+
+---
+
+### Structure conditionnelle 〜と
+
+La particule **と** est utilisée pour exprimer un lien de cause à effet automatique, se traduisant souvent par "si tu ... alors ...". Elle indique qu'une fois la condition remplie, la conséquence se produit inévitablement.
+
+**Formation :**
+1. **Utiliser la forme neutre (ou dictionnaire) du verbe** pour poser la condition.  
+   Par exemple :  
+   - たべる (manger)  
+   - はしる (courir)
+
+2. **Ajouter と après le verbe en forme neutre** pour lier cette condition à sa conséquence.  
+   - たべる → **たべると** (si tu manges, alors ...)  
+   - はしる → **はしると** (si tu cours, alors ...)
+
+| **Expression**      | **Usage / Nuance**                                                 | **Exemple**                         | **Traduction / Explication**                                  |
+|---------------------|--------------------------------------------------------------------|-------------------------------------|---------------------------------------------------------------|
+| Forme neutre + と   | Exprime une conséquence inévitable et automatique                  | 春になると、桜が咲く                   | "Quand le printemps arrive, les cerisiers fleurissent."       |
+|                     | Décrit une réaction immédiate ou une vérité générale                 | このボタンを押すと、電気がつく           | "Si tu appuies sur ce bouton, la lumière s'allume."             |
+
+
+**Remarques :**
+- La structure **〜と** est particulièrement utilisée pour exprimer des faits naturels ou des vérités générales, où la conséquence se produit invariablement.
+- Elle n'est pas adaptée pour des situations délibérées ou incertaines ; dans ces cas, il est préférable d'utiliser d'autres conditionnels comme **〜ば** ou **〜たら**.
+
+---
+
+### Structure conditionnelle 〜なら
+
+La particule **なら** est utilisée pour exprimer une condition basée sur une information ou une situation déjà établie. Elle se traduit souvent par "si" ou "quant à" et permet de formuler des suggestions ou des recommandations à partir d'un contexte donné.
+
+**Formation :**
+1. **Identifier l'information ou le contexte** qui servira de base à la condition.  
+   Par exemple :  
+   - りょうり (cuisine)  
+   - てんき (temps)
+
+2. **Ajouter なら après le nom ou la proposition** pour indiquer la condition.  
+   - りょうりなら → **りょうりなら** (si c'est de la cuisine, alors …)  
+   - てんきなら → **てんきなら** (si c'est au niveau du temps, alors …)
+
+| **Expression**         | **Usage / Nuance**                                                  | **Exemple**                              | **Traduction / Explication**                                                     |
+|------------------------|---------------------------------------------------------------------|------------------------------------------|----------------------------------------------------------------------------------|
+| Nom + なら             | Condition basée sur une information connue ou implicite             | 日本料理なら、この店がおすすめです。          | "Si c'est de la cuisine japonaise, ce restaurant est recommandé."                 |
+| Proposition + なら     | Permet de formuler une suggestion ou une recommandation en fonction d'une situation donnée | 明日雨なら、ピクニックを中止しましょう。      | "Si demain il pleut, annulons le pique-nique."                                   |
+
+---
+
+**Remarques :**
+- La structure **〜なら** permet de focaliser l'attention sur une donnée spécifique déjà mentionnée ou présupposée dans la conversation.
+- Elle est souvent utilisée pour donner des conseils ou formuler des hypothèses, sans impliquer une conséquence automatique comme avec **〜と**.
+- **〜なら** peut s'appliquer aussi bien à des noms qu'à des propositions complètes, offrant ainsi une grande flexibilité dans l'expression conditionnelle.
+
+---
+
+### Structure conditionnelle 〜たら
+
+La structure **〜たら** permet d'exprimer une condition en partant de la forme passée (た-form) d'un verbe, d'un adjectif ou d'un nom, puis en ajoutant **ら**. Elle se traduit souvent par "si ... alors ..." ou "lorsque ...", indiquant qu'une action ou un état se produira une fois que la condition sera réalisée.
+
+**Formation :**
+
+1. **Pour les verbes :**  
+   Prenez la forme passée (た-form) du verbe et ajoutez **ら**.  
+   Par exemple :  
+   - たべる → たべた → **たべたら** ("si tu manges / une fois que tu as mangé")  
+   - はしる → はしった → **はしったら** ("si tu cours / une fois que tu as couru")
+
+2. **Pour les adjectifs en い :**  
+   Utilisez la forme passée de l'adjectif et ajoutez **ら**.  
+   Par exemple :  
+   - あたらしい → あたらしかった → **あたらしかったら** ("si c'était nouveau")
+
+3. **Pour les noms et adjectifs en な :**  
+   Prenez la forme passée (souvent avec だった pour les adjectifs en な) et ajoutez **ら**.  
+   Par exemple :  
+   - しずか → しずかだった → **しずかだったら** ("si c'était calme")
+
+| **Expression**            | **Usage / Nuance**                                                  | **Exemple**        | **Traduction / Explication**                                        |
+|---------------------------|---------------------------------------------------------------------|--------------------|----------------------------------------------------------------------|
+| Verbe (た-form) + ら        | Condition hypothétique ou événement déclencheur                     | たべたら           | "Si tu manges / une fois que tu as mangé"                            |
+| Adjectif い (passé) + ら     | Condition exprimée avec un adjectif en い en forme passée              | あたらしかったら     | "Si c'était nouveau"                                                |
+| Nom/Adjectif な (passé) + ら  | Condition appliquée aux noms ou adjectifs な en forme passée           | しずかだったら       | "Si c'était calme"                                                  |
+
+
+**Remarques :**
+- La structure **〜たら** est très flexible : elle peut exprimer une simple condition ou indiquer qu'une action se produit dès que la condition est remplie.
+- Selon le contexte, **〜たら** peut également se traduire par "quand" ou "lorsque", en insistant sur l'enchaînement des événements.
+- Cette forme est souvent utilisée pour donner des instructions ou décrire des situations conditionnelles de manière naturelle.
+
+---
+
+### Exprimer interdiction ou obligation
+
+**Interdiction** :
+Pour formuler une interdiction en japonais, on utilise la forme 〜て du verbe suivie de la particule は et de だめ ou いけない ou ならない. Voici la formation :
+
+**Exemple** : 
+
+| **Expression**       | **Exemple**    | **Traduction**                          |
+|----------------------|----------------|-----------------------------------------|
+| 〜てはだめ           | 食べてはだめ    | "Ne mange pas" / "Tu ne dois pas manger"  |
+| 〜てはいけない       | 行ってはいけない | "Ne va pas" / "Tu ne dois pas aller"      |
+| 〜てはならない       | 見てはならない   | "Ne regarde pas" / "Tu ne dois pas regarder" |
+
+**Obligation** : 
+La double négation = devoir. Il faut voir ça comme l'idée d'une obligation forte de **ne pas** réaliser l'action
+
+| **Expression**           | **Exemple**                      | **Traduction / Explication**                                                         |
+|--------------------------|----------------------------------|--------------------------------------------------------------------------------------|
+| 〜なければならない       | 勉強しなければならない            | "Je dois étudier"                 |
+| 〜なくてはいけない       | 勉強しなくてはいけない            | "Je dois étudier"                  |
+| 〜なければならない       | 宿題をしなければならない          | "Je dois faire mes devoirs"         |
+
+---
+
+### Structure : 〜て(も)いい
+
+La structure **〜て(も)いい** permet de demander ou de donner la permission de réaliser une action. Lorsqu'elle est utilisée de manière interrogative, elle sert à demander "Puis-je ... ?" et, lorsqu'elle est affirmative, elle signifie "Tu peux ..." ou "Il est permis de ...".
+
+**Formation :**
+
+1. **Conjuguer le verbe à la forme 〜て**  
+   Exemple : 入る → **入って**
+
+2. **Ajouter もいい** (ou la forme courte **〜ていい**)  
+   - **Interrogative :** 入ってもいいですか？ ("Puis-je entrer ?")
+   - **Affirmative :** 入ってもいいです. ("Tu peux entrer.")
+
+| **Expression**        | **Exemple**          | **Traduction / Explication**                                                |
+|-----------------------|----------------------|-----------------------------------------------------------------------------|
+| 〜てもいいですか      | 入ってもいいですか？    | "Puis-je entrer ?" – Demande de permission polie.                           |
+| 〜てもいいです        | 入ってもいいです      | "Tu peux entrer." – Permission donnée de manière formelle.                  |
+| (Forme courte) 〜ていい  | 入っていい？         | "Puis-je entrer ?" – Demande de permission dans un registre familier/informel.|
+
+- La forme courte **〜ていい** est employée dans des contextes informels, tandis que **〜てもいいです/ですか** est plus polie.
+
+---
+
+### La forme désirative 〜たい 
+
+La forme **〜たい** est utilisée pour exprimer ce que **l'on veut faire soi-même**. Elle se forme à partir de la racine du verbe (la même que pour la forme -ます) et se conjugue comme un adjectif en **-い**.
+
+**Formation :**
+- Comme la forme **-ます** mais avec **〜たい**.
+
+**Exemples :**
+- たべる → **たべたい**  
+  *"Je veux manger"*
+- みる → **みたい**  
+  *"Je veux regarder"*
+- いく → **いきたい**  
+  *"Je veux aller"*
+
+**Remarque importante :**
+- La forme **〜たい** sert exclusivement à exprimer **son propre désir**.  
+- Pour poser une question sur ce que souhaite faire une autre personne, on peut utiliser une question comme :  
+  「なにがしたいですか？」  
+  (*"Qu'est-ce que tu veux faire ?"*)
+
+---
+
+### La structure 〜てほしい 
+
+Pour indiquer que **l'on souhaite que quelqu'un d'autre réalise une action**, on utilise la structure **V-て + ほしい**. Celle-ci exprime un désir envers l'action de l'autre personne.
+
+**Formation :**
+- Conjuguez le verbe à la **forme 〜て**.
+- Ajoutez **ほしい**.
+
+**Exemples :**
+- 見る → **見てほしい**  
+  *"Je veux que tu regardes"*
+- 手伝う → **手伝ってほしい**  
+  *"Je veux que tu m'aides"*
+- 来る → **来てほしい**  
+  *"Je veux qu'il/elle vienne"*
 
 ---
 
@@ -840,6 +1056,39 @@ Avec +**でも** (indique une possibilité ou une généralité)
 | **Identité/Description** (Nom ou Adjectif en **な**) | **です (desu)**      | Poli                | Relie un nom ou un adjectif au sujet pour identifier ou décrire | これは本です (Kore wa hon desu) - "Ceci est un livre"                              |
 | **Description avec Adjectif en い**                  | Pas de **だ**       | Neutre / familier   | Pas de copule nécessaire, l'adjectif seul est complet           | この山は高い (Kono yama wa takai) - "Cette montagne est haute"                     |
 | **Description avec Adjectif en い**                  | **です (desu)**      | Poli                | Ajoute de la politesse à un adjectif en **い** (optionnel)       | この山は高いです (Kono yama wa takai desu) - "Cette montagne est haute"              |
+
+### Nominalisation avec の
+
+En japonais, la particule **の** peut servir à nominaliser une proposition ou une phrase, c’est-à-dire à la transformer en **nom** ou en **concept**. Ainsi, on peut faire référence à une idée, une action ou une situation comme s’il s’agissait d’un objet ou d’un sujet à part entière.
+
+- **Construction de base :**  
+  \[Phrase en forme neutre\] + **の**  
+  Exemple :  
+  - わたしが言いたい → わたしが言いたい**の**  
+    *"Ce que je veux dire"*  
+
+**Exemples** : 
+
+| **Phrase**                        | **Traduction / Explication**                                                                                                     |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| わたしが いいたい **の** は これ です。      | "**Ce que je veux dire, c’est ceci.**" <br> La partie 「わたしが いいたい」 est nominalisée par の, et devient le sujet de は.        |
+| おれが いいたい **の** は あれ だ。         | "**Ce que je (moi) veux dire, c’est ça.**" <br> Registre plus familier avec おれ (au lieu de わたし).                          |
+| あなたが たべたい **の** は どれ ですか。    | "**La chose que tu veux manger, c’est laquelle ?**" <br> Ici, la proposition 「あなたが たべたい」 est nominalisée.              |
+| ぼくが 聞きたい **の** は、そのりゆう だ。     | "**Ce que je veux savoir, c’est la raison (pourquoi).**" <br> Nominalisation de 「ぼくが 聞きたい」 (ce que je veux demander). |
+| きみが 作った **の** は おいしい ね。         | "**Ce que tu as cuisiné est délicieux, n’est-ce pas ?**" <br> Nominalisation de 「きみが 作った」 (ce que tu as fait).         |
+
+En plus de の, le mot **こと** peut aussi nominaliser une phrase. Les deux sont parfois interchangeables, mais :
+
+- **の** : plus informel ou plus concret, souvent utilisé à l’oral.  
+  - Met l’accent sur la situation réelle ou tangible.  
+- **こと** : plus formel ou plus abstrait.  
+  - Met l’accent sur le concept, l’idée, la notion.  
+
+**Exemple :**
+- わたしが 言いたい **の** は… (nuance plus directe, conversationnelle)  
+- わたしが 言いたい **こと** は… (nuance un peu plus formelle ou abstraite)
+
+
 
 ### Articulation des phrases
 
