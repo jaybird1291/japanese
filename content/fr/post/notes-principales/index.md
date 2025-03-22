@@ -1032,6 +1032,58 @@ Ce n'est pas réellement une "forme transitive" mais bien la forme causative don
 
 ---
 
+📚 **Fiche de révision** – Forme 〜て + verbe auxiliaire
+
+🔄 〜て いる（action en cours ou état résultant）
+> Exprime une action en cours ou un état présent.
+
+- **たべて いる** → Je suis en train de manger.  
+- **よんで いる** → Je suis en train de lire.  
+- **ドア が あいて いる** → La porte est (restée) ouverte.
+
+✅ 〜て ある（état résultant d’une action terminée）
+> Indique qu’une action a été faite et que son résultat est visible.
+
+- **メモ が かいて ある** → Une note est écrite (et visible).  
+- **にもつ が おいて ある** → Les bagages sont posés (quelqu’un les a mis là).
+
+🔜 〜て おく（préparation pour l’avenir）
+> Faire quelque chose à l’avance, en prévision.
+
+- **はやく たべて おく** → Je mange rapidement (pour ne pas avoir faim plus tard).  
+- **しりょう を コピーして おく** → Je fais des copies des documents à l’avance.
+
+🧪 〜て みる（essayer quelque chose）
+> Tenter quelque chose pour voir ce que ça donne.
+
+- **たべて みる** → J’essaie de goûter.  
+- **やって みる** → J’essaie (de le faire).  
+- **きて みて！** → Viens essayer ça !
+
+↗️ 〜て いく（action qui s’éloigne dans le temps ou l’espace）
+> Action qui part du présent vers le futur, ou vers un lieu.
+
+- **たべて いく** → Je vais manger (et ensuite je pars).  
+- **にほんご を べんきょうして いく** → Je vais continuer à apprendre le japonais.
+
+↘️ 〜て くる（action qui se rapproche ou est venue vers ici）
+> Action qui vient vers le présent, le locuteur, ou un lieu.
+
+- **たべて くる** → Je viens de manger. / Je viens manger.  
+- **かのじょ が はしって くる** → Elle court vers moi.
+
+😢 〜て しまう（action involontaire ou regrettable）
+> Action faite sans le vouloir, ou avec un résultat négatif.
+
+- **たべて しまった** → J’ai (malheureusement) tout mangé.  
+- **さいふ を わすれて しまった** → J’ai oublié mon portefeuille (zut !).  
+- **こわして しまった** → J’ai cassé (sans faire exprès).
+
+📝 Astuce : à l’oral, 「〜て しまう」 devient souvent 「〜ちゃう」 et 「〜で しまう」 devient 「〜じゃう」  
+Ex : **たべちゃった**, **のんじゃった**
+
+---
+
 📚 **Fiche de révision** 
 
 ✅ Expressions polies
