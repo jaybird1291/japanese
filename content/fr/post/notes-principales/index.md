@@ -886,6 +886,21 @@ La forme **〜たい** est utilisée pour exprimer ce que **l'on veut faire soi-
 
 ---
 
+### Forme désirative + conditionnelle
+
+**Exprimer un souhait avec une condition** :  
+La forme **〜たい** exprime le désir de faire quelque chose. Pour former la condition, on remplace la terminaison **い** par **ければ**.  
+Ainsi, **〜たい** devient **〜たければ**, ce qui permet d'exprimer "si (je) veux …".
+
+| **ひょうげん**       | **れい**            | **ほんやく / せつめい**                                             |
+|---------------------|---------------------|-------------------------------------------------------------------|
+| 〜たい              | のみたい           | "je veux boire"                                                   |
+| 〜たければ         | のみたければ       | "si (je) veux boire" / condition liée au désir                    |
+| 〜たい              | したい             | "je veux faire"                                                   |
+| 〜たければ         | したたければ       | "si (je) veux faire" / condition liée au souhait                   |
+
+---
+
 ### La structure 〜てほしい 
 
 Pour indiquer que **l'on souhaite que quelqu'un d'autre réalise une action**, on utilise la structure **V-て + ほしい**. Celle-ci exprime un désir envers l'action de l'autre personne.
@@ -901,6 +916,141 @@ Pour indiquer que **l'on souhaite que quelqu'un d'autre réalise une action**, o
   *"Je veux que tu m'aides"*
 - 来る → **来てほしい**  
   *"Je veux qu'il/elle vienne"*
+
+---
+
+### Forme "と おもう"
+
+**Utilisation** :  
+Cette structure permet d'exprimer ce que pense quelqu'un d'autre. On ajoute la particule **と** à la fin de la phrase ou de la proposition exprimant l'opinion, suivie de **おもう** pour indiquer "je pense que…" ou "il/elle pense que…".
+
+| **Expression**    | **Exemple**                             | **Traduction / Explication**                          |
+|-------------------|-----------------------------------------|-------------------------------------------------------|
+| 〜と おもう      | かれは すしが おいしい と おもう          | "il pense que les sushis sont bons"                   |
+| 〜と おもう      | かのじょは えいがが おもしろい と おもう    | "elle pense que le film est intéressant"             |
+
+*Remarque* : Pour une forme plus polie ou exprimant une opinion en continu, on peut utiliser **と おもっています**.
+
+---
+
+### Forme "て もらう"
+
+**Utilisation** :  
+Cette structure s'emploie pour indiquer qu'une action a été réalisée en votre faveur. On forme cette construction en conjuguant le verbe à la forme て suivi de **もらう**.  
+Elle sert aussi bien à rapporter qu'une aide ou un service a été reçu qu'à formuler une demande de faveur avec la forme interrogative.
+
+| **Expression**         | **Exemple**                                      | **Traduction / Explication**                                        |
+|------------------------|--------------------------------------------------|---------------------------------------------------------------------|
+| 〜て もらう           | わたしは かあさんに たすけて もらった             | "maman m'a aidé" / "j'ai reçu de l'aide de maman"                   |
+| 〜て もらう           | わたしは ともだちに ほんを かして もらった         | "un ami m'a prêté un livre" / "j'ai reçu ce service d'un ami"         |
+| 〜て もらえますか？    | あなたに たすけて もらえますか？                   | "pourrais-tu m'aider ?" / demande de faveur                           |
+
+---
+
+### Forme "て + ください"
+
+**Demande polie** :  
+La structure **〜て + ください** s'utilise pour demander poliment à quelqu'un de faire une action.  
+**Formation** :  
+1. Conjuguer le verbe à la forme て.  
+2. Ajouter **ください**.
+
+| **ひょうげん**       | **れい**            | **ほんやく / せつめい**                                     |
+|---------------------|---------------------|-----------------------------------------------------------|
+| 〜てください        | たべてください      | "s'il te plait, mange" / demande polie de manger          |
+| 〜てください        | はなしてください    | "s'il te plait, parle" / demande polie de parler          |
+
+---
+
+### Forme なさい
+
+**Ordre ou conseil ferme** :  
+La forme **〜なさい** sert à donner un ordre ou un conseil de manière ferme, souvent employé dans un contexte familier ou pour s'adresser à des personnes plus jeunes.  
+**Formation** :  
+1. Partir de la base (radical) du verbe.  
+2. Ajouter **なさい**.
+
+| **ひょうげん**       | **れい**            | **ほんやく / せつめい**                                     |
+|---------------------|---------------------|-----------------------------------------------------------|
+| 〜なさい           | たべなさい         | "mange" / ordre de manger                                 |
+| 〜なさい           | はなさなさい       | "parle" / ordre de parler                                 |
+
+---
+
+### Structure "～ことにする"
+
+**Utilisation** :  
+Cette structure permet d'exprimer une décision personnelle ou l'établissement d'une règle. On l'utilise en ajoutant **ことにする** à la forme neutre du verbe.
+
+| **Expression**      | **Exemple**                  | **Traduction / Explication**                                     |
+|---------------------|------------------------------|------------------------------------------------------------------|
+| ～ことにする        | えいがを みる ことにする      | "je décide de regarder un film" / fixer une décision              |
+| ～ことにする        | たべる ことにする            | "je décide de manger" / fixer une décision                        |
+
+*Remarque* : Utilisez cette construction pour signifier une décision ferme prise après réflexion.
+
+---
+
+### Structure "Impératif négatif sec" (via "な")
+
+**Utilisation** :  
+Cette forme sert à donner un ordre négatif de façon abrupte et informelle, pour dire "ne fais pas".  
+On utilise la forme neutre du verbe suivie directement de **な**.
+
+| **Expression** | **Exemple**    | **Traduction / Explication**                      |
+|----------------|----------------|---------------------------------------------------|
+| ～な           | たべるな      | "ne mange pas" / ordre négatif sec                |
+| ～な           | はしるな      | "ne cours pas" / ordre négatif sec                |
+
+*Remarque* : Cette forme est très familière et peut paraître rude ; à employer avec précaution.
+
+---
+
+### Structure Causative (～させる)
+
+**Utilisation** :  
+La forme causative (～させる) sert non seulement à indiquer qu'une personne fait faire quelque chose à quelqu'un, mais aussi à exprimer qu'elle "laisse" ou "permet" à quelqu'un de faire une action.  
+Le sens dépend du contexte et de l'intonation.
+
+**Formation** :  
+On forme le causatif en suivant les règles habituelles :  
+- Pour un verbe ichidan (るどうし) : on enlève **る** et on ajoute **させる**.  
+- Pour un verbe godan (うどうし) : on transforme la terminaison en son équivalent en **あ** puis on ajoute **せる**.  
+- Pour する : il devient **させる**.
+
+| **Expression** | **Exemple**                                       | **Traduction / Explication**                                      |
+|----------------|---------------------------------------------------|-------------------------------------------------------------------|
+| ～させる      | わたしは こどもに たべさせる                        | "je fais manger à l'enfant" / j'autorise l'enfant à manger         |
+| ～させる      | せんせいは がくせいに はなさせる                    | "le professeur fait parler les élèves" / il les laisse parler       |
+| ～させる      | かれは ともだちに しゅくだいを させる                | "il fait faire les devoirs par son ami"                           |
+| ～させる      | かあさんは わたしに あそばせる                | "maman me laisse jouer" / "maman permet que je joue"                       |
+| ～させる      | せんせいは がくせいに しゅくだいを させる      | "le professeur fait faire le devoir" ou "le professeur permet que les élèves fassent le devoir" |
+
+
+*Remarque* : Le même construction est employé pour exprimer soit l'action de faire faire quelque chose (imposer une action), soit celle de laisser faire (donner la permission).  
+Ce n'est pas réellement une "forme transitive" mais bien la forme causative dont le sens est précisé par le contexte.
+
+---
+
+📚 **Fiche de révision** 
+
+✅ Expressions polies
+
+- **みず を ください** — Donne-moi de l’eau, s’il te plaît.  
+- **みて ください** — Regarde, s’il te plaît.  
+- **みないで ください** — Ne regarde pas, s’il te plaît.  
+
+💬 Expressions casual (familier)
+
+- **みて** — Regarde ! (informel, comme "hey, regarde !")  
+- **みないで** — Ne regarde pas ! (informel, comme "hey, regarde pas !")  
+
+🤔 Formes avec "donner le bénéfice de..."
+
+- **みて くれますか / みて くれませんか**  
+  → Est-ce que tu peux me faire la faveur de regarder ?  
+- **みて もらえますか / みて もらえませんか**  
+  → Est-ce que je peux recevoir la faveur que tu regardes ? (plus indirect)  
 
 ---
 
