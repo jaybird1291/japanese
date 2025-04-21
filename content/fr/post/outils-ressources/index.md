@@ -66,6 +66,7 @@ Mes extensions :
 - Kanji Grid (https://minosvasilias.github.io/kanjigrid/)
 
 ## **Autres**
+- ChatGPT ou autre IA pour poser vos questions etc.
 - https://steven-kraft.com/projects/japanese/# (collection d'outils pour travailler ses conjugaisons (verbes & adjectifs), nombres, kanji, vocabulaire...) 
 - https://japanesetest4you.com/ (s'auto tester pour le JLPT)
 - https://migaku.com/
@@ -73,3 +74,5 @@ Mes extensions :
 - https://github.com/yomidevs/yomitan
 - https://tadoku.org/japanese/book-search?level=l-start
 - https://www.nagomivisit.com/
+- https://kitsunekko.net/ (site pour download des sous-titres en japonais pour vos animes etc.)
+- https://killergerbah.github.io/asbplayer/ (site pour pouvoir regarder des mp4 etc. avec doubles sous-titres (ja/fr par exemple) + sous-titres navigable, parfait avec yomichan etc.)
