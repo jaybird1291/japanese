@@ -9,12 +9,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/japanese/fr/post/jlpt/</loc>
-    <lastmod>2025-01-01T08:00:05+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>http://localhost:1313/japanese/fr/post/notes-principales/</loc>
     <lastmod>2024-12-29T08:00:05+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -22,13 +16,13 @@
   </url>
   <url>
     <loc>http://localhost:1313/japanese/fr/</loc>
-    <lastmod>2025-01-01T08:00:05+00:00</lastmod>
+    <lastmod>2024-12-30T08:00:05+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost:1313/japanese/</loc>
-    <lastmod>2025-01-01T08:00:05+00:00</lastmod>
+    <lastmod>2024-12-30T08:00:05+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
