@@ -14,6 +14,7 @@ tags:
 Vous retrouverez ici la liste d’outils et de ressources qui m’accompagnent. Comme vous le verrez, la majorité de ces ressources sont en anglais. Effectivement, ce n’est peut-être pas le plus confortable, mais on n’y peut rien. À mes yeux, vous ne pouvez pas vous limiter à des ressources en français. Si vous n’êtes pas à l’aise avec l’anglais, vous devriez peut-être apprendre cette langue avant de vous lancer dans le japonais.
 
 ## **Guides**
+- Guide d'apprentissage du japonais (et très gros focus sur l'immersion, guide en français super quali, c'est celui que je vous conseille absolument) : https://donkuri.github.io/learn-japanese/fr/guide/
 - TheMoeWay - 30 Day Japanese (https://learnjapanese.moe/guide/)
 - Tofugu - Learn Japanese: A Ridiculously Detailed Guide (https://www.tofugu.com/learn-japanese/)
 - Guide japonais de Tae Kim pour la grammaire japonaise (https://www.guidetojapanese.org/french/index.html)
