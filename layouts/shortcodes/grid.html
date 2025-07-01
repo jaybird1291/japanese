@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heatmap avec navigation temporelle</title>
   <style>
+    /* Global */
+    html {
+      font-size: 13pt; /* Increase the default font size */
+    }
     body {
       font-family: Arial, sans-serif;
       color: white;
@@ -16,6 +20,7 @@
       margin: 0;
     }
 
+    /* Controls */
     .controls {
       display: flex;
       justify-content: center;
@@ -36,12 +41,14 @@
       background-color: #65576a;
     }
 
+    /* Date range text */
     #date-range {
       margin-top: 10px;
       font-size: 14px;
       text-align: center;
     }
 
+    /* Grid */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(15px, 1fr));
@@ -53,6 +60,7 @@
       touch-action: pan-x; /* sur mobile, évite les conflits de scroll */
     }
 
+    /* Stats */
     .stats {
       margin-top: 20px;
       text-align: center;
@@ -62,6 +70,7 @@
       justify-content: center;
     }
 
+    /* Day cells */
     .day {
       width: 15px;
       height: 15px;
@@ -70,13 +79,13 @@
       position: relative;
       transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
     }
-
     .day.hovered {
       transform: scale(1.25);
       z-index: 10;
       box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
     }
 
+    /* Tooltip */
     .tooltip {
       position: fixed;
       background-color: #65576a;
@@ -95,7 +104,7 @@
       display: block;
     }
 
-    /* Couleurs (thème magenta) */
+    /* Heatmap colors (magenta theme) */
     .q1  { background-color: #49006a; }
     .q2  { background-color: #610070; }
     .q3  { background-color: #7a0177; }
@@ -107,6 +116,21 @@
     .q9  { background-color: #fcc5c0; }
     .q10 { background-color: #fde0dd; }
 
+    /* Highlight du jour avec le maximum de cartes */
+    .day.max-day {
+      border: 2px solid gold;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    }
+    /* .day.max-day::after {
+      content: "★";
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      font-size: 10px;
+      color: gold;
+    } */
+
+    /* Responsive */
     @media (max-width: 768px) {
       .grid-container {
         grid-gap: 7px;
@@ -121,21 +145,33 @@
       }
     }
 
-    /*
-    @media (max-width: 480px) {
-      .grid-container {
-        grid-gap: 2px;
-      }
-      .day {
-        width: 12px;
-        height: 12px;
-      }
-      .stats {
-        font-size: 12px;
-        gap: 5px;
-      }
+    /* Additional layout classes */
+    .max-w-prose {
+      max-width: 90ch;
     }
-    */ 
+    .image-container {
+      display: flex;
+      column-gap: 15px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .diploma-container {
+      display: flex;
+      column-gap: 15px;
+      flex-wrap: wrap;
+    }
+    .image2-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Difficulty captions */
+    figure.hard figcaption { color: rgb(255, 25, 25); }
+    figure.medium figcaption { color: orange; }
+    figure.easy figcaption { color: #70ce3a; }
+    figure.very-easy figcaption { color: #ff00f9; }
+    figure.insane figcaption { color: #e3e3e3; }
   </style>
 </head>
 <body>
@@ -153,10 +189,11 @@
   <div class="grid-container" id="grid"></div>
 
   <!-- Statistiques globales (basées sur tout le dataset, pas sur la plage affichée) -->
-  <div class="stats">
-    <span id="daily-average">Moyenne quotidienne : xx cards</span>
-    <span id="longest-streak">Plus longue série : xx days</span>
-    <span id="current-streak">Série actuelle : xx days</span>
+  <div class="stats max-w-prose">
+    <span id="daily-average">Moyenne quotidienne : xx cartes</span>
+    <span id="longest-streak">Plus longue série : xx jours</span>
+    <span id="current-streak">Série actuelle : xx jours</span>
+    <span id="max-revisions">Max. révisions en 1 jour : xx jours</span>
   </div>
 
   <script>
@@ -458,254 +495,62 @@
       { date: "28/06/2025", cards: 198 },
       { date: "29/06/2025", cards: 226 },
       { date: "30/06/2025", cards: 287 },
-      { date: "01/06/2025", cards: 347 },
+      { date: "01/07/2025", cards: 347 },
     ];
 
-    // ----------------------------------------
-    // 1) Calculer les stats sur TOUT le dataset
-    // ----------------------------------------
+    // 1) Calcul du record (max)
+    const maxEntry = data.reduce((best, cur) => cur.cards > best.cards ? cur : best, data[0]);
+    const maxDateString = maxEntry.date;
+
+    // 2) Calculer les stats sur TOUT le dataset
     function computeStats(fullData) {
       const sortedData = [...fullData].sort((a, b) => {
-        const [dayA, monthA, yearA] = a.date.split("/").map(Number);
-        const [dayB, monthB, yearB] = b.date.split("/").map(Number);
-        return new Date(yearA, monthA - 1, dayA) - new Date(yearB, monthB - 1, dayB);
+        const [dA, mA, yA] = a.date.split("/").map(Number);
+        const [dB, mB, yB] = b.date.split("/").map(Number);
+        return new Date(yA, mA-1, dA) - new Date(yB, mB-1, dB);
       });
-
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      let totalCards = 0;
-      let daysWithCards = 0;
-      let longestStreak = 0;
-      let currentStreak = 0;
-      let tempStreak = 0;
-
-      for (const dayData of sortedData) {
-        const [day, month, year] = dayData.date.split("/").map(Number);
-        const currentDate = new Date(year, month - 1, day);
-
-        if (currentDate.getTime() === today.getTime()) continue;
-
-        if (dayData.cards > 0) {
-          tempStreak++;
-          if (tempStreak > longestStreak) {
-            longestStreak = tempStreak;
-          }
-          totalCards += dayData.cards;
-          daysWithCards++;
-        } else {
-          tempStreak = 0;
-        }
+      const today = new Date(); today.setHours(0,0,0,0);
+      let total=0, days=0, longest=0, temp=0;
+      for (const {date, cards} of sortedData) {
+        const [d,m,y]=date.split("/").map(Number);
+        const dt=new Date(y,m-1,d);
+        if (dt.getTime()===today.getTime()) continue;
+        if (cards>0) { temp++; total+=cards; days++; longest=Math.max(longest,temp); }
+        else temp=0;
       }
-
-      currentStreak = tempStreak;
-      const dailyAverage = daysWithCards > 0 
-        ? Math.round(totalCards / daysWithCards) 
-        : 0;
-
-      return {
-        dailyAverage,
-        longestStreak,
-        currentStreak,
-      };
+      return { dailyAverage: days?Math.round(total/days):0, longestStreak:longest, currentStreak:temp };
     }
-
-    // Calcule les stats une seule fois
     const stats = computeStats(data);
+    document.getElementById("daily-average").innerText = `Moyenne quotidienne : ${stats.dailyAverage} cartes`;
+    document.getElementById("longest-streak").innerText = `Plus longue série : ${stats.longestStreak} jours`;
+    document.getElementById("current-streak").innerText = `Série actuelle : ${stats.currentStreak} jours`;
+    document.getElementById("max-revisions").innerText =`Max. révisions en 1 jour : ${maxEntry.cards} cartes`;
 
-    // ---------------------------
-    // 2) Initialiser les stats
-    // ---------------------------
-    document.getElementById("daily-average").innerText =
-      `Moyenne quotidienne : ${stats.dailyAverage} cartes`;
-    document.getElementById("longest-streak").innerText =
-      `Plus longue série : ${stats.longestStreak} jours`;
-    document.getElementById("current-streak").innerText =
-      `Série actuelle : ${stats.currentStreak} jours`;
 
-    // ------------------------------------------------
-    // 3) Gérer l'affichage dynamique de la heatmap
-    // ------------------------------------------------
-
-    const grid = document.getElementById("grid");
-    let offsetDays = 0; // Permet de se déplacer dans le temps (futur / passé)
-    let endDay = new Date(); // Date de fin (initialement aujourd'hui)
-
-    // Retourne la classe correspondant au nombre de cartes
-    function getClassByCards(cards) {
-      if (cards >= 168) return "q10";
-      if (cards >= 147) return "q9";
-      if (cards >= 126) return "q8";
-      if (cards >= 105) return "q7";
-      if (cards >= 84)  return "q6";
-      if (cards >= 63)  return "q5";
-      if (cards >= 42)  return "q4";
-      if (cards >= 21)  return "q3";
-      if (cards >= 1)   return "q2";
-      return "q1"; // 0
-    }
-
-    // Détermine le nombre de jours à afficher en fonction de la taille de l’écran
-    function getTotalDays() {
-      return window.matchMedia("(max-width: 768px)").matches ? 140 : 367;
-    }
-
-    function renderGrid() {
-      grid.innerHTML = "";
-
-      // Mettre à jour endDay en fonction de offsetDays
-      endDay = new Date();
-      endDay.setDate(endDay.getDate() + offsetDays);
-
-      const totalDays = getTotalDays();
-
-      // Tooltip unique
-      const tooltip = document.createElement("div");
-      tooltip.className = "tooltip";
-      document.body.appendChild(tooltip);
-
-      const isTouchDevice = 'ontouchstart' in window;
-
-      const showTooltip = (e, message) => {
-        const x = e.touches?.[0]?.clientX ?? e.clientX;
-        const y = e.touches?.[0]?.clientY ?? e.clientY;
-        tooltip.innerHTML = message;
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
-
-        const tooltipWidth = tooltip.offsetWidth;
-        const adjustedX = Math.min(x + 10, window.innerWidth - tooltipWidth - 10);
-        const adjustedY = Math.max(y - 40, 10);
-
-        tooltip.style.left = `${adjustedX}px`;
-        tooltip.style.top = `${adjustedY}px`;
-      };
-
-      const hideTooltip = () => {
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-      };
-
-      const removeAllHovered = () => {
-        const allDays = document.querySelectorAll(".day.hovered");
-        allDays.forEach(d => d.classList.remove("hovered"));
-      };
-
-      // Construction de la grille du plus ancien jour au plus récent
-      for (let i = totalDays - 1; i >= 0; i--) {
-        const d = new Date(endDay);
-        d.setDate(endDay.getDate() - i);
-
-        const day = document.createElement("div");
-        day.className = "day";
-
-        // Format de date en EN-GB => "dd/mm/yyyy"
-        const dayString = d.toLocaleDateString("en-GB");
-        const todayData = data.find(entry => entry.date === dayString) || null;
-
-        if (todayData && todayData.cards > 0) {
-          const cards = todayData.cards;
-          day.classList.add(getClassByCards(cards));
-
-          if (isTouchDevice) {
-            day.addEventListener("touchstart", (e) => {
-              e.stopPropagation();
-              removeAllHovered();
-              day.classList.add("hovered");
-              showTooltip(e, `${cards} cartes révisées le ${dayString}`);
-            });
-          } else {
-            day.addEventListener("mouseover", (e) => {
-              removeAllHovered();
-              day.classList.add("hovered");
-              showTooltip(e, `${cards} cartes révisées le ${dayString}`);
-            });
-            day.addEventListener("mouseout", () => {
-              day.classList.remove("hovered");
-              hideTooltip();
-            });
-          }
-
-        } else {
-          // Jour sans cartes
-          day.style.backgroundColor = "#433845";
-
-          if (isTouchDevice) {
-            day.addEventListener("touchstart", (e) => {
-              e.stopPropagation();
-              removeAllHovered();
-              day.classList.add("hovered");
-              showTooltip(e, `Pas de révision le ${dayString}`);
-            });
-          } else {
-            day.addEventListener("mouseover", (e) => {
-              removeAllHovered();
-              day.classList.add("hovered");
-              showTooltip(e, `Pas de révision le ${dayString}`);
-            });
-            day.addEventListener("mouseout", () => {
-              day.classList.remove("hovered");
-              hideTooltip();
-            });
-          }
+    // 3) Affichage dynamique de la heatmap
+    const grid=document.getElementById("grid"); let offset=0;
+    function getClass(cards){ if(cards>=168)return"q10"; if(cards>=147)return"q9"; if(cards>=126)return"q8"; if(cards>=105)return"q7"; if(cards>=84)return"q6"; if(cards>=63)return"q5"; if(cards>=42)return"q4"; if(cards>=21)return"q3"; if(cards>=1)return"q2"; return"q1"; }
+    function totalDays(){ return window.matchMedia("(max-width:768px)").matches?140:367; }
+    function render(){ grid.innerHTML=""; const end=new Date(); end.setDate(end.getDate()+offset);
+      const tooltip=document.createElement("div"); tooltip.className="tooltip"; document.body.appendChild(tooltip);
+      const isTouch='ontouchstart'in window;
+      const show=(e,msg)=>{ const x=e.touches?.[0]?.clientX||e.clientX; const y=e.touches?.[0]?.clientY||e.clientY; tooltip.innerHTML=msg; tooltip.style.visibility="visible"; tooltip.style.opacity="1"; const w=tooltip.offsetWidth; tooltip.style.left=`${Math.min(x+10,window.innerWidth-w-10)}px`; tooltip.style.top=`${Math.max(y-40,10)}px`; };
+      const hide=()=>{ tooltip.style.visibility="hidden"; tooltip.style.opacity="0"; };
+      const clearHover=()=>document.querySelectorAll(".day.hovered").forEach(d=>d.classList.remove("hovered"));
+      for(let i=totalDays()-1;i>=0;i--){ const d=new Date(end); d.setDate(end.getDate()-i); const day=document.createElement("div"); day.className="day"; const ds=d.toLocaleDateString("en-GB"); if(ds===maxDateString) day.classList.add("max-day"); const e=data.find(e=>e.date===ds);
+        if(e&&e.cards>0){ day.classList.add(getClass(e.cards)); if(isTouch){ day.addEventListener("touchstart",ev=>{ev.stopPropagation();clearHover();day.classList.add("hovered");show(ev,`${e.cards} cartes révisées le ${ds}`);}); } else { day.addEventListener("mouseover",ev=>{clearHover();day.classList.add("hovered");show(ev,`${e.cards} cartes révisées le ${ds}`);}); day.addEventListener("mouseout",()=>{day.classList.remove("hovered");hide();}); }} else {
+          if(isTouch){ day.addEventListener("touchstart",ev=>{ev.stopPropagation();clearHover();day.classList.add("hovered");show(ev,`Pas de révision le ${ds}`);}); } else { day.addEventListener("mouseover",ev=>{clearHover();day.classList.add("hovered");show(ev,`Pas de révision le ${ds}`);}); day.addEventListener("mouseout",()=>{day.classList.remove("hovered");hide();}); }
         }
-
         grid.appendChild(day);
       }
-
-      // Mise à jour du texte "Du xx/xx/xxxx au xx/xx/xxxx"
-      const earliestDate = new Date(endDay);
-      earliestDate.setDate(earliestDate.getDate() - (totalDays - 1));
-      // On formate en français
-      const dateMin = earliestDate.toLocaleDateString("fr-FR");
-      const dateMax = endDay.toLocaleDateString("fr-FR");
-      document.getElementById("date-range").innerText = `Du ${dateMin} au ${dateMax}`;
-
-      // Gérer la fermeture du tooltip sur mobile ou scroll
-      if (isTouchDevice) {
-        document.addEventListener("touchstart", (ev) => {
-          const dayClicked = ev.target.closest(".day");
-          if (!tooltip.contains(ev.target) && !dayClicked) {
-            hideTooltip();
-            removeAllHovered();
-          }
-        });
-      }
-
-      window.addEventListener("scroll", () => {
-        hideTooltip();
-        removeAllHovered();
-      }, { passive: true });
-
-      grid.addEventListener("scroll", () => {
-        hideTooltip();
-        removeAllHovered();
-      }, { passive: true });
+      const start=new Date(end); start.setDate(end.getDate()-(totalDays()-1)); document.getElementById("date-range").innerText=`Du ${start.toLocaleDateString("fr-FR")} au ${end.toLocaleDateString("fr-FR")}`;
+      if(isTouch) document.addEventListener("touchstart",ev=>{ if(!tooltip.contains(ev.target)&&!ev.target.closest(".day")){ hide(); clearHover(); }});
+      window.addEventListener("scroll",()=>{hide();clearHover();},{passive:true}); grid.addEventListener("scroll",()=>{hide();clearHover();},{passive:true});
     }
-
-    // ---------------------------
-    // 4) Boutons de navigation
-    // ---------------------------
-    function goBackward() {
-      offsetDays -= 30; // Décale de 30 jours dans le passé
-      renderGrid();
-    }
-    function goForward() {
-      offsetDays += 30; // Décale de 30 jours dans le futur
-      renderGrid();
-    }
-    function resetView() {
-      offsetDays = 0;   // Revient à la date du jour
-      renderGrid();
-    }
-
-    // Écouteurs sur les boutons
-    document.getElementById("btn-left").addEventListener("click", goBackward);
-    document.getElementById("btn-right").addEventListener("click", goForward);
-    document.getElementById("btn-center").addEventListener("click", resetView);
-
-    // Premier rendu de la grille
-    renderGrid();
+    document.getElementById("btn-left").addEventListener("click",()=>{offset-=30;render();});
+    document.getElementById("btn-right").addEventListener("click",()=>{offset+=30;render();});
+    document.getElementById("btn-center").addEventListener("click",()=>{offset=0;render();});
+    render();
   </script>
 </body>
 </html>
